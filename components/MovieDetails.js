@@ -220,7 +220,6 @@ const styles = {
     ...t.pl3,
     ...t.pl4_l,
     ...t.pb4,
-    ...t.pb0_l,
     flex: 1,
   }),
   ratingsWrapper: style({
@@ -247,13 +246,6 @@ const styles = {
     ...t.bt,
     ...t.b__white_20,
     ...t.bw2,
-    [breakpoints.l]: {
-      ...t.flex_column,
-      ...t.pl4,
-      ...t.pt0,
-      ...t.bn,
-      width: 'auto',
-    },
   }),
   torrentsTitle: style({
     ...t.f5,
@@ -266,7 +258,6 @@ const styles = {
   torrentCard: style({
     ...t.dib,
     ...t.mr3,
-    ...t.mr0_l,
     ...t.mb3,
     ...t.bg_white_20,
     ...t.white,
