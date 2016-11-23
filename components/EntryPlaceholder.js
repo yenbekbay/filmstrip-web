@@ -13,6 +13,7 @@ const loaderAnimation = keyframes({
 
 const styles = {
   container: style({
+    ...t.br2,
     ...t.mt2,
     ...t.w_100,
     ...t.relative,
