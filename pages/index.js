@@ -24,7 +24,8 @@ type PageInfo = {
   hasNextPage: boolean,
 };
 type Props = {
-  movies: ?Array<MovieDetailsFragment>,
+  loading?: ?boolean,
+  movies?: ?Array<MovieDetailsFragment>,
   pageInfo: ?PageInfo,
   url: {
     query: Object,
@@ -67,7 +68,7 @@ class IndexPage extends Component {
   }
 
   render() {
-    const { movies = this.state.movies, pageInfo, url } = this.props;
+    const { loading, movies = this.state.movies, pageInfo, url } = this.props;
     const modalMovie = url.query.id && _.find({ slug: url.query.id }, movies);
 
     return (
@@ -96,7 +97,7 @@ class IndexPage extends Component {
         )}
         <div className={styles.container}>
           <WebtorrentNotice />
-          {(movies && movies.length > 0) ? (
+          {(!loading && movies && movies.length > 0) ? (
             (movies || []).map((movie: MovieDetailsFragment) => (
               <MovieFeedEntry
                 key={movie.ytsId}
