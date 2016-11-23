@@ -25,6 +25,23 @@ const TrailerModal = (props: {
         zIndex: 999,
       },
     }}
+    onAfterOpen={() => {
+      const el = document.querySelector('.ReactModal__Overlay');
+      const modalEl = document.querySelector('.ReactModal__Content');
+
+      const handler = (event: Object) => {
+        const target = event.targetTouches.length > 0
+          ? event.targetTouches[0]
+          : event.target;
+
+        if (!modalEl.contains(target)) {
+          el.removeEventListener('touchend', handler);
+          props.closeTrailerModal();
+        }
+      };
+
+      el && el.addEventListener('touchend', handler);
+    }}
   >
     <YouTube
       opts={{

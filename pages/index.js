@@ -91,6 +91,23 @@ class IndexPage extends Component {
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
               },
             }}
+            onAfterOpen={() => {
+              const el = document.querySelector('.ReactModal__Overlay');
+              const modalEl = document.querySelector('.ReactModal__Content');
+
+              const handler = (event: Object) => {
+                const target = event.targetTouches.length > 0
+                  ? event.targetTouches[0]
+                  : event.target;
+
+                if (!modalEl.contains(target)) {
+                  el.removeEventListener('touchend', handler);
+                  this.dismissModal();
+                }
+              };
+
+              el && el.addEventListener('touchend', handler);
+            }}
           >
             <MovieDetails movie={modalMovie} />
           </Modal>
