@@ -1,0 +1,12 @@
+filmstrip.yenbekbay.me {
+  proxy / web:3000 {
+    transparent
+  }
+  proxy /graphql filmstrip.yenbekbay.me:8080 {
+    transparent
+  }
+
+  gzip
+
+  tls ayan+filmstrip@anvilabs.co
+}

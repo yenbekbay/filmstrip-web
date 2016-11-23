@@ -1,0 +1,15 @@
+web:
+  build: .
+  mem_limit: 256m
+  memswap_limit: -1
+
+caddy:
+  image: zzrot/alpine-caddy
+  links:
+    - web
+  volumes:
+    - /home/core/.caddy:/root/.caddy
+    - /home/core/filmstrip/data/Caddyfile:/etc/Caddyfile
+  ports:
+    - "80:80"
+    - "443:443"

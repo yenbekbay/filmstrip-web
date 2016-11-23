@@ -1,0 +1,9 @@
+*
+!components/
+!data/
+!hocs/
+!pages/
+!static/
+!styles/
+!env.js
+!package.json
