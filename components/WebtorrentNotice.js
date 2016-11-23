@@ -47,7 +47,7 @@ class WebtorrentNotice extends Component {
           target="_blank"
           rel="noopener noreferrer"
         >
-          ❗ Download <span>Webtorrent</span> to stream the movies on this website.
+          ❗ Download <span>WebTorrent</span> to stream the movies on this website.
         </a>
         <button
           className={styles.closeButton}
