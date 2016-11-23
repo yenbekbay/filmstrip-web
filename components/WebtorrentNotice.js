@@ -41,7 +41,12 @@ class WebtorrentNotice extends Component {
     /* eslint-disable max-len */
     return (
       <div className={styles.container}>
-        <a className={styles.message} href="http://webtorrent.io/" target="_blank" rel="noopener noreferrer">
+        <a
+          className={styles.message}
+          href="https://webtorrent.io/desktop/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           ❗ Download <span>Webtorrent</span> to stream the movies on this website.
         </a>
         <button
