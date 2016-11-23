@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Modal from 'react-modal';
 import React, { Component } from 'react';
 
+import breakpoints from '../styles/breakpoints';
 import EntryPlaceholder from '../components/EntryPlaceholder';
 import MovieDetails from '../components/MovieDetails';
 import MovieFeedEntry from '../components/MovieFeedEntry';
@@ -83,14 +84,10 @@ class IndexPage extends Component {
           <Modal
             isOpen
             onRequestClose={this.dismissModal}
+            className={styles.movieModal}
             style={{
               overlay: {
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              },
-              content: {
-                padding: 0,
-                border: 0,
-                backgroundColor: 'transparent',
               },
             }}
           >
@@ -200,6 +197,21 @@ const styles = {
     ...t.ba,
     ...t.b__white_20,
     ...t.br3,
+  }),
+  movieModal: style({
+    ...t.absolute,
+    ...t.overflow_auto,
+    ...t.outline_0,
+    top: '6rem',
+    left: '1rem',
+    right: '1rem',
+    bottom: '1rem',
+    [breakpoints.l]: {
+      top: '3rem',
+      left: '3rem',
+      right: '3rem',
+      bottom: '3rem',
+    },
   }),
 };
 
