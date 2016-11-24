@@ -6,6 +6,8 @@
 
 The client-side app for Filmstrip. Built with [Next.js](https://github.com/zeit/next.js) ([React](https://github.com/facebook/react), [Webpack](https://github.com/webpack/webpack), [Glamor](https://github.com/threepointone/glamor)), [Redux](https://github.com/reactjs/redux), and [Apollo Client](https://github.com/apollostack/apollo-client).
 
+![Website usage demonstration](.github/demo.gif)
+
 ## Running the app
 
 0. **This repository is only the frontend. Run the [Filmstrip API](https://github.com/yenbekbay/filmstrip-api) first.**
