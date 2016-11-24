@@ -1,8 +1,8 @@
-filmstrip.yenbekbay.me {
+filmstrip.cf {
   proxy / web:3000 {
     transparent
   }
-  proxy /graphql filmstrip.yenbekbay.me:8080 {
+  proxy /graphql filmstrip.cf:8080 {
     transparent
   }
 
