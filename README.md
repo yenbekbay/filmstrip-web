@@ -23,7 +23,7 @@ $ yarn # npm install
 
 3. **Run the app:**
 ```bash
-$ yarn start # npm start
+$ yarn dev # npm run dev
 ```
 
 
