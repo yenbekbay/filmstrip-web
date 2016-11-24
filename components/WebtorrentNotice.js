@@ -84,7 +84,6 @@ const styles = {
     ...t.input_reset,
     ...t.button_reset,
     ...t.bg_black_10,
-    ...t.border_box,
     ...t.pa1,
     ...t.dim,
     ...t.outline_0,

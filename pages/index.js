@@ -1,5 +1,6 @@
 /* @flow */
 
+import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import { style } from 'next/css';
 import _ from 'lodash/fp';
@@ -9,7 +10,9 @@ import Link from 'next/link';
 import Modal from 'react-modal';
 import React, { Component } from 'react';
 
+import { switchFeedType } from '../data/actions/ui';
 import breakpoints from '../styles/breakpoints';
+import colors from '../styles/colors';
 import EntryPlaceholder from '../components/EntryPlaceholder';
 import MovieDetails from '../components/MovieDetails';
 import MovieFeedEntry from '../components/MovieFeedEntry';
@@ -17,6 +20,7 @@ import page from '../hocs/page';
 import t from '../styles/tachyons';
 import TrailerModal from '../components/TrailerModal';
 import WebtorrentNotice from '../components/WebtorrentNotice';
+import type { FeedType, ReduxState } from '../data/types';
 import type { MovieDetailsFragment } from '../components/types';
 
 type PageInfo = {
@@ -27,6 +31,8 @@ type Props = {
   loading?: ?boolean,
   movies?: ?Array<MovieDetailsFragment>,
   pageInfo: ?PageInfo,
+  feedType: FeedType,
+  switchFeedType: (feedType: FeedType) => void,
   url: {
     query: Object,
     pathname: string,
@@ -68,7 +74,13 @@ class IndexPage extends Component {
   }
 
   render() {
-    const { loading, movies = this.state.movies, pageInfo, url } = this.props;
+    const {
+      loading,
+      movies = this.state.movies,
+      pageInfo,
+      feedType: activeFeedType,
+      url,
+    } = this.props;
     const modalMovie = url.query.id && _.find({ slug: url.query.id }, movies);
 
     return (
@@ -114,6 +126,25 @@ class IndexPage extends Component {
         )}
         <div className={styles.container}>
           <WebtorrentNotice />
+          <div className={styles.feedTypeSelectorContainer}>
+            {['LATEST', 'TRENDING'].map((feedType: FeedType) => (
+              <button
+                key={feedType}
+                className={styles.feedTypeSelectorButton}
+                onClick={() =>
+                  activeFeedType !== feedType &&
+                  this.props.switchFeedType(feedType)
+                }
+                {...(
+                  activeFeedType === feedType
+                    ? styles.feedTypeSelectorSelectedButton
+                    : {}
+                )}
+              >
+                {_.capitalize(feedType)}
+              </button>
+            ))}
+          </div>
           {(!loading && movies && movies.length > 0) ? (
             (movies || []).map((movie: MovieDetailsFragment) => (
               <MovieFeedEntry
@@ -157,8 +188,8 @@ class IndexPage extends Component {
 }
 
 const MOVIE_FEED_QUERY = gql`
-  query MovieFeed($offset: Int, $limit: Int) {
-    movies(offset: $offset, limit: $limit) {
+  query MovieFeed($type: FeedType!, $offset: Int, $limit: Int) {
+    feed(type: $type, offset: $offset, limit: $limit) {
       nodes {
         ...MovieDetails
       }
@@ -173,25 +204,26 @@ const MOVIE_FEED_QUERY = gql`
 const ITEMS_PER_PAGE = 10;
 
 const withData = graphql(MOVIE_FEED_QUERY, {
-  options: ({ url: { query } }: Props) => ({
+  options: ({ url: { query }, feedType }: Props) => ({
     variables: {
+      type: feedType,
       offset: query.page ? ((query.page - 1) * ITEMS_PER_PAGE) : 0,
       limit: ITEMS_PER_PAGE,
     },
   }),
   skip: ({ url: { pathname } }: Props) => pathname === '/movie',
-  props: ({ data: { loading, movies } }: {
+  props: ({ data: { loading, feed } }: {
     data: {
       loading: boolean,
-      movies: {
+      feed: {
         nodes: Array<MovieDetailsFragment>,
         pageInfo: PageInfo,
       },
     },
   }) => ({
     loading,
-    movies: _.get('nodes', movies),
-    pageInfo: _.get('pageInfo', movies),
+    movies: _.get('nodes', feed),
+    pageInfo: _.get('pageInfo', feed),
   }),
 });
 
@@ -202,12 +234,35 @@ const styles = {
     ...t.mw8,
     ...t.center,
   }),
+  feedTypeSelectorContainer: style({
+    ...t.tc,
+    ...t.mt4,
+    ...t.mt0_ns,
+    ...t.mb4,
+  }),
+  feedTypeSelectorButton: style({
+    ...t.bg_transparent,
+    ...t.mh2,
+    ...t.input_reset,
+    ...t.button_reset,
+    ...t.pa2,
+    ...t.dim,
+    ...t.outline_0,
+    ...t.ba,
+    ...t.b__white_20,
+    ...t.br3,
+  }),
+  feedTypeSelectorSelectedButton: style({
+    ...t.bg_white_90,
+    color: colors.bg,
+  }),
   pagination: style({
     ...t.mt4,
+    ...t.mb4,
+    ...t.mb0_ns,
     ...t.tc,
   }),
   paginationLink: style({
-    ...t.f4,
     ...t.white,
     ...t.dim,
     ...t.pa2,
@@ -233,4 +288,13 @@ const styles = {
   }),
 };
 
-export default page(withData(IndexPage));
+const mapStateToProps = (state: ReduxState) => ({
+  feedType: state.ui.feedType,
+});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  switchFeedType: (feedType: FeedType) => dispatch(switchFeedType(feedType)),
+});
+
+export default page(
+  connect(mapStateToProps, mapDispatchToProps)(withData(IndexPage)),
+);
