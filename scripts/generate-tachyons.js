@@ -67,10 +67,18 @@ const extractPseudoSelectors = (pseudo: string) => (styles: Object) => _.reduce(
     if (_.includes(`:${pseudo}`, selector)) {
       const [rootSelector, descendantSelector] = selector.split(`:${pseudo}`);
 
+      const pseudoSelector = `:${pseudo}${descendantSelector}`;
+
       return _.flow(
-        _.merge(_, {
+        _.merge(_, (pseudo === 'hover' || pseudo === 'focus') ? {
           [rootSelector]: {
-            [`:${pseudo}${descendantSelector}`]: styles[selector],
+            '@media (pointer: fine)': {
+              [pseudoSelector]: styles[selector],
+            },
+          },
+        } : {
+          [rootSelector]: {
+            [pseudoSelector]: styles[selector],
           },
         }),
         _.unset(selector),

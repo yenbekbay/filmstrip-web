@@ -765,18 +765,20 @@ module.exports = {
   "link": {
     "textDecoration": "none",
     "transition": "color .15s ease-in",
-    ":hover": {
-      "transition": "color .15s ease-in"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "transition": "color .15s ease-in"
+      },
+      ":focus": {
+        "transition": "color .15s ease-in",
+        "outline": "1px dotted currentColor"
+      }
     },
     ":active": {
       "transition": "color .15s ease-in"
     },
     ":link": {
       "transition": "color .15s ease-in"
-    },
-    ":focus": {
-      "transition": "color .15s ease-in",
-      "outline": "1px dotted currentColor"
     },
     ":visited": {
       "transition": "color .15s ease-in"
@@ -1855,17 +1857,19 @@ module.exports = {
   "dim": {
     "opacity": "1",
     "transition": "opacity .15s ease-in",
-    ":hover": {
-      "opacity": ".5",
-      "transition": "opacity .15s ease-in"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "opacity": ".5",
+        "transition": "opacity .15s ease-in"
+      },
+      ":focus": {
+        "opacity": ".5",
+        "transition": "opacity .15s ease-in"
+      }
     },
     ":active": {
       "opacity": ".8",
       "transition": "opacity .15s ease-out"
-    },
-    ":focus": {
-      "opacity": ".5",
-      "transition": "opacity .15s ease-in"
     }
   },
   "hide_child .child": {
@@ -1878,14 +1882,16 @@ module.exports = {
     "backfaceVisibility": "hidden",
     "transform": "translateZ( 0 )",
     "transition": "transform .25s ease-out, -webkit-transform .25s ease-out",
-    ":hover": {
-      "transform": "scale( 1.05 )"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "transform": "scale( 1.05 )"
+      },
+      ":focus": {
+        "transform": "scale( 1.05 )"
+      }
     },
     ":active": {
       "transform": "scale( .90 )"
-    },
-    ":focus": {
-      "transform": "scale( 1.05 )"
     }
   },
   "grow_large": {
@@ -1894,14 +1900,16 @@ module.exports = {
     "backfaceVisibility": "hidden",
     "transform": "translateZ( 0 )",
     "transition": "transform .25s ease-in-out, -webkit-transform .25s ease-in-out",
-    ":hover": {
-      "transform": "scale( 1.2 )"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "transform": "scale( 1.2 )"
+      },
+      ":focus": {
+        "transform": "scale( 1.2 )"
+      }
     },
     ":active": {
       "transform": "scale( .95 )"
-    },
-    ":focus": {
-      "transform": "scale( 1.2 )"
     }
   },
   "shadow_hover::after": {
@@ -1911,11 +1919,13 @@ module.exports = {
   },
   "bg_animate": {
     "transition": "background-color .15s ease-in-out",
-    ":hover": {
-      "transition": "background-color .15s ease-in-out"
-    },
-    ":focus": {
-      "transition": "background-color .15s ease-in-out"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "transition": "background-color .15s ease-in-out"
+      },
+      ":focus": {
+        "transition": "background-color .15s ease-in-out"
+      }
     }
   },
   "z_0": {
@@ -7464,619 +7474,773 @@ module.exports = {
     }
   },
   "hover_black": {
-    ":hover": {
-      "color": "#000"
-    },
-    ":focus": {
-      "color": "#000"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#000"
+      },
+      ":focus": {
+        "color": "#000"
+      }
     }
   },
   "hover_near_black": {
-    ":hover": {
-      "color": "#111"
-    },
-    ":focus": {
-      "color": "#111"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#111"
+      },
+      ":focus": {
+        "color": "#111"
+      }
     }
   },
   "hover_dark_gray": {
-    ":hover": {
-      "color": "#333"
-    },
-    ":focus": {
-      "color": "#333"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#333"
+      },
+      ":focus": {
+        "color": "#333"
+      }
     }
   },
   "hover_mid_gray": {
-    ":hover": {
-      "color": "#555"
-    },
-    ":focus": {
-      "color": "#555"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#555"
+      },
+      ":focus": {
+        "color": "#555"
+      }
     }
   },
   "hover_gray": {
-    ":hover": {
-      "color": "#777"
-    },
-    ":focus": {
-      "color": "#777"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#777"
+      },
+      ":focus": {
+        "color": "#777"
+      }
     }
   },
   "hover_silver": {
-    ":hover": {
-      "color": "#999"
-    },
-    ":focus": {
-      "color": "#999"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#999"
+      },
+      ":focus": {
+        "color": "#999"
+      }
     }
   },
   "hover_light_silver": {
-    ":hover": {
-      "color": "#aaa"
-    },
-    ":focus": {
-      "color": "#aaa"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#aaa"
+      },
+      ":focus": {
+        "color": "#aaa"
+      }
     }
   },
   "hover_moon_gray": {
-    ":hover": {
-      "color": "#ccc"
-    },
-    ":focus": {
-      "color": "#ccc"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ccc"
+      },
+      ":focus": {
+        "color": "#ccc"
+      }
     }
   },
   "hover_light_gray": {
-    ":hover": {
-      "color": "#eee"
-    },
-    ":focus": {
-      "color": "#eee"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#eee"
+      },
+      ":focus": {
+        "color": "#eee"
+      }
     }
   },
   "hover_near_white": {
-    ":hover": {
-      "color": "#f4f4f4"
-    },
-    ":focus": {
-      "color": "#f4f4f4"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#f4f4f4"
+      },
+      ":focus": {
+        "color": "#f4f4f4"
+      }
     }
   },
   "hover_white": {
-    ":hover": {
-      "color": "#fff"
-    },
-    ":focus": {
-      "color": "#fff"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#fff"
+      },
+      ":focus": {
+        "color": "#fff"
+      }
     }
   },
   "hover_bg_black": {
-    ":hover": {
-      "backgroundColor": "#000"
-    },
-    ":focus": {
-      "backgroundColor": "#000"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#000"
+      },
+      ":focus": {
+        "backgroundColor": "#000"
+      }
     }
   },
   "hover_bg_near_black": {
-    ":hover": {
-      "backgroundColor": "#111"
-    },
-    ":focus": {
-      "backgroundColor": "#111"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#111"
+      },
+      ":focus": {
+        "backgroundColor": "#111"
+      }
     }
   },
   "hover_bg_dark_gray": {
-    ":hover": {
-      "backgroundColor": "#333"
-    },
-    ":focus": {
-      "backgroundColor": "#555"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#333"
+      },
+      ":focus": {
+        "backgroundColor": "#555"
+      }
     }
   },
   "hover_bg_mid_gray": {
-    ":hover": {
-      "backgroundColor": "#555"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#555"
+      }
     }
   },
   "hover_bg_gray": {
-    ":hover": {
-      "backgroundColor": "#777"
-    },
-    ":focus": {
-      "backgroundColor": "#777"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#777"
+      },
+      ":focus": {
+        "backgroundColor": "#777"
+      }
     }
   },
   "hover_bg_silver": {
-    ":hover": {
-      "backgroundColor": "#999"
-    },
-    ":focus": {
-      "backgroundColor": "#999"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#999"
+      },
+      ":focus": {
+        "backgroundColor": "#999"
+      }
     }
   },
   "hover_bg_light_silver": {
-    ":hover": {
-      "backgroundColor": "#aaa"
-    },
-    ":focus": {
-      "backgroundColor": "#aaa"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#aaa"
+      },
+      ":focus": {
+        "backgroundColor": "#aaa"
+      }
     }
   },
   "hover_bg_moon_gray": {
-    ":hover": {
-      "backgroundColor": "#ccc"
-    },
-    ":focus": {
-      "backgroundColor": "#ccc"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ccc"
+      },
+      ":focus": {
+        "backgroundColor": "#ccc"
+      }
     }
   },
   "hover_bg_light_gray": {
-    ":hover": {
-      "backgroundColor": "#eee"
-    },
-    ":focus": {
-      "backgroundColor": "#eee"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#eee"
+      },
+      ":focus": {
+        "backgroundColor": "#eee"
+      }
     }
   },
   "hover_bg_near_white": {
-    ":hover": {
-      "backgroundColor": "#f4f4f4"
-    },
-    ":focus": {
-      "backgroundColor": "#f4f4f4"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#f4f4f4"
+      },
+      ":focus": {
+        "backgroundColor": "#f4f4f4"
+      }
     }
   },
   "hover_bg_white": {
-    ":hover": {
-      "backgroundColor": "#fff"
-    },
-    ":focus": {
-      "backgroundColor": "#fff"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#fff"
+      },
+      ":focus": {
+        "backgroundColor": "#fff"
+      }
     }
   },
   "hover_bg_transparent": {
-    ":hover": {
-      "backgroundColor": "transparent"
-    },
-    ":focus": {
-      "backgroundColor": "transparent"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "transparent"
+      },
+      ":focus": {
+        "backgroundColor": "transparent"
+      }
     }
   },
   "hover_dark_red": {
-    ":hover": {
-      "color": "#e7040f"
-    },
-    ":focus": {
-      "color": "#e7040f"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#e7040f"
+      },
+      ":focus": {
+        "color": "#e7040f"
+      }
     }
   },
   "hover_red": {
-    ":hover": {
-      "color": "#ff4136"
-    },
-    ":focus": {
-      "color": "#ff4136"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ff4136"
+      },
+      ":focus": {
+        "color": "#ff4136"
+      }
     }
   },
   "hover_light_red": {
-    ":hover": {
-      "color": "#ff725c"
-    },
-    ":focus": {
-      "color": "#ff725c"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ff725c"
+      },
+      ":focus": {
+        "color": "#ff725c"
+      }
     }
   },
   "hover_orange": {
-    ":hover": {
-      "color": "#ff6300"
-    },
-    ":focus": {
-      "color": "#ff6300"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ff6300"
+      },
+      ":focus": {
+        "color": "#ff6300"
+      }
     }
   },
   "hover_gold": {
-    ":hover": {
-      "color": "#ffb700"
-    },
-    ":focus": {
-      "color": "#ffb700"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ffb700"
+      },
+      ":focus": {
+        "color": "#ffb700"
+      }
     }
   },
   "hover_yellow": {
-    ":hover": {
-      "color": "#ffd700"
-    },
-    ":focus": {
-      "color": "#ffd700"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ffd700"
+      },
+      ":focus": {
+        "color": "#ffd700"
+      }
     }
   },
   "hover_light_yellow": {
-    ":hover": {
-      "color": "#fbf1a9"
-    },
-    ":focus": {
-      "color": "#fbf1a9"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#fbf1a9"
+      },
+      ":focus": {
+        "color": "#fbf1a9"
+      }
     }
   },
   "hover_purple": {
-    ":hover": {
-      "color": "#5e2ca5"
-    },
-    ":focus": {
-      "color": "#5e2ca5"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#5e2ca5"
+      },
+      ":focus": {
+        "color": "#5e2ca5"
+      }
     }
   },
   "hover_light_purple": {
-    ":hover": {
-      "color": "#a463f2"
-    },
-    ":focus": {
-      "color": "#a463f2"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#a463f2"
+      },
+      ":focus": {
+        "color": "#a463f2"
+      }
     }
   },
   "hover_dark_pink": {
-    ":hover": {
-      "color": "#d5008f"
-    },
-    ":focus": {
-      "color": "#d5008f"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#d5008f"
+      },
+      ":focus": {
+        "color": "#d5008f"
+      }
     }
   },
   "hover_hot_pink": {
-    ":hover": {
-      "color": "#ff41b4"
-    },
-    ":focus": {
-      "color": "#ff41b4"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ff41b4"
+      },
+      ":focus": {
+        "color": "#ff41b4"
+      }
     }
   },
   "hover_pink": {
-    ":hover": {
-      "color": "#ff80cc"
-    },
-    ":focus": {
-      "color": "#ff80cc"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ff80cc"
+      },
+      ":focus": {
+        "color": "#ff80cc"
+      }
     }
   },
   "hover_light_pink": {
-    ":hover": {
-      "color": "#ffa3d7"
-    },
-    ":focus": {
-      "color": "#ffa3d7"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ffa3d7"
+      },
+      ":focus": {
+        "color": "#ffa3d7"
+      }
     }
   },
   "hover_dark_green": {
-    ":hover": {
-      "color": "#137752"
-    },
-    ":focus": {
-      "color": "#137752"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#137752"
+      },
+      ":focus": {
+        "color": "#137752"
+      }
     }
   },
   "hover_green": {
-    ":hover": {
-      "color": "#19a974"
-    },
-    ":focus": {
-      "color": "#19a974"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#19a974"
+      },
+      ":focus": {
+        "color": "#19a974"
+      }
     }
   },
   "hover_light_green": {
-    ":hover": {
-      "color": "#9eebcf"
-    },
-    ":focus": {
-      "color": "#9eebcf"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#9eebcf"
+      },
+      ":focus": {
+        "color": "#9eebcf"
+      }
     }
   },
   "hover_navy": {
-    ":hover": {
-      "color": "#001b44"
-    },
-    ":focus": {
-      "color": "#001b44"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#001b44"
+      },
+      ":focus": {
+        "color": "#001b44"
+      }
     }
   },
   "hover_dark_blue": {
-    ":hover": {
-      "color": "#00449e"
-    },
-    ":focus": {
-      "color": "#00449e"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#00449e"
+      },
+      ":focus": {
+        "color": "#00449e"
+      }
     }
   },
   "hover_blue": {
-    ":hover": {
-      "color": "#357edd"
-    },
-    ":focus": {
-      "color": "#357edd"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#357edd"
+      },
+      ":focus": {
+        "color": "#357edd"
+      }
     }
   },
   "hover_light_blue": {
-    ":hover": {
-      "color": "#96ccff"
-    },
-    ":focus": {
-      "color": "#96ccff"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#96ccff"
+      },
+      ":focus": {
+        "color": "#96ccff"
+      }
     }
   },
   "hover_lightest_blue": {
-    ":hover": {
-      "color": "#cdecff"
-    },
-    ":focus": {
-      "color": "#cdecff"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#cdecff"
+      },
+      ":focus": {
+        "color": "#cdecff"
+      }
     }
   },
   "hover_washed_blue": {
-    ":hover": {
-      "color": "#f6fffe"
-    },
-    ":focus": {
-      "color": "#f6fffe"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#f6fffe"
+      },
+      ":focus": {
+        "color": "#f6fffe"
+      }
     }
   },
   "hover_washed_green": {
-    ":hover": {
-      "color": "#e8fdf5"
-    },
-    ":focus": {
-      "color": "#e8fdf5"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#e8fdf5"
+      },
+      ":focus": {
+        "color": "#e8fdf5"
+      }
     }
   },
   "hover_washed_yellow": {
-    ":hover": {
-      "color": "#fffceb"
-    },
-    ":focus": {
-      "color": "#fffceb"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#fffceb"
+      },
+      ":focus": {
+        "color": "#fffceb"
+      }
     }
   },
   "hover_washed_red": {
-    ":hover": {
-      "color": "#ffdfdf"
-    },
-    ":focus": {
-      "color": "#ffdfdf"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "color": "#ffdfdf"
+      },
+      ":focus": {
+        "color": "#ffdfdf"
+      }
     }
   },
   "hover_bg_dark_red": {
-    ":hover": {
-      "backgroundColor": "#e7040f"
-    },
-    ":focus": {
-      "backgroundColor": "#e7040f"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#e7040f"
+      },
+      ":focus": {
+        "backgroundColor": "#e7040f"
+      }
     }
   },
   "hover_bg_red": {
-    ":hover": {
-      "backgroundColor": "#ff4136"
-    },
-    ":focus": {
-      "backgroundColor": "#ff4136"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ff4136"
+      },
+      ":focus": {
+        "backgroundColor": "#ff4136"
+      }
     }
   },
   "hover_bg_light_red": {
-    ":hover": {
-      "backgroundColor": "#ff725c"
-    },
-    ":focus": {
-      "backgroundColor": "#ff725c"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ff725c"
+      },
+      ":focus": {
+        "backgroundColor": "#ff725c"
+      }
     }
   },
   "hover_bg_orange": {
-    ":hover": {
-      "backgroundColor": "#ff6300"
-    },
-    ":focus": {
-      "backgroundColor": "#ff6300"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ff6300"
+      },
+      ":focus": {
+        "backgroundColor": "#ff6300"
+      }
     }
   },
   "hover_bg_gold": {
-    ":hover": {
-      "backgroundColor": "#ffb700"
-    },
-    ":focus": {
-      "backgroundColor": "#ffb700"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ffb700"
+      },
+      ":focus": {
+        "backgroundColor": "#ffb700"
+      }
     }
   },
   "hover_bg_yellow": {
-    ":hover": {
-      "backgroundColor": "#ffd700"
-    },
-    ":focus": {
-      "backgroundColor": "#ffd700"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ffd700"
+      },
+      ":focus": {
+        "backgroundColor": "#ffd700"
+      }
     }
   },
   "hover_bg_light_yellow": {
-    ":hover": {
-      "backgroundColor": "#fbf1a9"
-    },
-    ":focus": {
-      "backgroundColor": "#fbf1a9"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#fbf1a9"
+      },
+      ":focus": {
+        "backgroundColor": "#fbf1a9"
+      }
     }
   },
   "hover_bg_purple": {
-    ":hover": {
-      "backgroundColor": "#5e2ca5"
-    },
-    ":focus": {
-      "backgroundColor": "#5e2ca5"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#5e2ca5"
+      },
+      ":focus": {
+        "backgroundColor": "#5e2ca5"
+      }
     }
   },
   "hover_bg_light_purple": {
-    ":hover": {
-      "backgroundColor": "#a463f2"
-    },
-    ":focus": {
-      "backgroundColor": "#a463f2"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#a463f2"
+      },
+      ":focus": {
+        "backgroundColor": "#a463f2"
+      }
     }
   },
   "hover_bg_dark_pink": {
-    ":hover": {
-      "backgroundColor": "#d5008f"
-    },
-    ":focus": {
-      "backgroundColor": "#d5008f"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#d5008f"
+      },
+      ":focus": {
+        "backgroundColor": "#d5008f"
+      }
     }
   },
   "hover_bg_hot_pink": {
-    ":hover": {
-      "backgroundColor": "#ff41b4"
-    },
-    ":focus": {
-      "backgroundColor": "#ff41b4"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ff41b4"
+      },
+      ":focus": {
+        "backgroundColor": "#ff41b4"
+      }
     }
   },
   "hover_bg_pink": {
-    ":hover": {
-      "backgroundColor": "#ff80cc"
-    },
-    ":focus": {
-      "backgroundColor": "#ff80cc"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ff80cc"
+      },
+      ":focus": {
+        "backgroundColor": "#ff80cc"
+      }
     }
   },
   "hover_bg_light_pink": {
-    ":hover": {
-      "backgroundColor": "#ffa3d7"
-    },
-    ":focus": {
-      "backgroundColor": "#ffa3d7"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ffa3d7"
+      },
+      ":focus": {
+        "backgroundColor": "#ffa3d7"
+      }
     }
   },
   "hover_bg_dark_green": {
-    ":hover": {
-      "backgroundColor": "#137752"
-    },
-    ":focus": {
-      "backgroundColor": "#137752"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#137752"
+      },
+      ":focus": {
+        "backgroundColor": "#137752"
+      }
     }
   },
   "hover_bg_green": {
-    ":hover": {
-      "backgroundColor": "#19a974"
-    },
-    ":focus": {
-      "backgroundColor": "#19a974"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#19a974"
+      },
+      ":focus": {
+        "backgroundColor": "#19a974"
+      }
     }
   },
   "hover_bg_light_green": {
-    ":hover": {
-      "backgroundColor": "#9eebcf"
-    },
-    ":focus": {
-      "backgroundColor": "#9eebcf"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#9eebcf"
+      },
+      ":focus": {
+        "backgroundColor": "#9eebcf"
+      }
     }
   },
   "hover_bg_navy": {
-    ":hover": {
-      "backgroundColor": "#001b44"
-    },
-    ":focus": {
-      "backgroundColor": "#001b44"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#001b44"
+      },
+      ":focus": {
+        "backgroundColor": "#001b44"
+      }
     }
   },
   "hover_bg_dark_blue": {
-    ":hover": {
-      "backgroundColor": "#00449e"
-    },
-    ":focus": {
-      "backgroundColor": "#00449e"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#00449e"
+      },
+      ":focus": {
+        "backgroundColor": "#00449e"
+      }
     }
   },
   "hover_bg_blue": {
-    ":hover": {
-      "backgroundColor": "#357edd"
-    },
-    ":focus": {
-      "backgroundColor": "#357edd"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#357edd"
+      },
+      ":focus": {
+        "backgroundColor": "#357edd"
+      }
     }
   },
   "hover_bg_light_blue": {
-    ":hover": {
-      "backgroundColor": "#96ccff"
-    },
-    ":focus": {
-      "backgroundColor": "#96ccff"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#96ccff"
+      },
+      ":focus": {
+        "backgroundColor": "#96ccff"
+      }
     }
   },
   "hover_bg_lightest_blue": {
-    ":hover": {
-      "backgroundColor": "#cdecff"
-    },
-    ":focus": {
-      "backgroundColor": "#cdecff"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#cdecff"
+      },
+      ":focus": {
+        "backgroundColor": "#cdecff"
+      }
     }
   },
   "hover_bg_washed_blue": {
-    ":hover": {
-      "backgroundColor": "#f6fffe"
-    },
-    ":focus": {
-      "backgroundColor": "#f6fffe"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#f6fffe"
+      },
+      ":focus": {
+        "backgroundColor": "#f6fffe"
+      }
     }
   },
   "hover_bg_washed_green": {
-    ":hover": {
-      "backgroundColor": "#e8fdf5"
-    },
-    ":focus": {
-      "backgroundColor": "#e8fdf5"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#e8fdf5"
+      },
+      ":focus": {
+        "backgroundColor": "#e8fdf5"
+      }
     }
   },
   "hover_bg_washed_yellow": {
-    ":hover": {
-      "backgroundColor": "#fffceb"
-    },
-    ":focus": {
-      "backgroundColor": "#fffceb"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#fffceb"
+      },
+      ":focus": {
+        "backgroundColor": "#fffceb"
+      }
     }
   },
   "hover_bg_washed_red": {
-    ":hover": {
-      "backgroundColor": "#ffdfdf"
-    },
-    ":focus": {
-      "backgroundColor": "#ffdfdf"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "backgroundColor": "#ffdfdf"
+      },
+      ":focus": {
+        "backgroundColor": "#ffdfdf"
+      }
     }
   },
   "hide_child": {
-    ":hover .child": {
-      "opacity": "1",
-      "transition": "opacity .15s ease-in"
+    "@media (pointer: fine)": {
+      ":hover .child": {
+        "opacity": "1",
+        "transition": "opacity .15s ease-in"
+      },
+      ":focus .child": {
+        "opacity": "1",
+        "transition": "opacity .15s ease-in"
+      }
     },
     ":active .child": {
-      "opacity": "1",
-      "transition": "opacity .15s ease-in"
-    },
-    ":focus .child": {
       "opacity": "1",
       "transition": "opacity .15s ease-in"
     }
   },
   "underline_hover": {
-    ":hover": {
-      "textDecoration": "underline"
-    },
-    ":focus": {
-      "textDecoration": "underline"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "textDecoration": "underline"
+      },
+      ":focus": {
+        "textDecoration": "underline"
+      }
     }
   },
   "pointer": {
-    ":hover": {
-      "cursor": "pointer"
+    "@media (pointer: fine)": {
+      ":hover": {
+        "cursor": "pointer"
+      }
     }
   },
   "shadow_hover": {
-    ":hover::after": {
-      "opacity": "1"
-    },
-    ":focus::after": {
-      "opacity": "1"
+    "@media (pointer: fine)": {
+      ":hover::after": {
+        "opacity": "1"
+      },
+      ":focus::after": {
+        "opacity": "1"
+      }
     }
   }
 }

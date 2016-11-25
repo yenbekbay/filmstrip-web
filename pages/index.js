@@ -10,7 +10,6 @@ import Link from 'next/link';
 import Modal from 'react-modal';
 import React, { Component } from 'react';
 
-import { hasNoTouch } from '../env';
 import { switchFeedType } from '../data/actions/ui';
 import breakpoints from '../styles/breakpoints';
 import colors from '../styles/colors';
@@ -247,7 +246,7 @@ const styles = {
     ...t.input_reset,
     ...t.button_reset,
     ...t.pa2,
-    ...(hasNoTouch && t.dim),
+    ...t.dim,
     ...t.outline_0,
     ...t.ba,
     ...t.b__white_20,
@@ -265,7 +264,7 @@ const styles = {
   }),
   paginationLink: style({
     ...t.white,
-    ...(hasNoTouch && t.dim),
+    ...t.dim,
     ...t.pa2,
     ...t.mh2,
     ...t.ba,
