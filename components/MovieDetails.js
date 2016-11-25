@@ -6,7 +6,6 @@ import gql from 'graphql-tag';
 import iso6391 from 'iso-639-1';
 import React from 'react';
 
-import breakpoints from '../styles/breakpoints';
 import colors from '../styles/colors';
 import MovieCredits from './MovieCredits';
 import MovieRatings from './MovieRatings';

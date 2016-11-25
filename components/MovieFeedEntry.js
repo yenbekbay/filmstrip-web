@@ -3,6 +3,7 @@
 import { style } from 'next/css';
 import React from 'react';
 
+import { hasNoTouch } from '../env';
 import breakpoints from '../styles/breakpoints';
 import MovieCredits from './MovieCredits';
 import MovieRatings from './MovieRatings';
@@ -101,7 +102,7 @@ const styles = {
   }),
   infoContainer: style({
     ...t.db,
-    ...t.dim,
+    ...(hasNoTouch && t.dim),
     ...t.cover,
     ...t.bg_center,
     ...t.white,

@@ -4,7 +4,7 @@ import { style } from 'next/css';
 import cookie from 'react-cookie';
 import React, { Component } from 'react';
 
-import { isServer } from '../env';
+import { isServer, hasNoTouch } from '../env';
 import t from '../styles/tachyons';
 
 const CloseIcon = () => (
@@ -71,7 +71,7 @@ const styles = {
   message: style({
     ...t.db,
     ...t.bn,
-    ...t.dim,
+    ...(hasNoTouch && t.dim),
     ...t.pa4,
     '& > span': {
       borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
@@ -85,7 +85,7 @@ const styles = {
     ...t.button_reset,
     ...t.bg_black_10,
     ...t.pa1,
-    ...t.dim,
+    ...(hasNoTouch && t.dim),
     ...t.outline_0,
     ...t.bn,
     boxSizing: 'content-box',
