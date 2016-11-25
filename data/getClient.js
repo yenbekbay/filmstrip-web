@@ -8,18 +8,6 @@ const getClient = (headers: any) => {
   if (isServer || !window.apolloClient) {
     const networkInterface = createNetworkInterface({ uri: graphqlEndpoint });
 
-    networkInterface.use([{
-      applyMiddleware(req: any, next: any) {
-        /* eslint-disable no-param-reassign */
-        if (!req.options.headers) {
-          req.options.headers = {};
-        }
-        /* eslint-enable no-param-reassign */
-
-        next();
-      },
-    }]);
-
     const client = new ApolloClient({
       networkInterface,
       headers,
