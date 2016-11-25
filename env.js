@@ -17,5 +17,5 @@ module.exports = {
   graphqlEndpoint: isProduction && isBrowser
     ? `${window.location.protocol}//${window.location.hostname}/graphql`
     : `http://localhost:${GRAPHQL_PORT}/graphql`,
-  apiToken: '',
+  gaTrackingID: 'UA-88023222-1',
 };

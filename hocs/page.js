@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import 'glamor/reset';
 
 import { getClient, getStore } from '../data';
+import { isBrowser, isProduction, gaTrackingID } from '../env';
 import colors from '../styles/colors';
 import t from '../styles/tachyons';
 
@@ -37,6 +38,23 @@ type Props = {
   initialState: Object,
   headers: Object,
   query: Object,
+};
+
+/* eslint-disable max-len */
+const gaSnippet = `
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', '${gaTrackingID}', 'auto');
+`;
+/* eslint-enable max-len */
+const trackPageView = () => {
+  if (isBrowser && isProduction && window.ga) {
+    window.ga('send', 'pageview');
+    window.ga('set', 'page', window.location.pathname);
+  }
 };
 
 const page = (
@@ -80,6 +98,14 @@ const page = (
       this.reduxStore = getStore(this.apolloClient, props.initialState);
     }
 
+    componentDidMount() {
+      trackPageView();
+    }
+
+    componentDidUpdate() {
+      trackPageView();
+    }
+
     render() {
       /* eslint-disable max-len */
       return (
@@ -101,6 +127,13 @@ const page = (
 
               <meta property="og:site_name" content="filmstrip" />
               <meta property="og:type" content="website" />
+
+              {isBrowser && isProduction && (
+                <script
+                  // eslint-disable-next-line react/no-danger
+                  dangerouslySetInnerHTML={{ __html: gaSnippet }}
+                />
+              )}
             </Head>
             <header className={styles.header}>
               <Link href="/">
