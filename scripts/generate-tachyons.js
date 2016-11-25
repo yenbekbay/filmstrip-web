@@ -5,11 +5,9 @@
 import fs from 'fs';
 import path from 'path';
 
-/* eslint-disable import/no-extraneous-dependencies */
 import { parse as parseCss } from 'css';
 import _ from 'lodash/fp';
 import 'isomorphic-fetch';
-/* eslint-enable import/no-extraneous-dependencies */
 
 const tachyonsCdnUrl = 'https://unpkg.com/tachyons@latest/css/tachyons.css';
 

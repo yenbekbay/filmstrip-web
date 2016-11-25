@@ -5,7 +5,7 @@ import { style } from 'next/css';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { Component } from 'react';
-import 'glamor/reset'; // eslint-disable-line import/no-extraneous-dependencies
+import 'glamor/reset';
 
 import { getClient, getStore } from '../data';
 import colors from '../styles/colors';

@@ -3,10 +3,8 @@
 import fs from 'fs';
 import path from 'path';
 
-/* eslint-disable import/no-extraneous-dependencies */
 import { graphql, parse, buildASTSchema, introspectionQuery } from 'graphql';
 import 'isomorphic-fetch';
-/* eslint-enable import/no-extraneous-dependencies */
 
 (async () => {
   try {

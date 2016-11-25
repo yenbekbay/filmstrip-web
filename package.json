@@ -62,10 +62,8 @@
     "iso-639-1": "^1.2.3",
     "lodash": "^4.17.2",
     "next": "^1.1.2",
-    "react": "^15.4.1",
     "react-apollo": "^0.6.0",
     "react-cookie": "^0.4.8",
-    "react-dom": "^15.4.1",
     "react-modal": "^1.5.2",
     "react-redux": "^4.4.6",
     "react-youtube": "^7.2.0",
@@ -93,7 +91,6 @@
     "husky": "^0.11.9",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^17.0.3",
-    "native-css": "^1.2.5",
     "npm-run-all": "^3.1.1",
     "validate-commit-msg": "^2.8.2"
   }

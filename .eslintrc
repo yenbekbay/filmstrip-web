@@ -3,5 +3,8 @@
     "anvilabs",
     "anvilabs/jest",
     "anvilabs/react"
-  ]
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": 0
+  }
 }
