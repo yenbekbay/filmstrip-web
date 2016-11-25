@@ -1,5 +1,8 @@
 FROM mhart/alpine-node:6.9.1
 
+# Install git
+RUN apk add --update git && rm -rf /tmp/* /var/cache/apk/*
+
 # Set environment variables
 ENV NPM_CONFIG_LOGLEVEL warn
 ENV NODE_ENV production

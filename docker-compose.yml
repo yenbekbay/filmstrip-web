@@ -8,8 +8,8 @@ caddy:
   links:
     - web
   volumes:
-    - /home/core/.caddy:/root/.caddy
-    - /home/core/filmstrip/data/Caddyfile:/etc/Caddyfile
+    - /root/.caddy:/root/.caddy
+    - /root/filmstrip/data/Caddyfile:/etc/Caddyfile
   ports:
     - "80:80"
     - "443:443"

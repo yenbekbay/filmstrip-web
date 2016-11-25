@@ -7,8 +7,8 @@ if [[ -n "$machine_name" ]]; then
 
   if [ $? -eq 0 ]; then
     eval $(docker-machine env $machine_name) \
-      && docker-machine ssh $machine_name mkdir -p /home/core/filmstrip/data \
-      && docker-machine scp Caddyfile ${machine_name}:/home/core/filmstrip/data \
+      && docker-machine ssh $machine_name mkdir -p /root/filmstrip/data \
+      && docker-machine scp Caddyfile ${machine_name}:/root/filmstrip/data \
       && docker-compose build \
       && docker-compose up -d
   fi
