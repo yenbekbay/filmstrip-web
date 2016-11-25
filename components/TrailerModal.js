@@ -29,12 +29,13 @@ const TrailerModal = (props: {
       const el = document.querySelector('.ReactModal__Overlay');
       const modalEl = document.querySelector('.ReactModal__Content');
 
-      const handler = (event: Object) => {
-        const target = event.targetTouches.length > 0
-          ? event.targetTouches[0]
-          : event.target;
+      const handler = (e: Object) => {
+        const target = e.targetTouches.length > 0
+          ? e.targetTouches[0]
+          : e.target;
 
         if (!modalEl.contains(target)) {
+          e.preventDefault();
           el.removeEventListener('touchend', handler);
           props.closeTrailerModal();
         }
