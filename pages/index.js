@@ -180,8 +180,8 @@ class IndexPage extends Component {
               {pageInfo.hasPreviousPage && (
                 <Link
                   href={(query.page && query.page > 2)
-                    ? `/?page=${parseInt(query.page, 10) - 1}`
-                    : '/'
+                    ? `/?type=${activeFeedType}&page=${parseInt(query.page, 10) - 1}` // eslint-disable-line max-len
+                    : `/?type=${activeFeedType}`
                   }
                 >
                   <a className={styles.paginationLink}>Previous</a>
@@ -190,8 +190,8 @@ class IndexPage extends Component {
               {pageInfo.hasNextPage && (
                 <Link
                   href={query.page
-                    ? `/?page=${parseInt(query.page, 10) + 1}`
-                    : '/?page=2'
+                    ? `/?type=${activeFeedType}&page=${parseInt(query.page, 10) + 1}` // eslint-disable-line max-len
+                    : `/?type=${activeFeedType}&page=2`
                   }
                 >
                   <a className={styles.paginationLink}>Next</a>
