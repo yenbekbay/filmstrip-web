@@ -227,6 +227,7 @@ const styles = {
   feedTypeSelectorLink: style({
     ...t.dib,
     ...t.mh2,
+    ...t.mv2,
     ...t.pa2,
     ...t.dim,
     ...t.ba,
