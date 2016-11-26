@@ -768,10 +768,6 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "transition": "color .15s ease-in"
-      },
-      ":focus": {
-        "transition": "color .15s ease-in",
-        "outline": "1px dotted currentColor"
       }
     },
     ":active": {
@@ -1861,10 +1857,6 @@ module.exports = {
       ":hover": {
         "opacity": ".5",
         "transition": "opacity .15s ease-in"
-      },
-      ":focus": {
-        "opacity": ".5",
-        "transition": "opacity .15s ease-in"
       }
     },
     ":active": {
@@ -1885,9 +1877,6 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "transform": "scale( 1.05 )"
-      },
-      ":focus": {
-        "transform": "scale( 1.05 )"
       }
     },
     ":active": {
@@ -1902,9 +1891,6 @@ module.exports = {
     "transition": "transform .25s ease-in-out, -webkit-transform .25s ease-in-out",
     "@media (pointer: fine)": {
       ":hover": {
-        "transform": "scale( 1.2 )"
-      },
-      ":focus": {
         "transform": "scale( 1.2 )"
       }
     },
@@ -1921,9 +1907,6 @@ module.exports = {
     "transition": "background-color .15s ease-in-out",
     "@media (pointer: fine)": {
       ":hover": {
-        "transition": "background-color .15s ease-in-out"
-      },
-      ":focus": {
         "transition": "background-color .15s ease-in-out"
       }
     }
@@ -7477,18 +7460,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#000"
-      },
-      ":focus": {
-        "color": "#000"
       }
     }
   },
   "hover_near_black": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#111"
-      },
-      ":focus": {
         "color": "#111"
       }
     }
@@ -7497,18 +7474,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#333"
-      },
-      ":focus": {
-        "color": "#333"
       }
     }
   },
   "hover_mid_gray": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#555"
-      },
-      ":focus": {
         "color": "#555"
       }
     }
@@ -7517,18 +7488,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#777"
-      },
-      ":focus": {
-        "color": "#777"
       }
     }
   },
   "hover_silver": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#999"
-      },
-      ":focus": {
         "color": "#999"
       }
     }
@@ -7537,18 +7502,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#aaa"
-      },
-      ":focus": {
-        "color": "#aaa"
       }
     }
   },
   "hover_moon_gray": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#ccc"
-      },
-      ":focus": {
         "color": "#ccc"
       }
     }
@@ -7557,18 +7516,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#eee"
-      },
-      ":focus": {
-        "color": "#eee"
       }
     }
   },
   "hover_near_white": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#f4f4f4"
-      },
-      ":focus": {
         "color": "#f4f4f4"
       }
     }
@@ -7577,18 +7530,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#fff"
-      },
-      ":focus": {
-        "color": "#fff"
       }
     }
   },
   "hover_bg_black": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#000"
-      },
-      ":focus": {
         "backgroundColor": "#000"
       }
     }
@@ -7597,9 +7544,6 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#111"
-      },
-      ":focus": {
-        "backgroundColor": "#111"
       }
     }
   },
@@ -7607,9 +7551,6 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#333"
-      },
-      ":focus": {
-        "backgroundColor": "#555"
       }
     }
   },
@@ -7624,18 +7565,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#777"
-      },
-      ":focus": {
-        "backgroundColor": "#777"
       }
     }
   },
   "hover_bg_silver": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#999"
-      },
-      ":focus": {
         "backgroundColor": "#999"
       }
     }
@@ -7644,18 +7579,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#aaa"
-      },
-      ":focus": {
-        "backgroundColor": "#aaa"
       }
     }
   },
   "hover_bg_moon_gray": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#ccc"
-      },
-      ":focus": {
         "backgroundColor": "#ccc"
       }
     }
@@ -7664,18 +7593,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#eee"
-      },
-      ":focus": {
-        "backgroundColor": "#eee"
       }
     }
   },
   "hover_bg_near_white": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#f4f4f4"
-      },
-      ":focus": {
         "backgroundColor": "#f4f4f4"
       }
     }
@@ -7684,18 +7607,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#fff"
-      },
-      ":focus": {
-        "backgroundColor": "#fff"
       }
     }
   },
   "hover_bg_transparent": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "transparent"
-      },
-      ":focus": {
         "backgroundColor": "transparent"
       }
     }
@@ -7704,18 +7621,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#e7040f"
-      },
-      ":focus": {
-        "color": "#e7040f"
       }
     }
   },
   "hover_red": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#ff4136"
-      },
-      ":focus": {
         "color": "#ff4136"
       }
     }
@@ -7724,18 +7635,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#ff725c"
-      },
-      ":focus": {
-        "color": "#ff725c"
       }
     }
   },
   "hover_orange": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#ff6300"
-      },
-      ":focus": {
         "color": "#ff6300"
       }
     }
@@ -7744,18 +7649,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#ffb700"
-      },
-      ":focus": {
-        "color": "#ffb700"
       }
     }
   },
   "hover_yellow": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#ffd700"
-      },
-      ":focus": {
         "color": "#ffd700"
       }
     }
@@ -7764,18 +7663,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#fbf1a9"
-      },
-      ":focus": {
-        "color": "#fbf1a9"
       }
     }
   },
   "hover_purple": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#5e2ca5"
-      },
-      ":focus": {
         "color": "#5e2ca5"
       }
     }
@@ -7784,18 +7677,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#a463f2"
-      },
-      ":focus": {
-        "color": "#a463f2"
       }
     }
   },
   "hover_dark_pink": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#d5008f"
-      },
-      ":focus": {
         "color": "#d5008f"
       }
     }
@@ -7804,18 +7691,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#ff41b4"
-      },
-      ":focus": {
-        "color": "#ff41b4"
       }
     }
   },
   "hover_pink": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#ff80cc"
-      },
-      ":focus": {
         "color": "#ff80cc"
       }
     }
@@ -7824,18 +7705,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#ffa3d7"
-      },
-      ":focus": {
-        "color": "#ffa3d7"
       }
     }
   },
   "hover_dark_green": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#137752"
-      },
-      ":focus": {
         "color": "#137752"
       }
     }
@@ -7844,18 +7719,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#19a974"
-      },
-      ":focus": {
-        "color": "#19a974"
       }
     }
   },
   "hover_light_green": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#9eebcf"
-      },
-      ":focus": {
         "color": "#9eebcf"
       }
     }
@@ -7864,18 +7733,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#001b44"
-      },
-      ":focus": {
-        "color": "#001b44"
       }
     }
   },
   "hover_dark_blue": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#00449e"
-      },
-      ":focus": {
         "color": "#00449e"
       }
     }
@@ -7884,18 +7747,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#357edd"
-      },
-      ":focus": {
-        "color": "#357edd"
       }
     }
   },
   "hover_light_blue": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#96ccff"
-      },
-      ":focus": {
         "color": "#96ccff"
       }
     }
@@ -7904,18 +7761,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#cdecff"
-      },
-      ":focus": {
-        "color": "#cdecff"
       }
     }
   },
   "hover_washed_blue": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#f6fffe"
-      },
-      ":focus": {
         "color": "#f6fffe"
       }
     }
@@ -7924,18 +7775,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#e8fdf5"
-      },
-      ":focus": {
-        "color": "#e8fdf5"
       }
     }
   },
   "hover_washed_yellow": {
     "@media (pointer: fine)": {
       ":hover": {
-        "color": "#fffceb"
-      },
-      ":focus": {
         "color": "#fffceb"
       }
     }
@@ -7944,18 +7789,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "color": "#ffdfdf"
-      },
-      ":focus": {
-        "color": "#ffdfdf"
       }
     }
   },
   "hover_bg_dark_red": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#e7040f"
-      },
-      ":focus": {
         "backgroundColor": "#e7040f"
       }
     }
@@ -7964,18 +7803,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#ff4136"
-      },
-      ":focus": {
-        "backgroundColor": "#ff4136"
       }
     }
   },
   "hover_bg_light_red": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#ff725c"
-      },
-      ":focus": {
         "backgroundColor": "#ff725c"
       }
     }
@@ -7984,18 +7817,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#ff6300"
-      },
-      ":focus": {
-        "backgroundColor": "#ff6300"
       }
     }
   },
   "hover_bg_gold": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#ffb700"
-      },
-      ":focus": {
         "backgroundColor": "#ffb700"
       }
     }
@@ -8004,18 +7831,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#ffd700"
-      },
-      ":focus": {
-        "backgroundColor": "#ffd700"
       }
     }
   },
   "hover_bg_light_yellow": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#fbf1a9"
-      },
-      ":focus": {
         "backgroundColor": "#fbf1a9"
       }
     }
@@ -8024,18 +7845,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#5e2ca5"
-      },
-      ":focus": {
-        "backgroundColor": "#5e2ca5"
       }
     }
   },
   "hover_bg_light_purple": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#a463f2"
-      },
-      ":focus": {
         "backgroundColor": "#a463f2"
       }
     }
@@ -8044,18 +7859,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#d5008f"
-      },
-      ":focus": {
-        "backgroundColor": "#d5008f"
       }
     }
   },
   "hover_bg_hot_pink": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#ff41b4"
-      },
-      ":focus": {
         "backgroundColor": "#ff41b4"
       }
     }
@@ -8064,18 +7873,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#ff80cc"
-      },
-      ":focus": {
-        "backgroundColor": "#ff80cc"
       }
     }
   },
   "hover_bg_light_pink": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#ffa3d7"
-      },
-      ":focus": {
         "backgroundColor": "#ffa3d7"
       }
     }
@@ -8084,18 +7887,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#137752"
-      },
-      ":focus": {
-        "backgroundColor": "#137752"
       }
     }
   },
   "hover_bg_green": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#19a974"
-      },
-      ":focus": {
         "backgroundColor": "#19a974"
       }
     }
@@ -8104,18 +7901,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#9eebcf"
-      },
-      ":focus": {
-        "backgroundColor": "#9eebcf"
       }
     }
   },
   "hover_bg_navy": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#001b44"
-      },
-      ":focus": {
         "backgroundColor": "#001b44"
       }
     }
@@ -8124,18 +7915,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#00449e"
-      },
-      ":focus": {
-        "backgroundColor": "#00449e"
       }
     }
   },
   "hover_bg_blue": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#357edd"
-      },
-      ":focus": {
         "backgroundColor": "#357edd"
       }
     }
@@ -8144,18 +7929,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#96ccff"
-      },
-      ":focus": {
-        "backgroundColor": "#96ccff"
       }
     }
   },
   "hover_bg_lightest_blue": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#cdecff"
-      },
-      ":focus": {
         "backgroundColor": "#cdecff"
       }
     }
@@ -8164,18 +7943,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#f6fffe"
-      },
-      ":focus": {
-        "backgroundColor": "#f6fffe"
       }
     }
   },
   "hover_bg_washed_green": {
     "@media (pointer: fine)": {
       ":hover": {
-        "backgroundColor": "#e8fdf5"
-      },
-      ":focus": {
         "backgroundColor": "#e8fdf5"
       }
     }
@@ -8184,9 +7957,6 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#fffceb"
-      },
-      ":focus": {
-        "backgroundColor": "#fffceb"
       }
     }
   },
@@ -8194,19 +7964,12 @@ module.exports = {
     "@media (pointer: fine)": {
       ":hover": {
         "backgroundColor": "#ffdfdf"
-      },
-      ":focus": {
-        "backgroundColor": "#ffdfdf"
       }
     }
   },
   "hide_child": {
     "@media (pointer: fine)": {
       ":hover .child": {
-        "opacity": "1",
-        "transition": "opacity .15s ease-in"
-      },
-      ":focus .child": {
         "opacity": "1",
         "transition": "opacity .15s ease-in"
       }
@@ -8219,9 +7982,6 @@ module.exports = {
   "underline_hover": {
     "@media (pointer: fine)": {
       ":hover": {
-        "textDecoration": "underline"
-      },
-      ":focus": {
         "textDecoration": "underline"
       }
     }
@@ -8236,9 +7996,6 @@ module.exports = {
   "shadow_hover": {
     "@media (pointer: fine)": {
       ":hover::after": {
-        "opacity": "1"
-      },
-      ":focus::after": {
         "opacity": "1"
       }
     }

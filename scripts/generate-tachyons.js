@@ -70,17 +70,21 @@ const extractPseudoSelectors = (pseudo: string) => (styles: Object) => _.reduce(
       const pseudoSelector = `:${pseudo}${descendantSelector}`;
 
       return _.flow(
-        _.merge(_, (pseudo === 'hover' || pseudo === 'focus') ? {
-          [rootSelector]: {
-            '@media (pointer: fine)': {
+        // skip all `focus` pseudo-class styles
+        pseudo === 'focus'
+          ? _.identity
+          // only apply `hover` pseudo-class styles to non-touch screens
+          : _.merge(_, pseudo === 'hover' ? {
+            [rootSelector]: {
+              '@media (pointer: fine)': {
+                [pseudoSelector]: styles[selector],
+              },
+            },
+          } : {
+            [rootSelector]: {
               [pseudoSelector]: styles[selector],
             },
-          },
-        } : {
-          [rootSelector]: {
-            [pseudoSelector]: styles[selector],
-          },
-        }),
+          }),
         _.unset(selector),
       )(acc);
     }
