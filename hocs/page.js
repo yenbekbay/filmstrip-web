@@ -141,6 +141,9 @@ const page = (
               </Link>
             </header>
             <WrappedComponent {...this.props} />
+            <footer className={styles.footer}>
+              Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.
+            </footer>
           </main>
         </ApolloProvider>
       );
@@ -167,6 +170,13 @@ const styles = {
     ...t.pv3,
     ...t.ma0,
     ...t.white,
+  }),
+  footer: style({
+    ...t.tc,
+    ...t.pb4,
+    ...t.ph4,
+    ...t.f6,
+    ...t.o_70,
   }),
 };
 
