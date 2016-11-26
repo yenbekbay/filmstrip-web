@@ -21,7 +21,7 @@ import TrailerModal from '../components/TrailerModal';
 import WebtorrentNotice from '../components/WebtorrentNotice';
 import type { MovieDetailsFragment } from '../components/types';
 
-type FeedType = 'latest' | 'trending';
+type FeedType = 'trending' | 'new' | 'latest';
 type PageInfo = {
   hasPreviousPage: boolean,
   hasNextPage: boolean,
@@ -45,7 +45,12 @@ type State = {
   movies: ?Array<MovieDetailsFragment>,
 };
 
-const defaultFeedType: FeedType = 'latest';
+const defaultFeedType: FeedType = 'trending';
+const feedTypeMappings = {
+  trending: 'Trending',
+  new: 'New',
+  latest: 'Latest additions',
+};
 
 class IndexPage extends Component {
   props: Props;
@@ -149,7 +154,7 @@ class IndexPage extends Component {
         <div className={styles.container}>
           <WebtorrentNotice />
           <div className={styles.feedTypeSelectorContainer}>
-            {['latest', 'trending'].map((feedType: FeedType) => (
+            {['trending', 'new', 'latest'].map((feedType: FeedType) => (
               <a
                 key={feedType}
                 onClick={(e: Object) => this.switchFeedType(e, feedType)}
@@ -160,7 +165,7 @@ class IndexPage extends Component {
                   : {}
                 }
               >
-                {_.capitalize(feedType)}
+                {feedTypeMappings[feedType]}
               </a>
             ))}
           </div>
@@ -284,7 +289,10 @@ const withData = graphql(MOVIE_FEED_QUERY, {
       limit: ITEMS_PER_PAGE,
     },
   }),
-  skip: ({ url: { pathname } }: Props) => pathname === '/movie',
+  skip: ({ url: { pathname, query } }: Props) => (
+    pathname === '/movie' ||
+    (!query.type && defaultFeedType !== cookie.load('lastFeedType'))
+  ),
   props: ({ data: { loading, feed } }: {
     data: {
       loading: boolean,
