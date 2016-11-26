@@ -7,12 +7,12 @@ import cookie from 'react-cookie';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import Link from 'next/link';
-import Modal from 'react-modal';
 import React, { Component } from 'react';
 
 import breakpoints from '../styles/breakpoints';
 import colors from '../styles/colors';
 import EntryPlaceholder from '../components/EntryPlaceholder';
+import Modal from '../components/Modal';
 import MovieDetails from '../components/MovieDetails';
 import MovieFeedEntry from '../components/MovieFeedEntry';
 import page from '../hocs/page';
@@ -129,24 +129,6 @@ class IndexPage extends Component {
                 backgroundColor: 'rgba(0, 0, 0, 0.5)',
               },
             }}
-            onAfterOpen={() => {
-              const el = document.querySelector('.ReactModal__Overlay');
-              const modalEl = document.querySelector('.ReactModal__Content');
-
-              const handler = (e: Object) => {
-                const target = e.targetTouches.length > 0
-                  ? e.targetTouches[0]
-                  : e.target;
-
-                if (!modalEl.contains(target)) {
-                  e.preventDefault();
-                  el.removeEventListener('touchend', handler);
-                  this.dismissModal();
-                }
-              };
-
-              el && el.addEventListener('touchend', handler);
-            }}
           >
             <MovieDetails movie={modalMovie} />
           </Modal>
@@ -250,9 +232,6 @@ const styles = {
     ...t.br3,
   }),
   movieModal: style({
-    ...t.absolute,
-    ...t.overflow_auto,
-    ...t.outline_0,
     top: '6rem',
     left: '1rem',
     right: '1rem',
