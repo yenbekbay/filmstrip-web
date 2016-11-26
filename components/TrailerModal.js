@@ -8,7 +8,6 @@ import YouTube from 'react-youtube';
 import { closeTrailerModal } from '../data/actions/ui';
 import breakpoints from '../styles/breakpoints';
 import Modal from './Modal';
-import t from '../styles/tachyons';
 import type { Dispatch, ReduxState } from '../data/types';
 
 const TrailerModal = (props: {
