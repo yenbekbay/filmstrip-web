@@ -9,12 +9,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React, { Component } from 'react';
 
-import breakpoints from '../styles/breakpoints';
 import colors from '../styles/colors';
 import EntryPlaceholder from '../components/EntryPlaceholder';
-import Modal from '../components/Modal';
 import MovieDetails from '../components/MovieDetails';
 import MovieFeedEntry from '../components/MovieFeedEntry';
+import MovieModal from '../components/MovieModal';
 import page from '../hocs/page';
 import t from '../styles/tachyons';
 import TrailerModal from '../components/TrailerModal';
@@ -104,7 +103,7 @@ class IndexPage extends Component {
       loading,
       movies = this.state.movies,
       pageInfo,
-      url: { query },
+      url: { back, query },
     } = this.props;
     const activeFeedType = query.type || defaultFeedType;
     const modalMovie = query.id && _.find({ slug: query.id }, movies);
@@ -119,20 +118,7 @@ class IndexPage extends Component {
             }
           </title>
         </Head>
-        {modalMovie && (
-          <Modal
-            isOpen
-            onRequestClose={this.dismissModal}
-            className={styles.movieModal}
-            style={{
-              overlay: {
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              },
-            }}
-          >
-            <MovieDetails movie={modalMovie} />
-          </Modal>
-        )}
+        {modalMovie && <MovieModal movie={modalMovie} back={back} />}
         <div className={styles.container}>
           <WebtorrentNotice />
           <div className={styles.feedTypeSelectorContainer}>
@@ -230,18 +216,6 @@ const styles = {
     ...t.ba,
     ...t.b__white_20,
     ...t.br3,
-  }),
-  movieModal: style({
-    top: '6rem',
-    left: '1rem',
-    right: '1rem',
-    bottom: '1rem',
-    [breakpoints.l]: {
-      top: '3rem',
-      left: '3rem',
-      right: '3rem',
-      bottom: '3rem',
-    },
   }),
 };
 
