@@ -5,7 +5,9 @@ import React from 'react';
 
 import t from '../styles/tachyons';
 
-const Spinner = () => <div className={styles.spinner} />;
+const Spinner = ({ className }: { className?: string }) => (
+  <div className={`${styles.spinner} ${className || ''}`.trim()} />
+);
 
 const spinnerAnimation = keyframes({
   to: { transform: 'rotate(360deg)' },
@@ -16,9 +18,6 @@ const styles = {
     ...t.ba,
     ...t.b__white_20,
     ...t.bw3,
-    ...t.w3,
-    ...t.h3,
-    margin: '6rem auto',
     animation: `${spinnerAnimation} 1s infinite linear`,
     borderTopColor: 'rgba(255, 255, 255, 0.7)',
     borderRadius: '50%',

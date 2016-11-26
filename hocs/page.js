@@ -9,7 +9,10 @@ import 'glamor/reset';
 
 import { getClient, getStore } from '../data';
 import { isBrowser, isProduction, gaTrackingID } from '../env';
+import breakpoints from '../styles/breakpoints';
 import colors from '../styles/colors';
+import Modal from '../components/Modal';
+import Search from '../components/Search';
 import t from '../styles/tachyons';
 
 style.insertRule(`
@@ -38,6 +41,16 @@ type Props = {
   initialState: Object,
   headers: Object,
   query: Object,
+  url: {
+    query: {
+      q?: string,
+    },
+    back: () => void,
+    push: (path: string) => void,
+  },
+};
+type State = {
+  searching: boolean,
 };
 
 /* eslint-disable max-len */
@@ -87,6 +100,11 @@ const page = (
       return props;
     }
 
+    // eslint-disable-next-line react/sort-comp
+    state: State = {
+      searching: false,
+    };
+
     constructor(props: Props) {
       super(props);
 
@@ -105,6 +123,14 @@ const page = (
     componentDidUpdate() {
       trackPageView();
     }
+
+    dismissModal = () => {
+      this.setState({ searching: false });
+    };
+
+    showSearchModal = () => {
+      this.setState({ searching: true });
+    };
 
     render() {
       /* eslint-disable max-len */
@@ -135,10 +161,34 @@ const page = (
                 />
               )}
             </Head>
+            {this.state.searching && (
+              <Modal
+                isOpen
+                onRequestClose={this.dismissModal}
+                className={styles.searchModal}
+                style={{
+                  overlay: {
+                    backgroundColor: 'rgba(43, 48, 59, 0.95)',
+                  },
+                }}
+              >
+                <Search url={this.props.url} />
+              </Modal>
+            )}
             <header className={styles.header}>
-              <Link href="/">
-                <h1 className={styles.headerTitle}>filmstrip</h1>
-              </Link>
+              <div className={styles.headerInner}>
+                <Link href="/">
+                  <a className={styles.headerTitleWrapper}>
+                    <h1 className={styles.headerTitle}>filmstrip</h1>
+                  </a>
+                </Link>
+                <button
+                  className={styles.searchButton}
+                  onClick={this.showSearchModal}
+                >
+                  Find your next movie...
+                </button>
+              </div>
             </header>
             <WrappedComponent {...this.props} />
             <footer className={styles.footer}>
@@ -160,16 +210,50 @@ const styles = {
     fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif',
   }),
   header: style({
-    ...t.tc,
     ...t.shadow_1,
     backgroundColor: '#2f343f',
   }),
-  headerTitle: style({
-    ...t.db,
-    ...t.f2,
+  headerInner: style({
+    ...t.ph3,
+    ...t.ph5_ns,
     ...t.pv3,
+    ...t.mw8,
+    ...t.center,
+    ...t.flex,
+    ...t.items_center,
+    ...t.flex_wrap,
+  }),
+  headerTitleWrapper: style({
+    ...t.db,
+    ...t.w_100,
+    ...t.w_auto_ns,
+    ...t.tc,
     ...t.ma0,
+    ...t.mr3,
+  }),
+  headerTitle: style({
+    ...t.ma0,
+    ...t.f2,
     ...t.white,
+  }),
+  searchButton: style({
+    ...t.tl,
+    ...t.db,
+    ...t.fw3,
+    ...t.mt3,
+    ...t.mt0_ns,
+    ...t.bg_transparent,
+    ...t.f6,
+    ...t.f5_l,
+    ...t.white_80,
+    ...t.input_reset,
+    ...t.button_reset,
+    ...t.pa2,
+    ...t.outline_0,
+    ...t.ba,
+    ...t.b__white_20,
+    ...t.br2,
+    flex: 1,
   }),
   footer: style({
     ...t.tc,
@@ -177,6 +261,18 @@ const styles = {
     ...t.ph4,
     ...t.f6,
     ...t.o_70,
+  }),
+  searchModal: style({
+    top: '7rem',
+    left: '2rem',
+    right: '2rem',
+    bottom: '2rem',
+    [breakpoints.l]: {
+      top: '7rem',
+      left: '7rem',
+      right: '7rem',
+      bottom: '7rem',
+    },
   }),
 };
 

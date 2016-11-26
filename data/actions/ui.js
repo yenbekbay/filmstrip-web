@@ -9,4 +9,9 @@ const openTrailerModal = (youtubeId: string): Action => ({
 
 const closeTrailerModal = (): Action => ({ type: 'CLOSE_TRAILER_MODAL' });
 
-export { openTrailerModal, closeTrailerModal };
+const updateSearchQuery = (searchQuery: string): Action => ({
+  type: 'UPDATE_SEARCH_QUERY',
+  searchQuery,
+});
+
+export { openTrailerModal, closeTrailerModal, updateSearchQuery };

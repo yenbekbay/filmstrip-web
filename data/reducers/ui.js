@@ -4,10 +4,12 @@ import type { Action } from '../types';
 
 export type UiState = {
   youtubeId: ?string,
+  searchQuery: string,
 };
 
 const initialState: UiState = {
   youtubeId: null,
+  searchQuery: '',
 };
 
 export default (
@@ -24,6 +26,11 @@ export default (
       return {
         ...state,
         youtubeId: null,
+      };
+    case 'UPDATE_SEARCH_QUERY':
+      return {
+        ...state,
+        searchQuery: action.searchQuery,
       };
     default:
       return state;

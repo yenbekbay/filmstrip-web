@@ -1,6 +1,7 @@
 /* @flow */
 
 import { graphql } from 'react-apollo';
+import { style } from 'next/css';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import React from 'react';
@@ -8,6 +9,7 @@ import React from 'react';
 import Loader from '../components/Loader';
 import MovieDetails from '../components/MovieDetails';
 import page from '../hocs/page';
+import t from '../styles/tachyons';
 import TrailerModal from '../components/TrailerModal';
 import type { MovieDetailsFragment } from '../components/types';
 
@@ -39,10 +41,18 @@ const MoviePage = ({ movie }: { movie: MovieDetailsFragment }) => {
       </Head>
       {movie
         ? <MovieDetails movie={movie} />
-        : <Loader />}
+        : <Loader className={styles.loader} />}
       <TrailerModal />
     </div>
   );
+};
+
+const styles = {
+  loader: style({
+    ...t.w3,
+    ...t.h3,
+    margin: '6rem auto',
+  }),
 };
 
 const MOVIE_QUERY = gql`
