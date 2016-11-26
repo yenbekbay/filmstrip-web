@@ -13,6 +13,7 @@ const baseUrl = isServer
 module.exports = {
   isServer,
   isBrowser,
+  isProduction,
   baseUrl,
   graphqlEndpoint: isProduction && isBrowser
     ? `${window.location.protocol}//${window.location.hostname}/graphql`

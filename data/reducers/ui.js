@@ -1,15 +1,13 @@
 /* @flow */
 
-import type { FeedType, Action } from '../types';
+import type { Action } from '../types';
 
 export type UiState = {
   youtubeId: ?string,
-  feedType: FeedType,
 };
 
 const initialState: UiState = {
   youtubeId: null,
-  feedType: 'LATEST',
 };
 
 export default (
@@ -26,11 +24,6 @@ export default (
       return {
         ...state,
         youtubeId: null,
-      };
-    case 'SWITCH_FEED_TYPE':
-      return {
-        ...state,
-        feedType: action.feedType,
       };
     default:
       return state;
