@@ -43,6 +43,7 @@ type Props = {
   headers: Object,
   query: Object,
   url: {
+    pathname: string,
     query: {
       q?: string,
     },
@@ -116,9 +117,13 @@ const page = (
 
       this.apolloClient = getClient(props.headers);
       this.reduxStore = getStore(this.apolloClient, props.initialState, () => {
-        this.setState({
-          searching: this.reduxStore.getState().ui.searchQuery.length > 0,
-        });
+        if (props.url.pathname === '/') {
+          this.setState({
+            searching: this.reduxStore.getState().ui.searchQuery.length > 0,
+          });
+        } else {
+          this.reduxStore.dispatch(updateSearchQuery(''));
+        }
       });
     }
 
