@@ -167,7 +167,7 @@ class IndexPage extends Component {
           {(!loading && movies && movies.length > 0) ? (
             (movies || []).map((movie: MovieDetailsFragment) => (
               <MovieFeedEntry
-                key={movie.ytsId}
+                key={movie.slug}
                 movie={movie}
                 showMovieDetails={this.showMovieDetails}
               />

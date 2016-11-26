@@ -301,7 +301,6 @@ const styles = {
 MovieDetails.fragments = {
   details: gql`
     fragment MovieDetails on Movie {
-      ytsId
       slug
       info {
         backdropUrl

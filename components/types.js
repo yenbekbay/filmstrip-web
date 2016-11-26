@@ -13,7 +13,6 @@ export type Torrent = {
 };
 
 export type MovieDetailsFragment = {
-  ytsId: string,
   slug: string,
   info: {
     backdropUrl: ?string,
