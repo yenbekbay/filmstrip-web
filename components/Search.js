@@ -8,6 +8,7 @@ import gql from 'graphql-tag';
 import React, { Component } from 'react';
 
 import { updateSearchQuery } from '../data/actions/ui';
+import breakpoints from '../styles/breakpoints';
 import Loader from './Loader';
 import MovieCredits from './MovieCredits';
 import MovieDetails from './MovieDetails';
@@ -118,7 +119,8 @@ const styles = {
   searchInputContainer: style({
     ...t.flex,
     ...t.flex_row,
-    ...t.pb4,
+    ...t.pb3,
+    ...t.pb4_l,
     ...t.bb,
     ...t.b__white_20,
   }),
@@ -133,8 +135,14 @@ const styles = {
     ...t.white_80,
   }),
   searchInputLoader: style({
-    ...t.w2,
-    ...t.h2,
+    ...t.w1,
+    ...t.h1,
+    ...t.bw2,
+    [breakpoints.l]: {
+      ...t.w2,
+      ...t.h2,
+      ...t.bw3,
+    },
   }),
   searchResultsContainer: style({
     ...t.mv4,

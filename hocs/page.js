@@ -273,12 +273,11 @@ const styles = {
     top: '7rem',
     left: '2rem',
     right: '2rem',
-    bottom: '2rem',
+    bottom: 0,
     [breakpoints.l]: {
       top: '7rem',
       left: '7rem',
       right: '7rem',
-      bottom: '7rem',
     },
   }),
 };

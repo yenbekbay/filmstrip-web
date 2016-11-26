@@ -51,6 +51,7 @@ const styles = {
   loader: style({
     ...t.w3,
     ...t.h3,
+    ...t.bw3,
     margin: '6rem auto',
   }),
 };
