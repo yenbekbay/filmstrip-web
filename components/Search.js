@@ -57,12 +57,6 @@ class Search extends Component {
     this.updateSearchQuery(searchQuery);
   };
 
-  dismissModal = () => {
-    if (!this.props.url.query.id) return;
-
-    this.props.url.back();
-  };
-
   showMovieDetails = (e: Object, slug: string) => {
     e.preventDefault();
     this.props.url.push(`/movie?id=${slug}`);

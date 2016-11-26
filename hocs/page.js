@@ -9,6 +9,7 @@ import 'glamor/reset';
 
 import { getClient, getStore } from '../data';
 import { isBrowser, isProduction, gaTrackingID } from '../env';
+import { updateSearchQuery } from '../data/actions/ui';
 import breakpoints from '../styles/breakpoints';
 import colors from '../styles/colors';
 import Modal from '../components/Modal';
@@ -75,6 +76,7 @@ const page = (
 ) => {
   class Page extends Component {
     props: Props;
+    state: State;
     apolloClient: Object;
     reduxStore: Object;
 
@@ -113,7 +115,11 @@ const page = (
       }
 
       this.apolloClient = getClient(props.headers);
-      this.reduxStore = getStore(this.apolloClient, props.initialState);
+      this.reduxStore = getStore(this.apolloClient, props.initialState, () => {
+        this.setState({
+          searching: this.reduxStore.getState().ui.searchQuery.length > 0,
+        });
+      });
     }
 
     componentDidMount() {
@@ -126,6 +132,7 @@ const page = (
 
     dismissModal = () => {
       this.setState({ searching: false });
+      this.reduxStore.dispatch(updateSearchQuery(''));
     };
 
     showSearchModal = () => {

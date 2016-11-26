@@ -67,7 +67,8 @@
     "react-modal": "^1.5.2",
     "react-redux": "^4.4.6",
     "react-youtube": "^7.2.0",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-persist": "^4.0.0-beta1"
   },
   "devDependencies": {
     "@types/css": "^0.0.30",
