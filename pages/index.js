@@ -75,14 +75,22 @@ class IndexPage extends Component {
   }
 
   componentWillMount() {
+    const feedType = this.props.url.query.type;
     const lastFeedType = cookie.load('lastFeedType');
 
-    if (lastFeedType && lastFeedType !== defaultFeedType) {
+    if (!feedType && lastFeedType && lastFeedType !== defaultFeedType) {
       this.props.url.push(`/?type=${lastFeedType}`);
     }
   }
 
   componentWillReceiveProps(nextProps: Props) {
+    const feedType = nextProps.url.query.type;
+    const lastFeedType = cookie.load('lastFeedType');
+
+    if (!feedType && lastFeedType && lastFeedType !== defaultFeedType) {
+      this.props.url.push(`/?type=${lastFeedType}`);
+    }
+
     if (nextProps.movies || nextProps.selectedGenres) {
       this.setState({
         movies: nextProps.movies || this.state.movies,
