@@ -85,9 +85,13 @@ class IndexPage extends Component {
 
   componentWillReceiveProps(nextProps: Props) {
     const feedType = nextProps.url.query.type;
+    const isOnHomePage = nextProps.url.pathname === '/';
     const lastFeedType = cookie.load('lastFeedType');
 
-    if (!feedType && lastFeedType && lastFeedType !== defaultFeedType) {
+    if (
+      !feedType && isOnHomePage &&
+      lastFeedType && lastFeedType !== defaultFeedType
+    ) {
       this.props.url.push(`/?type=${lastFeedType}`);
     }
 
