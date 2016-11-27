@@ -159,6 +159,8 @@ const page = (
               <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16" />
               <link rel="manifest" href="/static/manifest.json" />
               <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#2b303b" />
+              <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css" />
+
               <meta name="apple-mobile-web-app-title" content="filmstrip" />
               <meta name="application-name" content="filmstrip" />
               <meta name="theme-color" content="#ffffff" />

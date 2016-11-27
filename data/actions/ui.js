@@ -14,4 +14,14 @@ const updateSearchQuery = (searchQuery: string): Action => ({
   searchQuery,
 });
 
-export { openTrailerModal, closeTrailerModal, updateSearchQuery };
+const updateFeedGenres = (feedGenres: Array<string>): Action => ({
+  type: 'UPDATE_FEED_GENRES',
+  feedGenres,
+});
+
+export {
+  openTrailerModal,
+  closeTrailerModal,
+  updateSearchQuery,
+  updateFeedGenres,
+};

@@ -5,11 +5,13 @@ import type { Action } from '../types';
 export type UiState = {
   youtubeId: ?string,
   searchQuery: string,
+  feedGenres: Array<string>,
 };
 
 const initialState: UiState = {
   youtubeId: null,
   searchQuery: '',
+  feedGenres: [],
 };
 
 export default (
@@ -31,6 +33,11 @@ export default (
       return {
         ...state,
         searchQuery: action.searchQuery,
+      };
+    case 'UPDATE_FEED_GENRES':
+      return {
+        ...state,
+        feedGenres: action.feedGenres,
       };
     default:
       return state;
