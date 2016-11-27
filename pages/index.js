@@ -367,10 +367,14 @@ const withFeed = graphql(MOVIE_FEED_QUERY, {
       limit: ITEMS_PER_PAGE,
     },
   }),
-  skip: ({ url: { pathname, query } }: Props) => (
-    pathname === '/movie' ||
-    (!query.type && defaultFeedType !== cookie.load('lastFeedType'))
-  ),
+  skip: ({ url: { pathname, query } }: Props) => {
+    const lastFeedType = cookie.load('lastFeedType');
+
+    return (
+      pathname === '/movie' ||
+      (!query.type && lastFeedType && lastFeedType !== defaultFeedType)
+    );
+  },
   props: ({ data: { loading, feed } }: {
     data: {
       loading: boolean,
