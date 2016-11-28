@@ -64,7 +64,7 @@ class Search extends Component {
   };
 
   render() {
-    const { loading, results, url: { back, query } } = this.props;
+    const { loading, results, searchQuery, url: { back, query } } = this.props;
     const modalMovie = query.id && _.find({ slug: query.id }, results);
 
     return (
@@ -84,8 +84,11 @@ class Search extends Component {
           </div>
         </div>
         <div className={styles.searchResultsContainer}>
-          {_.includes(this.props.searchQuery, this.state.searchQuery) &&
-            (results || []).map((movie: MovieDetailsFragment) => (
+          {(
+            results && results.length > 0 &&
+            _.includes(this.props.searchQuery, this.state.searchQuery)
+          ) ? (
+            results.map((movie: MovieDetailsFragment) => (
               <a
                 key={movie.info.title}
                 className={styles.searchResultContainer}
@@ -108,7 +111,11 @@ class Search extends Component {
                 </div>
               </a>
             ))
-          }
+          ) : (
+            (!loading && searchQuery.length >= 3) && (
+              <p className={styles.emptyStateText}>No movies found :(</p>
+            )
+          )}
         </div>
       </div>
     );
@@ -173,6 +180,12 @@ const styles = {
     ...t.f6,
     ...t.f5_ns,
     ...t.o_70,
+  }),
+  emptyStateText: style({
+    ...t.f4,
+    ...t.f3_l,
+    ...t.db,
+    ...t.mv4,
   }),
 };
 
