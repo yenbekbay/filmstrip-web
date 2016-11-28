@@ -6,7 +6,7 @@ import React from 'react';
 import t from '../styles/tachyons';
 
 const MovieRatings = ({ imdbRating, rtCriticsRating, kpRating, direction }: {
-  imdbRating: number,
+  imdbRating: ?number,
   rtCriticsRating: ?number,
   kpRating: ?number,
   direction: 'row' | 'column',
@@ -20,12 +20,14 @@ const MovieRatings = ({ imdbRating, rtCriticsRating, kpRating, direction }: {
       className={styles.container}
       style={{ flexDirection: direction }}
     >
-      <div className={ratingContainerStyle}>
-        <i className={styles.ratingIcon} />
-        <span className={styles.ratingText}>
-          {imdbRating.toFixed(1)}
-        </span>
-      </div>
+      {imdbRating && (
+        <div className={ratingContainerStyle}>
+          <i className={styles.ratingIcon} />
+          <span className={styles.ratingText}>
+            {imdbRating.toFixed(1)}
+          </span>
+        </div>
+      )}
       {rtCriticsRating && (
         <div className={ratingContainerStyle}>
           <i
