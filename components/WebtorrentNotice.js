@@ -66,13 +66,15 @@ const styles = {
     ...t.relative,
     ...t.bg_white_10,
     ...t.br2,
-    ...t.mb4,
+    ...t.mb5,
   }),
   message: style({
+    ...t.tc,
     ...t.db,
     ...t.bn,
     ...t.dim,
     ...t.pa4,
+    lineHeight: 1.8,
     '& > span': {
       borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
     },

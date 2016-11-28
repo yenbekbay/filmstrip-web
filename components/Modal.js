@@ -39,7 +39,8 @@ const Modal_ = (props: Object & {
 const styles = {
   modal: style({
     ...t.absolute,
-    ...t.overflow_auto,
+    ...t.overflow_x_hidden,
+    ...t.overflow_y_auto,
     ...t.outline_0,
   }),
 };

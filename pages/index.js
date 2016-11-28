@@ -258,9 +258,11 @@ const styles = {
     ...t.flex_wrap,
     ...t.items_center,
     ...t.justify_center,
+    ...t.mb5,
+    marginTop: '3rem',
     '& > .Select': {
       width: '20rem',
-      ...t.mb4,
+      ...t.mb2,
     },
     '& .Select-control': {
       ...t.bg_transparent,
@@ -292,21 +294,26 @@ const styles = {
     },
     [breakpoints.l]: {
       ...t.justify_between,
+      '& > .Select': {
+        ...t.mb0,
+      },
+    },
+    [breakpoints.ns]: {
+      ...t.mt0,
     },
   }),
   feedTypeSelectorContainer: style({
     ...t.tc,
-    ...t.mv4,
+    ...t.mb3,
     ...t.w_100,
     [breakpoints.l]: {
-      ...t.mt0,
+      ...t.mb0,
       ...t.w_auto,
     },
   }),
   feedTypeSelectorLink: style({
     ...t.dib,
-    ...t.mh2,
-    ...t.mv2,
+    ...t.ma2,
     ...t.pa2,
     ...t.dim,
     ...t.ba,
@@ -321,12 +328,13 @@ const styles = {
     ...t.mv6,
   }),
   pagination: style({
-    ...t.mt4,
-    ...t.mb4,
+    ...t.mt5,
+    marginBottom: '3rem',
     ...t.mb0_ns,
     ...t.tc,
   }),
   paginationLink: style({
+    ...t.dib,
     ...t.white,
     ...t.dim,
     ...t.pa2,
