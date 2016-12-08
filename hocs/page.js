@@ -177,6 +177,7 @@ const page = (
             </Head>
             {this.state.searching && (
               <Modal
+                contentLabel="Search Modal"
                 isOpen
                 onRequestClose={this.dismissModal}
                 className={styles.searchModal}

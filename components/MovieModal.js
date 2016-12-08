@@ -13,6 +13,7 @@ const MovieModal = ({ movie, back }: {
   back: () => void,
 }) => (
   <Modal
+    contentLabel="Movie Modal"
     isOpen
     onRequestClose={back}
     className={styles.movieModal}

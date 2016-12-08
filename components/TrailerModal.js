@@ -16,6 +16,7 @@ const TrailerModal = (props: {
   closeTrailerModal: () => void,
 }) => (
   <Modal
+    contentLabel="Trailer Modal"
     isOpen={!!props.youtubeId}
     onRequestClose={props.closeTrailerModal}
     className={styles.trailerModal}
