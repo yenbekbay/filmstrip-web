@@ -4019,7 +4019,7 @@ react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
 
-react-dom@15.4.1:
+react-dom@15.4.1, react-dom@^15.4.1:
   version "15.4.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.1.tgz#d54c913261aaedb17adc20410d029dcc18a1344a"
   dependencies:
@@ -4079,7 +4079,7 @@ react-youtube:
     lodash.isequal "^4.0.0"
     youtube-player "^3.0.0"
 
-react@15.4.1:
+react@15.4.1, react@^15.4.1:
   version "15.4.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.1.tgz#498e918602677a3983cd0fd206dfe700389a0dd6"
   dependencies:
