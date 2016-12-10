@@ -81,13 +81,13 @@ const styles = {
     ...t.outline_0,
     ...t.bn,
     ...t.w_100,
-    ...t.flex,
-    ...t.justify_end,
-    ...t.items_center,
     ...t.dim,
     ...t.pv0,
     ...t.ph3,
     height: '6rem',
+    '> svg': {
+      ...t.fr,
+    },
   }),
   modalContentInner: style({
     ...t.overflow_x_hidden,
