@@ -3,7 +3,7 @@
 import { style } from 'next/css';
 import React from 'react';
 
-import breakpoints from '../styles/breakpoints';
+import { breakpoints } from '../styles';
 import Modal from './Modal';
 import MovieDetails from './MovieDetails';
 import type { MovieDetailsFragment } from './types';

@@ -9,20 +9,20 @@ import gql from 'graphql-tag';
 import Head from 'next/head';
 import React, { Component } from 'react';
 
+import {
+  FeedEntry,
+  FeedEntryPlaceholder,
+  FeedGenresSelector,
+  FeedPagination,
+  FeedTypeSelector,
+} from '../components/Feed';
+import { page, withTranslator, withUrl } from '../hocs';
+import { t } from '../styles';
 import { updateFeedGenres } from '../data/actions/ui';
-import EntryPlaceholder from '../components/EntryPlaceholder';
-import FeedEntry from '../components/FeedEntry';
-import FeedGenresSelector from '../components/FeedGenresSelector';
-import FeedPagination from '../components/FeedPagination';
-import FeedTypeSelector from '../components/FeedTypeSelector';
 import MovieDetails from '../components/MovieDetails';
 import MovieModal from '../components/MovieModal';
-import page from '../hocs/page';
-import t from '../styles/tachyons';
 import TrailerModal from '../components/TrailerModal';
 import WebtorrentNotice from '../components/WebtorrentNotice';
-import withTranslator from '../hocs/withTranslator';
-import withUrl from '../hocs/withUrl';
 import type {
   MovieDetailsFragment,
   PageInfo,
@@ -153,7 +153,9 @@ class IndexPage extends Component {
             )
           )}
           {(feedLoading || feedLoading === undefined) && (
-            _.range(0, 3).map((idx: number) => <EntryPlaceholder key={idx} />)
+            _.range(0, 3).map((idx: number) => (
+              <FeedEntryPlaceholder key={idx} />
+            ))
           )}
           {pageInfo && (
             <FeedPagination

@@ -8,14 +8,12 @@ import _ from 'lodash/fp';
 import gql from 'graphql-tag';
 import React, { Component } from 'react';
 
+import { breakpoints, t } from '../styles';
 import { updateSearchQuery } from '../data/actions/ui';
-import breakpoints from '../styles/breakpoints';
+import { withTranslator } from '../hocs';
 import Loader from './Loader';
-import MovieCredits from './MovieCredits';
-import MovieDetails from './MovieDetails';
+import MovieDetails, { MovieCredits } from './MovieDetails';
 import MovieModal from './MovieModal';
-import t from '../styles/tachyons';
-import withTranslator from '../hocs/withTranslator';
 import type { MovieDetailsFragment } from './types';
 import type { ReduxState } from '../data/types';
 

@@ -4,7 +4,7 @@ import { style } from 'next/css';
 import _ from 'lodash/fp';
 import React from 'react';
 
-import t from '../styles/tachyons';
+import { t } from '../../styles';
 
 const MovieSynopsis = ({ synopsis, truncated }: {
   synopsis?: ?string,

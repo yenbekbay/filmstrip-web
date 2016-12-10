@@ -4,9 +4,9 @@ import { style } from 'next/css';
 import React from 'react';
 import Translate from 'react-translate-component';
 
-import t from '../styles/tachyons';
+import { t } from '../../styles';
 
-const TorrentDataRow = ({ labelId, text }: {
+const MovieDataRow = ({ labelId, text }: {
   labelId: string,
   text: string,
 }) => (
@@ -32,4 +32,4 @@ const styles = {
   }),
 };
 
-export default TorrentDataRow;
+export default MovieDataRow;

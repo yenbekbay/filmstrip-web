@@ -5,17 +5,16 @@ import _ from 'lodash/fp';
 import gql from 'graphql-tag';
 import React from 'react';
 
-import colors from '../styles/colors';
+import { colors, t } from '../../styles';
+import { withTranslator } from '../../hocs';
 import MovieCredits from './MovieCredits';
 import MovieDataRow from './MovieDataRow';
 import MovieRatings from './MovieRatings';
 import MovieSynopsis from './MovieSynopsis';
 import PlayTrailerButton from './PlayTrailerButton';
-import t from '../styles/tachyons';
 import Torrents from './Torrents';
-import WebtorrentNotice from './WebtorrentNotice';
-import withTranslator from '../hocs/withTranslator';
-import type { MovieDetailsFragment } from './types';
+import WebtorrentNotice from '../WebtorrentNotice';
+import type { MovieDetailsFragment } from '../types';
 
 const hoursUnit = { en: 'h', ru: 'ч' };
 const minutesUnit = { en: 'min', ru: 'мин' };

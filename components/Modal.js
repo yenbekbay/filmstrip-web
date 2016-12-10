@@ -4,7 +4,7 @@ import { style } from 'next/css';
 import Modal from 'react-modal';
 import React from 'react';
 
-import t from '../styles/tachyons';
+import { t } from '../styles';
 
 const Modal_ = (props: Object & {
   onRequestClose: () => void,

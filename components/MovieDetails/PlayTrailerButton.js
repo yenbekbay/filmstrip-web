@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { style } from 'next/css';
 import React from 'react';
 
-import { openTrailerModal } from '../data/actions/ui';
+import { openTrailerModal } from '../../data/actions/ui';
+import { t } from '../../styles';
 import PlayIcon from './PlayIcon';
-import t from '../styles/tachyons';
-import type { Dispatch } from '../data/types';
+import type { Dispatch } from '../../data/types';
 
 const PlayTrailerButton = (props: {
   youtubeId: string,

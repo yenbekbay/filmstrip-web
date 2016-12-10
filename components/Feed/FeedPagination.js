@@ -4,8 +4,8 @@ import { style } from 'next/css';
 import Link from 'next/link';
 import React from 'react';
 
-import t from '../styles/tachyons';
-import type { PageInfo, FeedType } from './types';
+import { t } from '../../styles';
+import type { PageInfo, FeedType } from './../types';
 
 const FeedPagination = ({ page, activeFeedType, pageInfo }: {
   page: ?string,

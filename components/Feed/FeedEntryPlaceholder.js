@@ -3,8 +3,7 @@
 import { style, keyframes } from 'next/css';
 import React from 'react';
 
-import breakpoints from '../styles/breakpoints';
-import t from '../styles/tachyons';
+import { breakpoints, t } from '../../styles';
 
 const loaderAnimation = keyframes({
   '0%': { backgroundPosition: '-700px 0' },
@@ -126,10 +125,10 @@ const renderBlock = (block: Object, idx: number) => {
   return <div key={idx} className={`${styles.block} ${blockStyle}`} />;
 };
 
-const EntryPlaceholder = () => (
+const FeedEntryPlaceholder = () => (
   <div className={styles.container} >
     {blocks.map(renderBlock)}
   </div>
 );
 
-export default EntryPlaceholder;
+export default FeedEntryPlaceholder;

@@ -3,14 +3,15 @@
 import { style } from 'next/css';
 import React from 'react';
 
-import breakpoints from '../styles/breakpoints';
-import MovieCredits from './MovieCredits';
-import MovieRatings from './MovieRatings';
-import MovieSynopsis from './MovieSynopsis';
-import PlayTrailerButton from './PlayTrailerButton';
-import t from '../styles/tachyons';
-import withUrl from '../hocs/withUrl';
-import type { MovieDetailsFragment } from './types';
+import {
+  MovieCredits,
+  MovieRatings,
+  MovieSynopsis,
+  PlayTrailerButton,
+} from '../MovieDetails';
+import { breakpoints, t } from '../../styles';
+import { withUrl } from '../../hocs';
+import type { MovieDetailsFragment } from '../types';
 
 const FeedEntry = ({ movie, url, getPath }: {
   movie: MovieDetailsFragment,

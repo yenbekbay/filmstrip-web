@@ -7,10 +7,9 @@ import React from 'react';
 import Translate from 'react-translate-component';
 
 import { isProduction } from '../env';
+import { t } from '../styles';
+import { withTranslator, withUrl } from '../hocs';
 import FlagIcon from './FlagIcon';
-import t from '../styles/tachyons';
-import withTranslator from '../hocs/withTranslator';
-import withUrl from '../hocs/withUrl';
 
 const PageHeader = ({ showSearchModal, translator, lang, url, getPath }: {
   showSearchModal: () => void,

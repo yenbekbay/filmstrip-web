@@ -3,7 +3,7 @@
 import { style } from 'next/css';
 import React from 'react';
 
-import t from '../styles/tachyons';
+import { t } from '../../styles';
 
 const MovieRatings = ({ imdbRating, rtCriticsRating, kpRating, direction }: {
   imdbRating: ?number,

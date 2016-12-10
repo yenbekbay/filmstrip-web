@@ -3,7 +3,7 @@
 import React from 'react';
 
 import MovieDataRow from './MovieDataRow';
-import type { MovieCreditsMember } from './types';
+import type { MovieCreditsMember } from '../types';
 
 const MovieCredits = ({ credits, truncated }: {
   credits: {

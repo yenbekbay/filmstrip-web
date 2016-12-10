@@ -5,11 +5,11 @@ import _ from 'lodash/fp';
 import React from 'react';
 import Translate from 'react-translate-component';
 
+import { t } from '../../styles';
 import PeerIcon from './PeerIcon';
 import SeedIcon from './SeedIcon';
 import TorrentDataRow from './TorrentDataRow';
-import t from '../styles/tachyons';
-import type { Torrent } from './types';
+import type { Torrent } from './../types';
 
 const Torrents = ({ torrents }: { torrents: Array<Torrent> }) => (
   <div className={styles.torrentsContainer}>

@@ -5,12 +5,9 @@ import { Translator } from 'counterpart';
 import cookie from 'react-cookie';
 import React from 'react';
 
-import breakpoints from '../styles/breakpoints';
-import colors from '../styles/colors';
-import t from '../styles/tachyons';
-import withTranslator from '../hocs/withTranslator';
-import withUrl from '../hocs/withUrl';
-import type { FeedType } from './types';
+import { breakpoints, colors, t } from '../../styles';
+import { withTranslator, withUrl } from '../../hocs';
+import type { FeedType } from '../types';
 
 const FeedTypeSelector = ({ activeFeedType, translator, url, getPath }: {
   activeFeedType: FeedType,

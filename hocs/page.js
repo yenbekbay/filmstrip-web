@@ -3,19 +3,17 @@
 import { ApolloProvider } from 'react-apollo';
 import { style } from 'next/css';
 import { Translator } from 'counterpart';
-import _ from 'lodash/fp';
 import Head from 'next/head';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import React, { Component, PropTypes } from 'react';
 import Translate from 'react-translate-component';
 import 'glamor/reset';
 
+import { breakpoints, colors } from '../styles';
 import { getClient, getStore, getTranslator } from '../data';
 import { getDisplayName } from './_utils';
 import { isBrowser, isProduction, gaTrackingID } from '../env';
 import { updateSearchQuery } from '../data/actions/ui';
-import breakpoints from '../styles/breakpoints';
-import colors from '../styles/colors';
 import Modal from '../components/Modal';
 import PageFooter from '../components/PageFooter';
 import PageHeader from '../components/PageHeader';

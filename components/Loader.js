@@ -3,7 +3,7 @@
 import { style, keyframes } from 'next/css';
 import React from 'react';
 
-import t from '../styles/tachyons';
+import { t } from '../styles';
 
 const Spinner = ({ className }: { className?: string }) => (
   <div className={`${styles.spinner} ${className || ''}`.trim()} />

@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import Translate from 'react-translate-component';
 
 import { isServer } from '../env';
-import t from '../styles/tachyons';
+import { t } from '../styles';
 
 const CloseIcon = () => (
   <svg width="25" height="25" viewBox="0 0 40 40">
