@@ -94,12 +94,15 @@ const styles = {
     ...t.mb3,
     ...t.bg_white_20,
     ...t.white,
+    ...t.flex,
+    maxWidth: '24rem',
     ':hover': {
       ...t.bg_white_30,
     },
   }),
   torrentCardInner: style({
     ...t.flex,
+    ...t.self_center,
     ...t.flex_column,
     ...t.pa3,
     ...t.tc,
