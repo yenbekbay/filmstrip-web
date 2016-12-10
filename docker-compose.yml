@@ -1,7 +1,5 @@
 web:
   build: .
-  mem_limit: 350m
-  memswap_limit: -1
 
 caddy:
   image: zzrot/alpine-caddy
