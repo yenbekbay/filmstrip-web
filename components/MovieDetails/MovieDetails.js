@@ -5,10 +5,12 @@ import _ from 'lodash/fp';
 import gql from 'graphql-tag';
 import React from 'react';
 
-import { colors, t } from '../../styles';
+import { breakpoints, colors, t } from '../../styles';
+import MovieBackdropWrapper from './MovieBackdropWrapper';
 import MovieCredits from './MovieCredits';
 import MovieDataRow from './MovieDataRow';
 import MovieGallery from './MovieGallery';
+import MoviePosterImage from './MoviePosterImage';
 import MovieRatings from './MovieRatings';
 import MovieSynopsis from './MovieSynopsis';
 import PlayTrailerButton from './PlayTrailerButton';
@@ -75,9 +77,6 @@ const MovieDetails = ({ movie, lang }: {
     torrents,
   } = movie;
 
-  const backdropStyle = backdropUrl
-    ? style({ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${backdropUrl})` }) // eslint-disable-line max-len
-    : '';
   const extras = _.toPairs({
     'ui.originalTitleLabel':
       (originalTitle && originalTitle !== title) && originalTitle,
@@ -91,26 +90,28 @@ const MovieDetails = ({ movie, lang }: {
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.headerContainer} ${backdropStyle}`.trim()}>
-        <div className={styles.trailerButtonWrapper}>
-          {youtubeIds.length > 0 && (
-            <PlayTrailerButton youtubeId={youtubeIds[0]} scale={1.5} />
-          )}
-        </div>
-        <div>
-          <h1 className={styles.title}>{title}</h1>
-          <h3 className={styles.subtitle}>{genres.join(', ')} - {year}</h3>
-        </div>
+      <div>
+        <MovieBackdropWrapper backdropUrl={backdropUrl}>
+          <div className={styles.headerContainer}>
+            <div className={styles.trailerButtonWrapper}>
+              {youtubeIds.length > 0 && (
+                <PlayTrailerButton youtubeId={youtubeIds[0]} scale={1.5} />
+              )}
+            </div>
+            <div>
+              <h1 className={styles.title}>{title}</h1>
+              <h3 className={styles.subtitle}>{genres.join(', ')} - {year}</h3>
+            </div>
+          </div>
+        </MovieBackdropWrapper>
       </div>
       <div className={styles.bodyContainer}>
         <WebtorrentNotice />
         <div className={styles.infoContainer}>
-          <img
-            className={styles.poster}
-            src={posterUrl}
-            alt={`Poster for "${title}"`}
-          />
-          <div className={styles.infoInnerWrapper}>
+          <div className={styles.posterWrapper}>
+            <MoviePosterImage posterUrl={posterUrl} title={title} />
+          </div>
+          <div className={styles.infoInner}>
             <div className={styles.ratingsWrapper}>
               <MovieRatings
                 {...{ imdbRating, rtCriticsRating, kpRating }}
@@ -147,15 +148,11 @@ const styles = {
     backgroundColor: colors.bg,
   }),
   headerContainer: style({
-    ...t.db,
-    ...t.cover,
-    ...t.bg_center,
-    ...t.white,
-    ...t.pa3,
-    ...t.pa4_l,
     ...t.flex,
     ...t.flex_column,
     ...t.justify_between,
+    ...t.pa3,
+    ...t.pa4_l,
     ...t.tc,
     height: '18rem',
   }),
@@ -191,12 +188,15 @@ const styles = {
     ...t.flex_wrap,
     ...t.pb4,
   }),
-  poster: style({
-    ...t.db,
-    ...t.h4,
-    ...t.h5_ns,
+  posterWrapper: style({
+    height: '8rem',
+    width: '5rem',
+    [breakpoints.l]: {
+      height: '17rem',
+      width: '11rem',
+    },
   }),
-  infoInnerWrapper: style({
+  infoInner: style({
     ...t.pl3,
     ...t.pl4_l,
     flex: 1,

@@ -11,7 +11,7 @@ import React, { Component } from 'react';
 import { breakpoints, t } from '../styles';
 import { updateSearchQuery } from '../data/actions/ui';
 import Loader from './Loader';
-import MovieDetails, { MovieCredits } from './MovieDetails';
+import MovieDetails, { MovieCredits, MoviePosterImage } from './MovieDetails';
 import MovieModal from './MovieModal';
 import withTranslator from '../hocs/withTranslator';
 import type { MovieDetailsFragment } from './types';
@@ -108,11 +108,12 @@ class Search extends Component {
                 href={`/movie?id=${movie.slug}`}
                 onClick={(e: Object) => this.showMovieDetails(e, movie.slug)}
               >
-                <img
-                  className={styles.poster}
-                  src={movie.info.posterUrl}
-                  alt={`Poster for "${movie.info.title}"`}
-                />
+                <div className={styles.posterWrapper}>
+                  <MoviePosterImage
+                    posterUrl={movie.info.posterUrl}
+                    title={movie.info.title}
+                  />
+                </div>
                 <div className={styles.movieInfo}>
                   <h2 className={styles.movieTitle}>
                     {`${movie.info.title} `}
@@ -177,9 +178,9 @@ const styles = {
     ...t.items_center,
     ...t.mv3,
   }),
-  poster: style({
-    ...t.db,
-    ...t.h4,
+  posterWrapper: style({
+    height: '8rem',
+    width: '5rem',
   }),
   movieInfo: style({
     ...t.ml3,

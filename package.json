@@ -72,6 +72,7 @@
     "react-image-lightbox": "^3.4.0",
     "react-interpolate-component": "^0.10.0",
     "react-modal": "^1.6.1",
+    "react-progressive-image": "^0.1.2",
     "react-redux": "^4.4.6",
     "react-select": "^1.0.0-rc.2",
     "react-translate-component": "^0.13.2",

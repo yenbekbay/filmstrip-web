@@ -2,8 +2,10 @@
 
 import { style } from 'next/css';
 import _ from 'lodash/fp';
+import ProgressiveImage from 'react-progressive-image';
 import React, { Component } from 'react';
 
+import { highresImageUrl, lowresImageUrl } from '../_utils';
 import { breakpoints, t } from '../../styles';
 import Lightbox from './Lightbox';
 
@@ -55,16 +57,23 @@ class MovieGallery extends Component {
     return (
       <div className={styles.gallery}>
         {imageUrls.slice(0, 6).map((imageUrl: string, idx: number) => (
-          <button
-            href={imageUrl}
-            className={styles.thumbnail}
-            key={idx}
-            onClick={(e: Object) => this._openLightbox(e, idx)}
-            style={{
-              width: `${this.imageWidthMappings[idx]}%`,
-              backgroundImage: `url(${imageUrl})`,
-            }}
-          />
+          <ProgressiveImage
+            src={highresImageUrl(imageUrl)}
+            placeholder={lowresImageUrl(imageUrl)}
+          >
+            {(progressiveImageUrl: string) => (
+              <button
+                href={imageUrl}
+                className={styles.thumbnail}
+                key={idx}
+                onClick={(e: Object) => this._openLightbox(e, idx)}
+                style={{
+                  width: `${this.imageWidthMappings[idx]}%`,
+                  backgroundImage: `url(${progressiveImageUrl})`,
+                }}
+              />
+            )}
+          </ProgressiveImage>
         ))}
       </div>
     );

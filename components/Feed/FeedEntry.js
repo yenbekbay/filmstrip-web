@@ -4,7 +4,9 @@ import { style } from 'next/css';
 import React from 'react';
 
 import {
+  MovieBackdropWrapper,
   MovieCredits,
+  MoviePosterImage,
   MovieRatings,
   MovieSynopsis,
   PlayTrailerButton,
@@ -36,9 +38,6 @@ const FeedEntry = ({ movie, url, getPath }: {
   } = movie;
 
   const movieDetailsPath = getPath('/movie', { id: slug });
-  const backdropStyle = backdropUrl
-    ? style({ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${backdropUrl})` }) // eslint-disable-line max-len
-    : '';
 
   return (
     <div className={styles.container}>
@@ -46,38 +45,39 @@ const FeedEntry = ({ movie, url, getPath }: {
         {youtubeIds.length > 0 && (
           <PlayTrailerButton youtubeId={youtubeIds[0]} />
         )}
-        <img
-          className={styles.poster}
-          src={posterUrl}
-          alt={`Poster for "${title}"`}
-        />
+        <MoviePosterImage posterUrl={posterUrl} title={title} />
       </div>
       <a
-        className={`${styles.infoContainer} ${backdropStyle}`.trim()}
+        className={styles.infoContainer}
         href={movieDetailsPath}
         onClick={(e: Object) => {
           e.preventDefault();
           url.push(movieDetailsPath);
         }}
       >
-        <div className={styles.infoLeftColumn}>
-          <div>
-            <h1 className={styles.title}>
-              {`${title} `}<span className={styles.year}>{`(${year})`}</span>
-            </h1>
-            <h3 className={styles.subtitle}>
-              {genres.join(', ')}
-            </h3>
+        <MovieBackdropWrapper backdropUrl={backdropUrl}>
+          <div className={styles.infoInner}>
+            <div className={styles.infoLeftColumn}>
+              <div>
+                <h1 className={styles.title}>
+                  {`${title} `}
+                  <span className={styles.year}>{`(${year})`}</span>
+                </h1>
+                <h3 className={styles.subtitle}>
+                  {genres.join(', ')}
+                </h3>
+              </div>
+              <MovieSynopsis synopsis={synopsis} truncated />
+              <MovieCredits credits={credits} truncated />
+            </div>
+            <div className={styles.infoRightColumn}>
+              <MovieRatings
+                {...{ imdbRating, rtCriticsRating, kpRating }}
+                direction="column"
+              />
+            </div>
           </div>
-          <MovieSynopsis synopsis={synopsis} truncated />
-          <MovieCredits credits={credits} truncated />
-        </div>
-        <div className={styles.infoRightColumn}>
-          <MovieRatings
-            {...{ imdbRating, rtCriticsRating, kpRating }}
-            direction="column"
-          />
-        </div>
+        </MovieBackdropWrapper>
       </a>
     </div>
   );
@@ -99,20 +99,17 @@ const styles = {
     ...t.db_l,
     ...t.h_100,
     ...t.relative,
+    backgroundColor: '#353A44',
     width: '11rem',
-  }),
-  poster: style({
-    ...t.h_100,
-    ...t.w_100,
   }),
   infoContainer: style({
     ...t.db,
     ...t.dim,
-    ...t.cover,
-    ...t.bg_center,
-    ...t.white,
-    ...t.flex,
     flex: 1,
+  }),
+  infoInner: style({
+    ...t.h_100,
+    ...t.flex,
   }),
   infoLeftColumn: style({
     ...t.pa3,

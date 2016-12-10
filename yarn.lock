@@ -4096,6 +4096,10 @@ react-modal@^1.4.0, react-modal@^1.6.1:
     exenv "1.2.0"
     lodash.assign "^3.2.0"
 
+react-progressive-image@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-progressive-image/-/react-progressive-image-0.1.2.tgz#e3c89a834e41666a284d13f4a9b775ba55dc45d8"
+
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
   resolved "https://registry.yarnpkg.com/react-proxy/-/react-proxy-3.0.0-alpha.1.tgz#4400426bcfa80caa6724c7755695315209fa4b07"
