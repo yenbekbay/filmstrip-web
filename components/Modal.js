@@ -9,42 +9,58 @@ import CloseIcon from './CloseIcon';
 
 const Modal_ = (props: Object & {
   onRequestClose: () => void,
-}) => (
-  <Modal
-    {...props}
-    className={styles.modal}
-    onAfterOpen={() => {
-      const el = document.querySelector('.ReactModal__Overlay');
-      const modalEl = document.querySelector('.ReactModal__Content');
+}) => {
+  const handleRequestClose = () => {
+    props.onRequestClose();
+    window.openModals -= 1;
 
-      const handler = (e: Object) => {
-        const target = e.targetTouches.length > 0
-          ? e.targetTouches[0]
-          : e.target;
+    if (window.openModals > 0) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+  };
 
-        if (!modalEl.contains(target)) {
-          e.preventDefault();
-          el.removeEventListener('touchend', handler);
-          props.onRequestClose();
-        }
-      };
+  return (
+    <Modal
+      {...props}
+      className={styles.modal}
+      onAfterOpen={() => {
+        const el = document.querySelector('.ReactModal__Overlay');
+        const modalEl = document.querySelector('.ReactModal__Content');
 
-      el && el.addEventListener('touchend', handler);
-    }}
-  >
-    <div className={styles.modalContentContainer}>
-      <button
-        className={styles.closeButton}
-        onClick={props.onRequestClose}
-      >
-        <CloseIcon size={40} />
-      </button>
-      <div className={`${styles.modalContentInner} ${props.className}`}>
-        {props.children}
+        const handler = (e: Object) => {
+          const target = e.targetTouches.length > 0
+            ? e.targetTouches[0]
+            : e.target;
+
+          if (!modalEl.contains(target)) {
+            e.preventDefault();
+            el.removeEventListener('touchend', handler);
+            handleRequestClose();
+          }
+        };
+
+        el && el.addEventListener('touchend', handler);
+        window.openModals = window.openModals ? window.openModals + 1 : 1;
+        document.body.classList.add('modal-open');
+      }}
+      onRequestClose={handleRequestClose}
+    >
+      <div className={styles.modalContentContainer}>
+        <button
+          className={styles.closeButton}
+          onClick={handleRequestClose}
+        >
+          <CloseIcon size={40} />
+        </button>
+        <div className={`${styles.modalContentInner} ${props.className}`}>
+          {props.children}
+        </div>
       </div>
-    </div>
-  </Modal>
-);
+    </Modal>
+  );
+};
 
 const styles = {
   modal: style({

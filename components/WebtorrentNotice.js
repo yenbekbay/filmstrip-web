@@ -23,7 +23,7 @@ class WebtorrentNotice extends Component {
     seen: isServer || !!cookie.load('seenWebtorrentNotice'),
   };
 
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
+  shouldComponentUpdate(nextProps: any, nextState: State) {
     return !_.isEqual(this.props, nextProps) ||
       !_.isEqual(this.state, nextState);
   }

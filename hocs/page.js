@@ -26,13 +26,13 @@ style.insertRule(`
     color: #fff;
   }
 
+  body.modal-open {
+    overflow: hidden;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
-  }
-
-  .ReactModal__Body--open {
-    overflow: hidden;
   }
 `);
 
