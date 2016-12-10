@@ -26,12 +26,12 @@ const PageHeader = ({ showSearchModal, translator, lang, url, getPath }: {
 }) => {
   const rootPath = getPath('/');
   const newLang = lang === 'ru' ? 'en' : 'ru';
-  const newLangPath = isProduction && url.host
-    ? getPath(
-        `https://${newLang}.${url.host}${url.pathname}`,
-        { ...url.query, lang: null },
-      )
-    : getPath(url.pathname, { ...url.query, lang: newLang });
+  const newLangPath = (
+    url.host && url.host !== '0.0.0.0' && url.host !== 'localhost'
+  ) ? getPath(
+    `https://${newLang}.${url.host.replace(`${lang}.`, '')}${url.pathname}`,
+    { ...url.query, lang: null },
+  ) : getPath(url.pathname, { ...url.query, lang: newLang });
 
   return (
     <header className={styles.header}>
