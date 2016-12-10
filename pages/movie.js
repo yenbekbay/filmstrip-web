@@ -1,6 +1,6 @@
 /* @flow */
 
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { style } from 'next/css';
 import gql from 'graphql-tag';
 import Head from 'next/head';
@@ -11,6 +11,8 @@ import MovieDetails from '../components/MovieDetails';
 import page from '../hocs/page';
 import t from '../styles/tachyons';
 import TrailerModal from '../components/TrailerModal';
+import withTranslator from '../hocs/withTranslator';
+import withUrl from '../hocs/withUrl';
 import type { MovieDetailsFragment } from '../components/types';
 
 const MoviePage = ({ movie }: { movie: MovieDetailsFragment }) => {
@@ -57,7 +59,7 @@ const styles = {
 };
 
 const MOVIE_QUERY = gql`
-  query Movie($slug: String!) {
+  query Movie($slug: String!, $lang: Language!) {
     movie(slug: $slug) {
       ...MovieDetails
     }
@@ -66,9 +68,13 @@ const MOVIE_QUERY = gql`
 `;
 
 const withData = graphql(MOVIE_QUERY, {
-  options: ({ url: { query } }: { url: { query: Object } }) => ({
+  options: ({ url: { query }, lang }: {
+    url: { query: Object },
+    lang: string,
+  }) => ({
     variables: {
       slug: query.id,
+      lang: lang.toUpperCase(),
     },
   }),
   props: ({ data: { loading, movie } }: {
@@ -82,4 +88,9 @@ const withData = graphql(MOVIE_QUERY, {
   }),
 });
 
-export default page(withData(MoviePage));
+export default compose(
+  page,
+  withUrl,
+  withTranslator,
+  withData,
+)(MoviePage);

@@ -1,8 +1,9 @@
 /* @flow */
 
 import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { style } from 'next/css';
+import { Translator } from 'counterpart';
 import _ from 'lodash/fp';
 import gql from 'graphql-tag';
 import React, { Component } from 'react';
@@ -14,6 +15,7 @@ import MovieCredits from './MovieCredits';
 import MovieDetails from './MovieDetails';
 import MovieModal from './MovieModal';
 import t from '../styles/tachyons';
+import withTranslator from '../hocs/withTranslator';
 import type { MovieDetailsFragment } from './types';
 import type { ReduxState } from '../data/types';
 
@@ -29,6 +31,8 @@ type Props = {
     back: () => void,
     push: (path: string) => void,
   },
+  translator: Translator,
+  lang: string,
 };
 type State = {
   searchQuery: string,
@@ -64,7 +68,13 @@ class Search extends Component {
   };
 
   render() {
-    const { loading, results, searchQuery, url: { back, query } } = this.props;
+    const {
+      loading,
+      results,
+      searchQuery,
+      url: { back, query },
+      translator,
+  } = this.props;
     const modalMovie = query.id && _.find({ slug: query.id }, results);
 
     return (
@@ -74,7 +84,7 @@ class Search extends Component {
           <input
             autoFocus
             className={styles.searchInput}
-            placeholder="Find your next movie..."
+            placeholder={translator.translate('ui.searchPlaceholder')}
             type="text"
             onChange={this.handleSearchQueryChange}
             value={this.state.searchQuery}
@@ -104,10 +114,10 @@ class Search extends Component {
                   <h2 className={styles.movieTitle}>
                     {`${movie.info.title} `}
                     <span className={styles.movieYear}>
-                      {`(${movie.info.releaseDate.slice(0, 4)})`}
+                      {`(${movie.info.year})`}
                     </span>
                   </h2>
-                  <MovieCredits credits={movie.info.credits} />
+                  <MovieCredits credits={movie.info.credits} truncated />
                 </div>
               </a>
             ))
@@ -190,18 +200,19 @@ const styles = {
 };
 
 const SEARCH_QUERY = gql`
-  query SearchResults($query: String!) {
-    search(query: $query) {
+  query SearchResults($query: String!, $lang: Language!) {
+    search(query: $query, lang: $lang) {
       ...MovieDetails
     }
   }
   ${MovieDetails.fragments.details}
 `;
 
-const withData = graphql(SEARCH_QUERY, {
-  options: ({ searchQuery }: Props) => ({
+const withResults = graphql(SEARCH_QUERY, {
+  options: ({ searchQuery, lang }: Props) => ({
     variables: {
       query: searchQuery,
+      lang: lang.toUpperCase(),
     },
   }),
   props: ({ data: { loading, search } }: {
@@ -224,4 +235,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   ) => dispatch(updateSearchQuery(searchQuery)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withData(Search));
+export default compose(
+  withTranslator,
+  connect(mapStateToProps, mapDispatchToProps),
+  withResults,
+)(Search);

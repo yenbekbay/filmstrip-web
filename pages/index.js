@@ -7,29 +7,29 @@ import _ from 'lodash/fp';
 import cookie from 'react-cookie';
 import gql from 'graphql-tag';
 import Head from 'next/head';
-import Link from 'next/link';
 import React, { Component } from 'react';
-import Select from 'react-select';
 
 import { updateFeedGenres } from '../data/actions/ui';
-import breakpoints from '../styles/breakpoints';
-import colors from '../styles/colors';
 import EntryPlaceholder from '../components/EntryPlaceholder';
+import FeedEntry from '../components/FeedEntry';
+import FeedGenresSelector from '../components/FeedGenresSelector';
+import FeedPagination from '../components/FeedPagination';
+import FeedTypeSelector from '../components/FeedTypeSelector';
 import MovieDetails from '../components/MovieDetails';
-import MovieFeedEntry from '../components/MovieFeedEntry';
 import MovieModal from '../components/MovieModal';
 import page from '../hocs/page';
 import t from '../styles/tachyons';
 import TrailerModal from '../components/TrailerModal';
 import WebtorrentNotice from '../components/WebtorrentNotice';
-import type { MovieDetailsFragment } from '../components/types';
+import withTranslator from '../hocs/withTranslator';
+import withUrl from '../hocs/withUrl';
+import type {
+  MovieDetailsFragment,
+  PageInfo,
+  FeedType,
+} from '../components/types';
 import type { ReduxState } from '../data/types';
 
-type FeedType = 'trending' | 'new' | 'latest';
-type PageInfo = {
-  hasPreviousPage: boolean,
-  hasNextPage: boolean,
-};
 type Props = {
   feedLoading?: ?boolean,
   movies?: ?Array<MovieDetailsFragment>,
@@ -41,107 +41,72 @@ type Props = {
   url: {
     query: {
       type?: FeedType,
-      page?: number,
+      page?: string,
       id?: string,
     },
     pathname: string,
     back: () => void,
     push: (path: string) => void,
   },
+  getPath: (pathname: string, query?: Object) => string,
+  lang: string,
 };
 type State = {
   movies: ?Array<MovieDetailsFragment>,
-  selectedGenres: Array<string>,
 };
 
 const defaultFeedType: FeedType = 'trending';
-const feedTypeMappings = {
-  trending: 'Trending',
-  new: 'New',
-  latest: 'Latest additions',
-};
 
 class IndexPage extends Component {
   props: Props;
-  state: State;
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      movies: [],
-      selectedGenres: props.selectedGenres || [],
-    };
-  }
+  state: State = {
+    movies: [],
+  };
 
   componentWillMount() {
-    const feedType = this.props.url.query.type;
+    const { url, getPath } = this.props;
+    const feedType = url.query.type;
     const lastFeedType = cookie.load('lastFeedType');
 
     if (!feedType && lastFeedType && lastFeedType !== defaultFeedType) {
-      this.props.url.push(`/?type=${lastFeedType}`);
+      url.push(getPath('/', { type: lastFeedType }));
     }
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const feedType = nextProps.url.query.type;
-    const isOnHomePage = nextProps.url.pathname === '/';
+    const { movies, selectedGenres, url, getPath } = nextProps;
+    const feedType = url.query.type;
+    const isOnHomePage = url.pathname === '/';
     const lastFeedType = cookie.load('lastFeedType');
 
     if (
       !feedType && isOnHomePage &&
       lastFeedType && lastFeedType !== defaultFeedType
     ) {
-      this.props.url.push(`/?type=${lastFeedType}`);
+      this.props.url.push(getPath('/', { type: lastFeedType }));
     }
 
-    if (nextProps.movies || nextProps.selectedGenres) {
+    if (movies || selectedGenres) {
       this.setState({
-        movies: nextProps.movies || this.state.movies,
-        selectedGenres: nextProps.selectedGenres || this.state.selectedGenres,
+        movies: movies || this.state.movies,
       });
     }
   }
 
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return (
-      !_.isEqual(this.props, nextProps) ||
-      !_.isEqual(this.state.selectedGenres, nextState.selectedGenres)
-    );
+  shouldComponentUpdate(nextProps: Props) {
+    return !_.isEqual(this.props, nextProps);
   }
 
-  dismissModal = () => {
+  _dismissModal = () => {
     if (!this.props.url.query.id) return;
 
     this.props.url.back();
   };
 
-  showMovieDetails = (e: Object, slug: string) => {
-    e.preventDefault();
-    this.props.url.push(`/movie?id=${slug}`);
-  };
-
-  switchFeedType = (e: Object, feedType: FeedType) => {
-    const activeFeedType = this.props.url.query.type || defaultFeedType;
-
-    e.preventDefault();
-
-    if (feedType !== activeFeedType) {
-      this.props.url.push(`/?type=${feedType}`);
-      cookie.save('lastFeedType', feedType, { path: '/' });
-    }
-  };
-
-  updateSelectedGenres = _.throttle(1000, (selectedGenres: Array<string>) => {
-    this.props.updateSelectedGenres(selectedGenres);
-  });
-
-  handleSelectedGenresChange = (genres: Array<string>) => {
-    const selectedGenres = _.map('value', genres);
-
-    this.setState({ selectedGenres });
-    this.updateSelectedGenres(selectedGenres);
-  };
+  _handleSelectedGenresChange = _.throttle(
+    1000, this.props.updateSelectedGenres,
+  );
 
   render() {
     const {
@@ -149,15 +114,12 @@ class IndexPage extends Component {
       movies = this.state.movies,
       genresLoading,
       genres,
+      selectedGenres,
       pageInfo,
       url: { back, query },
     } = this.props;
     const activeFeedType = query.type || defaultFeedType;
     const modalMovie = query.id && _.find({ slug: query.id }, movies);
-    const genreOptions = (genres || []).map((genre: string) => ({
-      value: genre,
-      label: genre,
-    }));
 
     return (
       <div>
@@ -173,40 +135,18 @@ class IndexPage extends Component {
         <div className={styles.container}>
           <WebtorrentNotice />
           <div className={styles.feedOptionsContainer}>
-            <div className={styles.feedTypeSelectorContainer}>
-              {['trending', 'new', 'latest'].map((feedType: FeedType) => (
-                <a
-                  key={feedType}
-                  onClick={(e: Object) => this.switchFeedType(e, feedType)}
-                  href={`/?type=${feedType}`}
-                  className={styles.feedTypeSelectorLink}
-                  style={(activeFeedType === feedType)
-                    ? { ...t.bg_white_90, color: colors.bg }
-                    : {}
-                  }
-                >
-                  {feedTypeMappings[feedType]}
-                </a>
-              ))}
-            </div>
-            <Select
-              multi
-              instanceId="1"
-              placeholder="Select genres"
-              value={this.state.selectedGenres}
-              isLoading={genresLoading}
-              options={genreOptions}
-              onChange={this.handleSelectedGenresChange}
+            <FeedTypeSelector activeFeedType={activeFeedType} />
+            <FeedGenresSelector
+              genres={genres}
+              selectedGenres={selectedGenres || []}
+              loading={genresLoading}
+              onSelectedGenresChange={this._handleSelectedGenresChange}
             />
           </div>
           {(!feedLoading && feedLoading !== undefined) && (
             (movies && movies.length > 0) ? (movies || []).map(
               (movie: MovieDetailsFragment) => (
-                <MovieFeedEntry
-                  key={movie.slug}
-                  movie={movie}
-                  showMovieDetails={this.showMovieDetails}
-                />
+                <FeedEntry key={movie.slug} movie={movie} />
               ),
             ) : (
               <p className={styles.emptyStateText}>No movies found :(</p>
@@ -216,28 +156,11 @@ class IndexPage extends Component {
             _.range(0, 3).map((idx: number) => <EntryPlaceholder key={idx} />)
           )}
           {pageInfo && (
-            <div className={styles.pagination}>
-              {pageInfo.hasPreviousPage && (
-                <Link
-                  href={(query.page && query.page > 2)
-                    ? `/?type=${activeFeedType}&page=${parseInt(query.page, 10) - 1}` // eslint-disable-line max-len
-                    : `/?type=${activeFeedType}`
-                  }
-                >
-                  <a className={styles.paginationLink}>Previous</a>
-                </Link>
-              )}
-              {pageInfo.hasNextPage && (
-                <Link
-                  href={query.page
-                    ? `/?type=${activeFeedType}&page=${parseInt(query.page, 10) + 1}` // eslint-disable-line max-len
-                    : `/?type=${activeFeedType}&page=2`
-                  }
-                >
-                  <a className={styles.paginationLink}>Next</a>
-                </Link>
-              )}
-            </div>
+            <FeedPagination
+              page={query.page}
+              activeFeedType={activeFeedType}
+              pageInfo={pageInfo}
+            />
           )}
         </div>
         <TrailerModal />
@@ -259,66 +182,9 @@ const styles = {
     ...t.items_center,
     ...t.justify_center,
     ...t.mb5,
+    ...t.justify_between_l,
+    ...t.mt0_ns,
     marginTop: '3rem',
-    '& > .Select': {
-      width: '20rem',
-      ...t.mb2,
-    },
-    '& .Select-control': {
-      ...t.bg_transparent,
-      ...t.b__white_20,
-      paddingBottom: 2,
-    },
-    '& .Select-value, & .Select-value-icon, & .Select-value-label': {
-      ...t.bg_transparent,
-      ...t.b__white_20,
-      ...t.white,
-    },
-    '& .Select-value-icon:hover, & .Select-value-icon:focus': {
-      ...t.white,
-      ...t.bg_white_10,
-    },
-    '& .Select.is-focused:not(.is-open) > .Select-control': {
-      ...t.b__white,
-    },
-    '& .Select-menu-outer': {
-      backgroundColor: colors.bg,
-      ...t.b__white_20,
-    },
-    '& .Select-option': {
-      ...t.bg_transparent,
-      ...t.white,
-    },
-    '& .Select-option.is-focused': {
-      ...t.bg_white_10,
-    },
-    [breakpoints.l]: {
-      ...t.justify_between,
-      '& > .Select': {
-        ...t.mb0,
-      },
-    },
-    [breakpoints.ns]: {
-      ...t.mt0,
-    },
-  }),
-  feedTypeSelectorContainer: style({
-    ...t.tc,
-    ...t.mb3,
-    ...t.w_100,
-    [breakpoints.l]: {
-      ...t.mb0,
-      ...t.w_auto,
-    },
-  }),
-  feedTypeSelectorLink: style({
-    ...t.dib,
-    ...t.ma2,
-    ...t.pa2,
-    ...t.dim,
-    ...t.ba,
-    ...t.b__white_20,
-    ...t.br3,
   }),
   emptyStateText: style({
     ...t.f4,
@@ -327,32 +193,23 @@ const styles = {
     ...t.tc,
     ...t.mv6,
   }),
-  pagination: style({
-    ...t.mt5,
-    marginBottom: '3rem',
-    ...t.mb0_ns,
-    ...t.tc,
-  }),
-  paginationLink: style({
-    ...t.dib,
-    ...t.white,
-    ...t.dim,
-    ...t.pa2,
-    ...t.mh2,
-    ...t.ba,
-    ...t.b__white_20,
-    ...t.br3,
-  }),
 };
 
 const MOVIE_FEED_QUERY = gql`
   query MovieFeed(
     $type: FeedType!,
+    $lang: Language!,
     $genres: [String!]!,
     $offset: Int,
     $limit: Int
   ) {
-    feed(type: $type, genres: $genres, offset: $offset, limit: $limit) {
+    feed(
+      type: $type,
+      lang: $lang,
+      genres: $genres,
+      offset: $offset,
+      limit: $limit
+    ) {
       nodes {
         ...MovieDetails
       }
@@ -367,11 +224,14 @@ const MOVIE_FEED_QUERY = gql`
 const ITEMS_PER_PAGE = 10;
 
 const withFeed = graphql(MOVIE_FEED_QUERY, {
-  options: ({ url: { query }, selectedGenres }: Props) => ({
+  options: ({ url: { query }, selectedGenres, lang }: Props) => ({
     variables: {
-      type: _.toUpper(query.type || defaultFeedType),
+      type: (query.type || defaultFeedType).toUpperCase(),
+      lang: lang.toUpperCase(),
       genres: selectedGenres || [],
-      offset: query.page ? ((query.page - 1) * ITEMS_PER_PAGE) : 0,
+      offset: query.page
+        ? ((parseInt(query.page, 10) - 1) * ITEMS_PER_PAGE)
+        : 0,
       limit: ITEMS_PER_PAGE,
     },
   }),
@@ -399,10 +259,15 @@ const withFeed = graphql(MOVIE_FEED_QUERY, {
 });
 
 const GENRES_QUERY = gql`
-  query Genres { genres }
+  query Genres($lang: Language!) { genres(lang: $lang) }
 `;
 
 const withGenres = graphql(GENRES_QUERY, {
+  options: ({ lang }: Props) => ({
+    variables: {
+      lang: lang.toUpperCase(),
+    },
+  }),
   props: ({ data: { loading, genres } }: {
     data: {
       loading: boolean,
@@ -424,6 +289,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 export default compose(
   page,
+  withUrl,
+  withTranslator,
   connect(mapStateToProps, mapDispatchToProps),
   withFeed,
   withGenres,

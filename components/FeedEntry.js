@@ -9,11 +9,13 @@ import MovieRatings from './MovieRatings';
 import MovieSynopsis from './MovieSynopsis';
 import PlayTrailerButton from './PlayTrailerButton';
 import t from '../styles/tachyons';
+import withUrl from '../hocs/withUrl';
 import type { MovieDetailsFragment } from './types';
 
-const MovieFeedEntry = ({ movie, showMovieDetails }: {
+const FeedEntry = ({ movie, url, getPath }: {
   movie: MovieDetailsFragment,
-  showMovieDetails: (e: Object, slug: string) => void,
+  url: { push: (path: string) => void },
+  getPath: (pathname: string, query?: Object) => string,
 }) => {
   const {
     slug,
@@ -24,18 +26,18 @@ const MovieFeedEntry = ({ movie, showMovieDetails }: {
       imdbRating,
       kpRating,
       posterUrl,
-      releaseDate,
       rtCriticsRating,
       synopsis,
       title,
+      year,
       youtubeIds,
     },
   } = movie;
 
+  const movieDetailsPath = getPath('/movie', { id: slug });
   const backdropStyle = backdropUrl
     ? style({ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${backdropUrl})` }) // eslint-disable-line max-len
     : '';
-  const year = releaseDate.slice(0, 4);
 
   return (
     <div className={styles.container}>
@@ -51,8 +53,11 @@ const MovieFeedEntry = ({ movie, showMovieDetails }: {
       </div>
       <a
         className={`${styles.infoContainer} ${backdropStyle}`.trim()}
-        href={`/movie?id=${slug}`}
-        onClick={(e: Object) => showMovieDetails(e, slug)}
+        href={movieDetailsPath}
+        onClick={(e: Object) => {
+          e.preventDefault();
+          url.push(movieDetailsPath);
+        }}
       >
         <div className={styles.infoLeftColumn}>
           <div>
@@ -64,7 +69,7 @@ const MovieFeedEntry = ({ movie, showMovieDetails }: {
             </h3>
           </div>
           <MovieSynopsis synopsis={synopsis} truncated />
-          <MovieCredits credits={credits} />
+          <MovieCredits credits={credits} truncated />
         </div>
         <div className={styles.infoRightColumn}>
           <MovieRatings
@@ -144,4 +149,4 @@ const styles = {
   }),
 };
 
-export default MovieFeedEntry;
+export default withUrl(FeedEntry);

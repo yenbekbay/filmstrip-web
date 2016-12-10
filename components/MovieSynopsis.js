@@ -7,11 +7,11 @@ import React from 'react';
 import t from '../styles/tachyons';
 
 const MovieSynopsis = ({ synopsis, truncated }: {
-  synopsis?: string,
+  synopsis?: ?string,
   truncated?: boolean,
 }) => (
   <p className={styles.synopsis}>
-    {truncated ? _.truncate({ length: 180 }, synopsis) : synopsis}
+    {(truncated ? _.truncate({ length: 180 }, synopsis) : synopsis) || '–'}
   </p>
 );
 

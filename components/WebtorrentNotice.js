@@ -3,6 +3,7 @@
 import { style } from 'next/css';
 import cookie from 'react-cookie';
 import React, { Component } from 'react';
+import Translate from 'react-translate-component';
 
 import { isServer } from '../env';
 import t from '../styles/tachyons';
@@ -26,6 +27,10 @@ type State = {
 };
 
 class WebtorrentNotice extends Component {
+  static contextTypes = {
+    translator: Translate.translatorType,
+  };
+
   state: State = {
     seen: isServer || !!cookie.load('seenWebtorrentNotice'),
   };
@@ -38,7 +43,6 @@ class WebtorrentNotice extends Component {
   render() {
     if (this.state.seen) return null;
 
-    /* eslint-disable max-len */
     return (
       <div className={styles.container}>
         <a
@@ -47,7 +51,7 @@ class WebtorrentNotice extends Component {
           target="_blank"
           rel="noopener noreferrer"
         >
-          ❗ Download <span>WebTorrent</span> to stream the movies on this website.
+          ❗ <Translate content="ui.webTorrentNotice" />
         </a>
         <button
           className={styles.closeButton}
@@ -57,7 +61,6 @@ class WebtorrentNotice extends Component {
         </button>
       </div>
     );
-    /* eslint-enable max-len */
   }
 }
 
@@ -69,13 +72,14 @@ const styles = {
     ...t.mb5,
   }),
   message: style({
-    ...t.tc,
+    ...t.tc_l,
     ...t.db,
     ...t.bn,
     ...t.dim,
     ...t.pa4,
     lineHeight: 1.8,
-    '& > span': {
+    '& em': {
+      ...t.fs_normal,
       borderBottom: '2px solid rgba(255, 255, 255, 0.3)',
     },
   }),

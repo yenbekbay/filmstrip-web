@@ -1,4 +1,4 @@
-filmstrip.cf {
+filmstrip.cf, en.filmstrip.cf, ru.filmstrip.cf {
   proxy / web:3000 {
     transparent
   }

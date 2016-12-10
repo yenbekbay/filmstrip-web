@@ -6,12 +6,14 @@ export type UiState = {
   youtubeId: ?string,
   searchQuery: string,
   feedGenres: Array<string>,
+  lang: string,
 };
 
 const initialState: UiState = {
   youtubeId: null,
   searchQuery: '',
   feedGenres: [],
+  lang: 'en',
 };
 
 export default (

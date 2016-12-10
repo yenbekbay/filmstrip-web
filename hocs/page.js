@@ -2,19 +2,25 @@
 
 import { ApolloProvider } from 'react-apollo';
 import { style } from 'next/css';
+import { Translator } from 'counterpart';
+import _ from 'lodash/fp';
 import Head from 'next/head';
-import Link from 'next/link';
-import React, { Component } from 'react';
+import hoistNonReactStatics from 'hoist-non-react-statics';
+import React, { Component, PropTypes } from 'react';
+import Translate from 'react-translate-component';
 import 'glamor/reset';
 
-import { getClient, getStore } from '../data';
+import { getClient, getStore, getTranslator } from '../data';
+import { getDisplayName } from './_utils';
 import { isBrowser, isProduction, gaTrackingID } from '../env';
 import { updateSearchQuery } from '../data/actions/ui';
 import breakpoints from '../styles/breakpoints';
 import colors from '../styles/colors';
 import Modal from '../components/Modal';
+import PageFooter from '../components/PageFooter';
+import PageHeader from '../components/PageHeader';
 import Search from '../components/Search';
-import t from '../styles/tachyons';
+import type { WrappableComponent } from './_utils';
 
 style.insertRule(`
   body {
@@ -72,41 +78,57 @@ const trackPageView = () => {
   }
 };
 
-const page = (
-  WrappedComponent: Class<Component<any, any, any>> | (props: any) => React$Element<any>, // eslint-disable-line max-len
-) => {
+const getHostLang = (headers: Object) => {
+  const { host } = headers;
+
+  if (host && (host.startsWith('ru') || host.startsWith('en'))) {
+    return host.startsWith('ru') ? 'ru' : 'en';
+  }
+
+  return null;
+};
+const getQueryLang = (query: Object) => {
+  if (query.lang) {
+    return query.lang === 'ru' ? 'ru' : 'en';
+  }
+
+  return null;
+};
+
+const page = (WrappedComponent: WrappableComponent) => {
   class Page extends Component {
     props: Props;
-    state: State;
     apolloClient: Object;
     reduxStore: Object;
+    translator: Translator;
+
+    static displayName = `page(${getDisplayName(WrappedComponent)})`;
+    static childContextTypes = {
+      translator: Translate.translatorType,
+      url: PropTypes.object,
+    };
 
     static async getInitialProps(ctx: GetInitialPropsContext) {
       const headers = ctx.req ? ctx.req.headers : {};
-      const query = ctx.query;
       const apolloClient = getClient(headers);
       const reduxStore = getStore(apolloClient, {});
-      const props = {
+
+      return {
         initialState: reduxStore.getState(),
         headers,
-        query,
       };
-
-      if (WrappedComponent.getInitialProps) {
-        const extendedCtx = { ...ctx, apolloClient, reduxStore };
-        // $FlowFixMe
-        const subProps = await WrappedComponent.getInitialProps(extendedCtx);
-
-        Object.assign(props, subProps);
-      }
-
-      return props;
     }
 
-    // eslint-disable-next-line react/sort-comp
-    state: State = {
-      searching: false,
-    };
+    /* eslint-disable react/sort-comp */
+    state: State = { searching: false };
+
+    getChildContext = () => ({
+      translator: this.translator,
+      url: {
+        ...this.props.url,
+        host: this.props.headers.host,
+      },
+    });
 
     constructor(props: Props) {
       super(props);
@@ -125,7 +147,11 @@ const page = (
           this.reduxStore.dispatch(updateSearchQuery(''));
         }
       });
+      this.translator = getTranslator(
+        getHostLang(props.headers) || getQueryLang(props.url.query) || 'en',
+      );
     }
+    /* eslint-enable react/sort-comp */
 
     componentDidMount() {
       trackPageView();
@@ -190,25 +216,9 @@ const page = (
                 <Search url={this.props.url} />
               </Modal>
             )}
-            <header className={styles.header}>
-              <div className={styles.headerInner}>
-                <Link href="/">
-                  <a className={styles.headerTitleWrapper}>
-                    <h1 className={styles.headerTitle}>filmstrip</h1>
-                  </a>
-                </Link>
-                <button
-                  className={styles.searchButton}
-                  onClick={this.showSearchModal}
-                >
-                  Find your next movie...
-                </button>
-              </div>
-            </header>
-            <WrappedComponent {...this.props} />
-            <footer className={styles.footer}>
-              Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.
-            </footer>
+            <PageHeader showSearchModal={this.showSearchModal} />
+            <WrappedComponent />
+            <PageFooter />
           </main>
         </ApolloProvider>
       );
@@ -216,66 +226,13 @@ const page = (
     }
   }
 
-  return Page;
+  return hoistNonReactStatics(Page, WrappedComponent, {});
 };
 
 const styles = {
   wrapper: style({
     // eslint-disable-next-line max-len
     fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif',
-  }),
-  header: style({
-    ...t.shadow_1,
-    backgroundColor: '#2f343f',
-  }),
-  headerInner: style({
-    ...t.ph3,
-    ...t.ph5_ns,
-    ...t.pv3,
-    ...t.mw8,
-    ...t.center,
-    ...t.flex,
-    ...t.items_center,
-    ...t.flex_wrap,
-  }),
-  headerTitleWrapper: style({
-    ...t.db,
-    ...t.w_100,
-    ...t.w_auto_ns,
-    ...t.tc,
-    ...t.ma0,
-    ...t.mr3,
-  }),
-  headerTitle: style({
-    ...t.ma0,
-    ...t.f2,
-    ...t.white,
-  }),
-  searchButton: style({
-    ...t.tl,
-    ...t.db,
-    ...t.fw3,
-    ...t.mt3,
-    ...t.mt0_ns,
-    ...t.bg_transparent,
-    ...t.f6,
-    ...t.f5_l,
-    ...t.white_80,
-    ...t.input_reset,
-    ...t.button_reset,
-    ...t.pa2,
-    ...t.outline_0,
-    ...t.ba,
-    ...t.b__white_20,
-    ...t.br2,
-    flex: 1,
-  }),
-  footer: style({
-    ...t.tc,
-    ...t.pb4,
-    ...t.ph4,
-    ...t.f6,
-    ...t.o_70,
   }),
   searchModal: style({
     top: '7rem',

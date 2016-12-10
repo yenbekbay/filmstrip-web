@@ -2,5 +2,6 @@
 
 import getClient from './getClient';
 import getStore from './getStore';
+import getTranslator from './getTranslator';
 
-export { getClient, getStore };
+export { getClient, getStore, getTranslator };
