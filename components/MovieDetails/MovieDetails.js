@@ -8,6 +8,7 @@ import React from 'react';
 import { colors, t } from '../../styles';
 import MovieCredits from './MovieCredits';
 import MovieDataRow from './MovieDataRow';
+import MovieGallery from './MovieGallery';
 import MovieRatings from './MovieRatings';
 import MovieSynopsis from './MovieSynopsis';
 import PlayTrailerButton from './PlayTrailerButton';
@@ -65,6 +66,7 @@ const MovieDetails = ({ movie, lang }: {
       releaseDate,
       rtCriticsRating,
       runtime,
+      stills,
       synopsis,
       title,
       year,
@@ -129,6 +131,9 @@ const MovieDetails = ({ movie, lang }: {
               ))}
             </div>
           </div>
+          {stills.length > 0 && (
+            <MovieGallery imageUrls={stills} />
+          )}
           <div className={styles.separator} />
           <Torrents torrents={torrents} />
         </div>
@@ -228,6 +233,7 @@ MovieDetails.fragments = {
         releaseDate
         rtCriticsRating
         runtime
+        stills
         synopsis(lang: $lang)
         title(lang: $lang)
         year

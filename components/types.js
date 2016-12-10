@@ -34,6 +34,7 @@ export type MovieDetailsFragment = {
     releaseDate: ?string,
     rtCriticsRating: ?number,
     runtime: ?number,
+    stills: Array<string>,
     synopsis: ?string,
     title: string,
     year: number,

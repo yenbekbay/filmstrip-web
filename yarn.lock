@@ -4066,6 +4066,12 @@ react-hot-loader@3.0.0-beta.6:
     redbox-react "^1.2.5"
     source-map "^0.4.4"
 
+react-image-lightbox@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/react-image-lightbox/-/react-image-lightbox-3.4.0.tgz#e6d39acb339d28b29d4875dc610a1b2c24e50260"
+  dependencies:
+    react-modal "^1.4.0"
+
 react-input-autosize@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-input-autosize/-/react-input-autosize-1.1.0.tgz#3fe1ac832387d8abab85f6051ceab1c9e5570853"
@@ -4078,7 +4084,7 @@ react-interpolate-component@^0.10.0:
     fbjs "^0.4.0"
     object-assign "^4.1.0"
 
-react-modal@^1.6.1:
+react-modal@^1.4.0, react-modal@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-1.6.1.tgz#be7a8a833cc5b6b893560f4cc73d33df17db06e8"
   dependencies:

@@ -68,6 +68,7 @@
     "react-apollo": "^0.6.0",
     "react-cookie": "^1.0.4",
     "react-dom": "^15.4.1",
+    "react-image-lightbox": "^3.4.0",
     "react-interpolate-component": "^0.10.0",
     "react-modal": "^1.6.1",
     "react-redux": "^4.4.6",
