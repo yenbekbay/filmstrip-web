@@ -123,6 +123,8 @@ const styles = {
     ...t.outline_0,
     ...t.bn,
     ...t.pa0,
+    ...t.mt3,
+    ...t.mt0_ns,
     height: 20,
   }),
 };
