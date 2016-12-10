@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React from 'react';
 import Translate from 'react-translate-component';
 
-import { isProduction } from '../env';
+import { isBrowser, isProduction } from '../env';
 import { t } from '../styles';
 import FlagIcon from './FlagIcon';
 import withTranslator from '../hocs/withTranslator';
@@ -24,12 +24,14 @@ const PageHeader = ({ showSearchModal, translator, lang, url, getPath }: {
   },
   getPath: (pathname: string, query?: Object) => string,
 }) => {
-  const rootPath = getPath('/');
+  const host = isBrowser ? window.location.hostname : url.host;
   const newLang = lang === 'ru' ? 'en' : 'ru';
+
+  const rootPath = getPath('/');
   const newLangPath = (
-    url.host && url.host !== '0.0.0.0' && url.host !== 'localhost'
+    host && host !== '0.0.0.0' && host !== 'localhost'
   ) ? getPath(
-    `https://${newLang}.${url.host.replace(`${lang}.`, '')}${url.pathname}`,
+    `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`,
     { ...url.query, lang: null },
   ) : getPath(url.pathname, { ...url.query, lang: newLang });
 
