@@ -4,6 +4,8 @@
 export default {
   en: {
     ui: {
+      dontGoMessage: 'It\'s movie time!',
+
       searchPlaceholder: 'Find your next movie...',
       webTorrentNotice: 'Download WebTorrent to stream the movies on this website.',
       footerText: 'Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.',
@@ -33,6 +35,8 @@ export default {
   },
   ru: {
     ui: {
+      dontGoMessage: 'Время посмотреть фильм!',
+
       searchPlaceholder: 'Найдите свой следующий фильм...',
       webTorrentNotice: 'Скачайте WebTorrent для стриминга фильмов на этом сайте.',
       footerText: 'Дисклеймер: этот сайт не хранит никаких файлов на своём сервере. Все данные предоставлены неаффилированными третьими лицами.',

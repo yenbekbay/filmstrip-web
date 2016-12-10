@@ -1410,6 +1410,10 @@ domready@1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/domready/-/domready-1.0.8.tgz#91f252e597b65af77e745ae24dd0185d5e26d58c"
 
+dont-go@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/dont-go/-/dont-go-1.0.7.tgz#2b98ad334fb923c7fa58de9a2076de3bd0e76e79"
+
 duplexer@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"

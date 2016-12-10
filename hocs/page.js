@@ -3,6 +3,7 @@
 import { ApolloProvider } from 'react-apollo';
 import { style } from 'next/css';
 import { Translator } from 'counterpart';
+import dontGo from 'dont-go';
 import Head from 'next/head';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import React, { Component, PropTypes } from 'react';
@@ -153,6 +154,10 @@ const page = (WrappedComponent: WrappableComponent) => {
 
     componentDidMount() {
       trackPageView();
+      dontGo({
+        title: this.translator.translate('ui.dontGoMessage'),
+        timeout: 1000,
+      });
     }
 
     componentDidUpdate() {
