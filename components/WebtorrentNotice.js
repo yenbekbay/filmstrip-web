@@ -1,6 +1,7 @@
 /* @flow */
 
 import { style } from 'next/css';
+import _ from 'lodash/fp';
 import cookie from 'react-cookie';
 import React, { Component } from 'react';
 import Translate from 'react-translate-component';
@@ -21,6 +22,11 @@ class WebtorrentNotice extends Component {
   state: State = {
     seen: isServer || !!cookie.load('seenWebtorrentNotice'),
   };
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return !_.isEqual(this.props, nextProps) ||
+      !_.isEqual(this.state, nextState);
+  }
 
   onClose = () => {
     cookie.save('seenWebtorrentNotice', 1, { path: '/' });

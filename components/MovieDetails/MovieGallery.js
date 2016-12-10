@@ -1,6 +1,7 @@
 /* @flow */
 
 import { style } from 'next/css';
+import _ from 'lodash/fp';
 import React, { Component } from 'react';
 
 import { breakpoints, t } from '../../styles';
@@ -20,6 +21,11 @@ class MovieGallery extends Component {
     lightboxIsOpen: false,
     lightboxImageIndex: 0,
   };
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return !_.isEqual(this.props, nextProps) ||
+      !_.isEqual(this.state, nextState);
+  }
 
   _openLightbox = (e: Object, idx: number) => {
     e.preventDefault();

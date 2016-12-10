@@ -49,6 +49,11 @@ class Search extends Component {
     };
   }
 
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return !_.isEqual(this.props, nextProps) ||
+      !_.isEqual(this.state, nextState);
+  }
+
   updateSearchQuery = _.throttle(1000, (searchQuery: string) => {
     this.props.updateSearchQuery(searchQuery);
   });
@@ -72,7 +77,7 @@ class Search extends Component {
       searchQuery,
       url: { back, query },
       translator,
-  } = this.props;
+    } = this.props;
     const modalMovie = query.id && _.find({ slug: query.id }, results);
 
     return (
