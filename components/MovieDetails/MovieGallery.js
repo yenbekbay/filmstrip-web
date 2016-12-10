@@ -17,15 +17,22 @@ type State = {
 
 class MovieGallery extends Component {
   props: Props;
+
+  /* eslint-disable react/sort-comp */
   state: State = {
     lightboxIsOpen: false,
     lightboxImageIndex: 0,
   };
+  imageWidthMappings: Array<number> = _.flow(_.shuffle, _.flatten)([
+    _.shuffle([50, 25, 25]),
+    _.shuffle([20, 50, 30]),
+  ]);
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
     return !_.isEqual(this.props, nextProps) ||
       !_.isEqual(this.state, nextState);
   }
+  /* eslint-enable react/sort-comp */
 
   _openLightbox = (e: Object, idx: number) => {
     e.preventDefault();
@@ -48,23 +55,16 @@ class MovieGallery extends Component {
     return (
       <div className={styles.gallery}>
         {imageUrls.slice(0, 6).map((imageUrl: string, idx: number) => (
-          <a
+          <button
             href={imageUrl}
             className={styles.thumbnail}
             key={idx}
             onClick={(e: Object) => this._openLightbox(e, idx)}
-            style={idx % 4 === 0 ? {
-              ...t.w_50,
-            } : {
-              ...t.w_25,
+            style={{
+              width: `${this.imageWidthMappings[idx]}%`,
+              backgroundImage: `url(${imageUrl})`,
             }}
-          >
-            <img
-              alt="Still from the movie"
-              src={imageUrl}
-              className={styles.source}
-            />
-          </a>
+          />
         ))}
       </div>
     );
@@ -75,7 +75,7 @@ class MovieGallery extends Component {
     const { lightboxIsOpen, lightboxImageIndex } = this.state;
 
     return (
-      <div>
+      <div className={styles.container}>
         {this._renderGallery()}
         {lightboxIsOpen && (
           <Lightbox
@@ -90,34 +90,38 @@ class MovieGallery extends Component {
 }
 
 const styles = {
-  gallery: style({
+  container: style({
     ...t.mt4,
+    ...t.w_100,
+  }),
+  gallery: style({
     ...t.flex,
     ...t.flex_wrap,
     marginRight: '-0.25rem',
+    marginBottom: '-0.25rem',
     [breakpoints.l]: {
       marginRight: '-0.5rem',
+      marginBottom: '-0.25rem',
     },
   }),
   thumbnail: style({
-    ...t.db,
-    ...t.fl,
-    ...t.pr3,
-    ...t.pb3,
-    ...t.overflow_hidden,
-    boxSizing: 'border-box',
-    lineHeight: 0,
+    ...t.pa0,
+    ...t.input_reset,
+    ...t.button_reset,
+    ...t.bg_transparent,
+    ...t.outline_0,
+    ...t.bn,
+    ...t.dim,
+    ...t.cover,
+    ...t.bg_center,
+    height: '25vw',
+    backgroundClip: 'content-box',
     paddingRight: '0.25rem',
     paddingBottom: '0.25rem',
     [breakpoints.l]: {
       paddingRight: '0.5rem',
       paddingBottom: '0.5rem',
     },
-  }),
-  source: style({
-    ...t.h_100,
-    ...t.w_100,
-    objectFit: 'cover',
   }),
 };
 
