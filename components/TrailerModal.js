@@ -1,11 +1,9 @@
 /* @flow */
 
 import { connect } from 'react-redux';
-import { style } from 'next/css';
 import React from 'react';
 import YouTube from 'react-youtube';
 
-import { breakpoints, t } from '../styles';
 import { closeTrailerModal } from '../data/actions/ui';
 import Modal from './Modal';
 import type { Dispatch, ReduxState } from '../data/types';
@@ -18,7 +16,6 @@ const TrailerModal = (props: {
     contentLabel="Trailer Modal"
     isOpen={!!props.youtubeId}
     onRequestClose={props.closeTrailerModal}
-    className={styles.trailerModal}
     style={{
       overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -38,22 +35,6 @@ const TrailerModal = (props: {
     />
   </Modal>
 );
-
-const styles = {
-  trailerModal: style({
-    top: '6rem',
-    left: '1rem',
-    right: '1rem',
-    bottom: '1rem',
-    ...t.overflow_y_hidden,
-    [breakpoints.l]: {
-      top: '3rem',
-      left: '3rem',
-      right: '3rem',
-      bottom: '3rem',
-    },
-  }),
-};
 
 const mapStateToProps = (state: ReduxState) => ({
   youtubeId: state.ui.youtubeId,

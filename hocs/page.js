@@ -9,7 +9,7 @@ import React, { Component, PropTypes } from 'react';
 import Translate from 'react-translate-component';
 import 'glamor/reset';
 
-import { breakpoints, colors } from '../styles';
+import { colors } from '../styles';
 import { getClient, getStore, getTranslator } from '../data';
 import { getDisplayName } from './_utils';
 import { isBrowser, isProduction, gaTrackingID } from '../env';
@@ -204,7 +204,6 @@ const page = (WrappedComponent: WrappableComponent) => {
                 contentLabel="Search Modal"
                 isOpen
                 onRequestClose={this.dismissModal}
-                className={styles.searchModal}
                 style={{
                   overlay: {
                     backgroundColor: 'rgba(43, 48, 59, 0.95)',
@@ -231,17 +230,6 @@ const styles = {
   wrapper: style({
     // eslint-disable-next-line max-len
     fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif',
-  }),
-  searchModal: style({
-    top: '7rem',
-    left: '2rem',
-    right: '2rem',
-    bottom: 0,
-    [breakpoints.l]: {
-      top: '7rem',
-      left: '7rem',
-      right: '7rem',
-    },
   }),
 };
 

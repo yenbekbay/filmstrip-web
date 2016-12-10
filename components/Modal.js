@@ -5,14 +5,14 @@ import Modal from 'react-modal';
 import React from 'react';
 
 import { t } from '../styles';
+import CloseIcon from './CloseIcon';
 
 const Modal_ = (props: Object & {
   onRequestClose: () => void,
-  className: string,
 }) => (
   <Modal
     {...props}
-    className={`${styles.modal} ${props.className}`}
+    className={styles.modal}
     onAfterOpen={() => {
       const el = document.querySelector('.ReactModal__Overlay');
       const modalEl = document.querySelector('.ReactModal__Content');
@@ -32,16 +32,51 @@ const Modal_ = (props: Object & {
       el && el.addEventListener('touchend', handler);
     }}
   >
-    {props.children}
+    <div className={styles.modalContentContainer}>
+      <button
+        className={styles.closeButton}
+        onClick={props.onRequestClose}
+      >
+        <CloseIcon size={40} />
+      </button>
+      <div className={`${styles.modalContentInner} ${props.className}`}>
+        {props.children}
+      </div>
+    </div>
   </Modal>
 );
 
 const styles = {
   modal: style({
     ...t.absolute,
+    ...t.absolute__fill,
+    ...t.outline_0,
+    ...t.overflow_hidden,
+  }),
+  modalContentContainer: style({
+    ...t.flex,
+    ...t.flex_column,
+    ...t.h_100,
+  }),
+  closeButton: style({
+    ...t.input_reset,
+    ...t.button_reset,
+    ...t.bg_transparent,
+    ...t.outline_0,
+    ...t.bn,
+    ...t.w_100,
+    ...t.flex,
+    ...t.justify_end,
+    ...t.items_center,
+    ...t.dim,
+    ...t.pv0,
+    ...t.ph3,
+    height: '6rem',
+  }),
+  modalContentInner: style({
     ...t.overflow_x_hidden,
     ...t.overflow_y_auto,
-    ...t.outline_0,
+    flex: 1,
   }),
 };
 

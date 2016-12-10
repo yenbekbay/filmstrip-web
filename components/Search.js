@@ -76,7 +76,7 @@ class Search extends Component {
     const modalMovie = query.id && _.find({ slug: query.id }, results);
 
     return (
-      <div>
+      <div className={styles.container}>
         {modalMovie && <MovieModal movie={modalMovie} back={back} />}
         <div className={styles.searchInputContainer}>
           <input
@@ -131,6 +131,10 @@ class Search extends Component {
 }
 
 const styles = {
+  container: style({
+    ...t.pa3,
+    ...t.pa5_ns,
+  }),
   searchInputContainer: style({
     ...t.flex,
     ...t.flex_row,

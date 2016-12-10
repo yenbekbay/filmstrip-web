@@ -7,20 +7,7 @@ import Translate from 'react-translate-component';
 
 import { isServer } from '../env';
 import { t } from '../styles';
-
-const CloseIcon = () => (
-  <svg width="25" height="25" viewBox="0 0 40 40">
-    <path
-      style={{
-        stroke: 'white',
-        fill: 'transparent',
-        strokeLinecap: 'round',
-        strokeWidth: 5,
-      }}
-      d="M 10,10 L 30,30 M 30,10 L 10,30"
-    />
-  </svg>
-);
+import CloseIcon from './CloseIcon';
 
 type State = {
   seen: boolean,
@@ -57,7 +44,7 @@ class WebtorrentNotice extends Component {
           className={styles.closeButton}
           onClick={this.onClose}
         >
-          <CloseIcon />
+          <CloseIcon size={25} />
         </button>
       </div>
     );
