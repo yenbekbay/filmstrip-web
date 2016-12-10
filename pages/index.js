@@ -129,7 +129,7 @@ class IndexPage extends Component {
           <title>
             {modalMovie
               ? modalMovie.info.title
-              : `filmstrip feed - page ${query.page || 1}`
+              : `filmstrip feed${query.page ? ` - page ${query.page}` : ''}`
             }
           </title>
         </Head>
