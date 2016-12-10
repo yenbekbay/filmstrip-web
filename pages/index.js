@@ -16,13 +16,15 @@ import {
   FeedPagination,
   FeedTypeSelector,
 } from '../components/Feed';
-import { page, withTranslator, withUrl } from '../hocs';
 import { t } from '../styles';
 import { updateFeedGenres } from '../data/actions/ui';
 import MovieDetails from '../components/MovieDetails';
 import MovieModal from '../components/MovieModal';
+import page from '../hocs/page';
 import TrailerModal from '../components/TrailerModal';
 import WebtorrentNotice from '../components/WebtorrentNotice';
+import withTranslator from '../hocs/withTranslator';
+import withUrl from '../hocs/withUrl';
 import type {
   MovieDetailsFragment,
   PageInfo,

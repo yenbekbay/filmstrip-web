@@ -6,11 +6,13 @@ import gql from 'graphql-tag';
 import Head from 'next/head';
 import React from 'react';
 
-import { page, withTranslator, withUrl } from '../hocs';
 import { t } from '../styles';
 import Loader from '../components/Loader';
 import MovieDetails from '../components/MovieDetails';
+import page from '../hocs/page';
 import TrailerModal from '../components/TrailerModal';
+import withTranslator from '../hocs/withTranslator';
+import withUrl from '../hocs/withUrl';
 import type { MovieDetailsFragment } from '../components/types';
 
 const MoviePage = ({ movie }: { movie: MovieDetailsFragment }) => {

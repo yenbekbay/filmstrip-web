@@ -10,7 +10,7 @@ import {
   PlayTrailerButton,
 } from '../MovieDetails';
 import { breakpoints, t } from '../../styles';
-import { withUrl } from '../../hocs';
+import withUrl from '../../hocs/withUrl';
 import type { MovieDetailsFragment } from '../types';
 
 const FeedEntry = ({ movie, url, getPath }: {

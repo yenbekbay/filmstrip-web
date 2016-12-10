@@ -10,10 +10,10 @@ import React, { Component } from 'react';
 
 import { breakpoints, t } from '../styles';
 import { updateSearchQuery } from '../data/actions/ui';
-import { withTranslator } from '../hocs';
 import Loader from './Loader';
 import MovieDetails, { MovieCredits } from './MovieDetails';
 import MovieModal from './MovieModal';
+import withTranslator from '../hocs/withTranslator';
 import type { MovieDetailsFragment } from './types';
 import type { ReduxState } from '../data/types';
 

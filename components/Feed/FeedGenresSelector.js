@@ -6,8 +6,8 @@ import _ from 'lodash/fp';
 import React, { Component } from 'react';
 import Select from 'react-select';
 
-import { withTranslator } from '../../hocs';
 import { breakpoints, colors, t } from '../../styles';
+import withTranslator from '../../hocs/withTranslator';
 
 type Props = {
   genres: ?Array<string>,

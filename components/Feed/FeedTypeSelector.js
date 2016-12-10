@@ -6,7 +6,8 @@ import cookie from 'react-cookie';
 import React from 'react';
 
 import { breakpoints, colors, t } from '../../styles';
-import { withTranslator, withUrl } from '../../hocs';
+import withTranslator from '../../hocs/withTranslator';
+import withUrl from '../../hocs/withUrl';
 import type { FeedType } from '../types';
 
 const FeedTypeSelector = ({ activeFeedType, translator, url, getPath }: {
