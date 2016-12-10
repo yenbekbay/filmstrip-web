@@ -3,6 +3,7 @@
 import { style } from 'next/css';
 import Link from 'next/link';
 import React from 'react';
+import Translate from 'react-translate-component';
 
 import { t } from '../../styles';
 import type { PageInfo, FeedType } from './../types';
@@ -20,7 +21,9 @@ const FeedPagination = ({ page, activeFeedType, pageInfo }: {
           : `/?type=${activeFeedType}`
         }
       >
-        <a className={styles.link}>Previous</a>
+        <a className={styles.link}>
+          <Translate content="ui.previousPageLabel" />
+        </a>
       </Link>
     )}
     {pageInfo.hasNextPage && (
@@ -30,7 +33,9 @@ const FeedPagination = ({ page, activeFeedType, pageInfo }: {
           : `/?type=${activeFeedType}&page=2`
         }
       >
-        <a className={styles.link}>Next</a>
+        <a className={styles.link}>
+          <Translate content="ui.nextPageLabel" />
+        </a>
       </Link>
     )}
   </div>

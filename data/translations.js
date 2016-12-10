@@ -8,6 +8,8 @@ export default {
       webTorrentNotice: 'Download WebTorrent to stream the movies on this website.',
       footerText: 'Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.',
       genresSelectorPlaceholder: 'Select genres',
+      previousPageLabel: 'Previous',
+      nextPageLabel: 'Next',
 
       trendingFeedType: 'Trending',
       newFeedType: 'New',
@@ -35,6 +37,8 @@ export default {
       webTorrentNotice: 'Скачайте WebTorrent для стриминга фильмов на этом сайте.',
       footerText: 'Дисклеймер: этот сайт не хранит никаких файлов на своём сервере. Все данные предоставлены неаффилированными третьими лицами.',
       genresSelectorPlaceholder: 'Выберите жанры',
+      previousPageLabel: 'Назад',
+      nextPageLabel: 'Дальше',
 
       trendingFeedType: 'Популярное',
       newFeedType: 'Новое',
