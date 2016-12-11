@@ -77,6 +77,8 @@ class IndexPage extends Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
+    if (_.isEqual(nextProps, this.props)) return;
+
     const { movies, selectedGenres, url, getPath } = nextProps;
     const feedType = url.query.type;
     const isOnHomePage = url.pathname === '/';
@@ -145,7 +147,7 @@ class IndexPage extends Component {
               onSelectedGenresChange={this._handleSelectedGenresChange}
             />
           </div>
-          {(!feedLoading && feedLoading !== undefined) && (
+          {!feedLoading && (
             (movies && movies.length > 0) ? (movies || []).map(
               (movie: MovieDetailsFragment) => (
                 <FeedEntry key={movie.slug} movie={movie} />
@@ -154,7 +156,7 @@ class IndexPage extends Component {
               <p className={styles.emptyStateText}>No movies found :(</p>
             )
           )}
-          {(feedLoading || feedLoading === undefined) && (
+          {feedLoading && (
             _.range(0, 3).map((idx: number) => (
               <FeedEntryPlaceholder key={idx} />
             ))

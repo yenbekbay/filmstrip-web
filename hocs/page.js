@@ -3,6 +3,7 @@
 import { ApolloProvider } from 'react-apollo';
 import { style } from 'next/css';
 import { Translator } from 'counterpart';
+import _ from 'lodash/fp';
 import dontGo from 'dont-go';
 import Head from 'next/head';
 import hoistNonReactStatics from 'hoist-non-react-statics';
@@ -158,6 +159,11 @@ const page = (WrappedComponent: WrappableComponent) => {
         title: this.translator.translate('ui.dontGoMessage'),
         timeout: 1000,
       });
+    }
+
+    shouldComponentUpdate(nextProps: Props, nextState: State) {
+      return !_.isEqual(this.props, nextProps) ||
+        !_.isEqual(this.state, nextState);
     }
 
     componentDidUpdate() {
