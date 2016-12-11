@@ -104,6 +104,7 @@ const styles = {
   }),
   infoContainer: style({
     ...t.db,
+    ...t.h_100,
     ...t.dim,
     flex: 1,
   }),

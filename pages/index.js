@@ -192,10 +192,10 @@ const styles = {
     ...t.flex_wrap,
     ...t.items_center,
     ...t.justify_center,
-    ...t.mb5,
     ...t.justify_between_l,
     ...t.mt0_ns,
     marginTop: '3rem',
+    marginBottom: '3rem',
   }),
   emptyStateText: style({
     ...t.f4,

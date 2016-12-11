@@ -43,7 +43,7 @@ const FeedPagination = ({ page, activeFeedType, pageInfo }: {
 
 const styles = {
   container: style({
-    ...t.mt5,
+    marginTop: '3rem',
     marginBottom: '3rem',
     ...t.mb0_ns,
     ...t.tc,
