@@ -188,6 +188,7 @@ const styles = {
     ...t.ml3,
     ...t.f6,
     ...t.f5_l,
+    flex: 1,
   }),
   movieTitle: style({
     ...t.f4,
