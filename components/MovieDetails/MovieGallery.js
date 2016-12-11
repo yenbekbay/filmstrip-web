@@ -58,6 +58,7 @@ class MovieGallery extends Component {
       <div className={styles.gallery}>
         {imageUrls.slice(0, 6).map((imageUrl: string, idx: number) => (
           <ProgressiveImage
+            key={imageUrl}
             src={highresImageUrl(imageUrl)}
             placeholder={lowresImageUrl(imageUrl)}
           >
@@ -65,7 +66,6 @@ class MovieGallery extends Component {
               <button
                 href={imageUrl}
                 className={styles.thumbnail}
-                key={idx}
                 onClick={(e: Object) => this._openLightbox(e, idx)}
                 style={{
                   width: `${this.imageWidthMappings[idx]}%`,
