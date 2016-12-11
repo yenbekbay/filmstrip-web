@@ -3,6 +3,7 @@
 import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
 import { style } from 'next/css';
+import { Translator } from 'counterpart';
 import _ from 'lodash/fp';
 import cookie from 'react-cookie';
 import gql from 'graphql-tag';
@@ -51,6 +52,7 @@ type Props = {
     push: (path: string) => void,
   },
   getPath: (pathname: string, query?: Object) => string,
+  translator: Translator,
   lang: string,
 };
 type State = {
@@ -121,6 +123,7 @@ class IndexPage extends Component {
       selectedGenres,
       pageInfo,
       url: { back, query },
+      translator,
     } = this.props;
     const activeFeedType = query.type || defaultFeedType;
     const modalMovie = query.id && _.find({ slug: query.id }, movies);
@@ -153,7 +156,9 @@ class IndexPage extends Component {
                 <FeedEntry key={movie.slug} movie={movie} />
               ),
             ) : (
-              <p className={styles.emptyStateText}>No movies found :(</p>
+              <p className={styles.emptyStateText}>
+                {translator.translate('ui.noMoviesFoundMessage')}
+              </p>
             )
           )}
           {feedLoading && (

@@ -127,7 +127,9 @@ class Search extends Component {
             ))
           ) : (
             (!loading && searchQuery.length >= 3) && (
-              <p className={styles.emptyStateText}>No movies found :(</p>
+              <p className={styles.emptyStateText}>
+                {translator.translate('ui.noMoviesFoundMessage')}
+              </p>
             )
           )}
         </div>

@@ -5,6 +5,7 @@ export default {
   en: {
     ui: {
       dontGoMessage: 'It\'s movie time!',
+      noMoviesFoundMessage: 'No movies found :(',
 
       searchPlaceholder: 'Find your next movie...',
       webTorrentNotice: 'Download WebTorrent to stream the movies on this website.',
@@ -36,6 +37,7 @@ export default {
   ru: {
     ui: {
       dontGoMessage: 'Время посмотреть фильм!',
+      noMoviesFoundMessage: 'Фильмов не найдено :(',
 
       searchPlaceholder: 'Найдите свой следующий фильм...',
       webTorrentNotice: 'Скачайте WebTorrent для стриминга фильмов на этом сайте.',
