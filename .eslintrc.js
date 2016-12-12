@@ -10,7 +10,7 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': 0,
 
-    'graphql/template-strings': [2, {
+    'graphql/template-strings': [0, {
       env: 'apollo',
       schemaJson: require('./graphql-schema.json'),
     }],
