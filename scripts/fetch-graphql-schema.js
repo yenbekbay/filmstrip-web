@@ -6,9 +6,11 @@ import path from 'path';
 import { graphql, parse, buildASTSchema, introspectionQuery } from 'graphql';
 import 'isomorphic-fetch';
 
+const GRAPHQL_PORT = 8080;
+
 (async () => {
   try {
-    const response = await fetch('https://tantalum.anvilabs.co/schema');
+    const response = await fetch(`http://localhost:${GRAPHQL_PORT}/schema`);
     const typeDefs = await response.text();
     const schema = buildASTSchema(parse(typeDefs));
     const result = await graphql(schema, introspectionQuery);
