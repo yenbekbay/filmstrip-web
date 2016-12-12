@@ -37,7 +37,7 @@ const transformProperty = _.memoize(_.flow(
 
 const stylesFromRules = (rules: Array<Object>): Array<Object> => _.flow(
   _.filter(['type', 'rule']),
-  _.map(({ declarations, selectors }: Object) => _.flow(
+  _.flatMap(({ declarations, selectors }: Object) => _.flow(
     _.filter(_.startsWith('.')),
     _.reject(_.startsWith('.debug')),
     _.map((selector: string) => ({
@@ -51,7 +51,6 @@ const stylesFromRules = (rules: Array<Object>): Array<Object> => _.flow(
       )(declarations),
     })),
   )(selectors)),
-  _.flatten,
   _.mergeAll,
 )(rules);
 
@@ -124,17 +123,16 @@ const writeFile = (file: string) => new Promise((
 
     const mediaStyles = _.flow(
       _.filter(['type', 'media']),
-      _.map(({ media, rules }: Object) => _.mapValues(
+      _.flatMap(({ media, rules }: Object) => _.mapValues(
         (styles: Object) => ({ [`@media ${media}`]: styles }),
         stylesFromRules(rules),
       )),
-      _.flatten(),
       _.mergeAll,
     )(stylesheet.rules);
 
     const file = _.flow(
       _.mergeAll,
-      _.flow(pseudos.map(extractPseudoSelectors)),
+      _.flow(...pseudos.map(extractPseudoSelectors)),
       (js: Object) => JSON.stringify(js, null, 2),
       (json: string) => `module.exports = ${json}`,
     )([rootStyles, mediaStyles]);

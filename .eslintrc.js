@@ -2,6 +2,7 @@ module.exports = {
   extends: [
     'anvilabs',
     'anvilabs/jest',
+    'anvilabs/lodash',
     'anvilabs/react'
   ],
   plugins: [
