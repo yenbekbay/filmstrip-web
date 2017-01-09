@@ -31,7 +31,7 @@ import type {
   PageInfo,
   FeedType,
 } from '../components/types';
-import type { ReduxState } from '../data/types';
+import type { Dispatch, ReduxState } from '../data/types';
 
 type Props = {
   feedLoading?: boolean,

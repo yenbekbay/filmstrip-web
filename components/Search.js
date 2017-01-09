@@ -15,7 +15,7 @@ import MovieDetails, { MovieCredits, MoviePosterImage } from './MovieDetails';
 import MovieModal from './MovieModal';
 import withTranslator from '../hocs/withTranslator';
 import type { MovieDetailsFragment } from './types';
-import type { ReduxState } from '../data/types';
+import type { Dispatch, ReduxState } from '../data/types';
 
 type Props = {
   loading?: boolean,
