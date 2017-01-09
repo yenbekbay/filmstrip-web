@@ -9,6 +9,7 @@ import { t } from '../../styles';
 
 const MovieBackdropWrapper = ({ backdropUrl, children }: {
   backdropUrl: ?string,
+  // eslint-disable-next-line react/require-default-props
   children?: React$Element<any>,
 }) => (
   backdropUrl ? (

@@ -34,13 +34,13 @@ import type {
 import type { ReduxState } from '../data/types';
 
 type Props = {
-  feedLoading?: ?boolean,
-  movies?: ?Array<MovieDetailsFragment>,
-  genresLoading?: ?boolean,
-  genres?: ?Array<string>,
+  feedLoading?: boolean,
+  movies?: Array<MovieDetailsFragment>,
+  genresLoading?: boolean,
+  genres?: Array<string>,
   selectedGenres: ?Array<string>,
   updateSelectedGenres: (genres: Array<string>) => void,
-  pageInfo?: ?PageInfo,
+  pageInfo?: PageInfo,
   url: {
     query: {
       type?: FeedType,
@@ -63,6 +63,14 @@ const defaultFeedType: FeedType = 'trending';
 
 class IndexPage extends Component {
   props: Props;
+
+  static defaultProps = {
+    feedLoading: false,
+    movies: undefined,
+    genresLoading: false,
+    genres: undefined,
+    pageInfo: undefined,
+  };
 
   state: State = {
     movies: [],

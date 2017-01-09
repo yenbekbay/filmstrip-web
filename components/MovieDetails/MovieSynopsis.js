@@ -15,6 +15,11 @@ const MovieSynopsis = ({ synopsis, truncated }: {
   </p>
 );
 
+MovieSynopsis.defaultProps = {
+  synopsis: null,
+  truncated: false,
+};
+
 const styles = {
   synopsis: style({
     ...t.f6,

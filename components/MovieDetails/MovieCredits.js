@@ -43,4 +43,8 @@ const MovieCredits = ({ credits, truncated }: {
   );
 };
 
+MovieCredits.defaultProps = {
+  truncated: false,
+};
+
 export default MovieCredits;

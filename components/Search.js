@@ -18,8 +18,8 @@ import type { MovieDetailsFragment } from './types';
 import type { ReduxState } from '../data/types';
 
 type Props = {
-  loading?: ?boolean,
-  results?: ?Array<MovieDetailsFragment>,
+  loading?: boolean,
+  results?: Array<MovieDetailsFragment>,
   searchQuery: string,
   updateSearchQuery: (searchQuery: string) => void,
   url: {
@@ -40,6 +40,11 @@ class Search extends Component {
   props: Props;
   state: State;
   searchInput: ?Object;
+
+  static defaultProps = {
+    loading: false,
+    results: undefined,
+  };
 
   constructor(props: Props) {
     super(props);

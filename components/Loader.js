@@ -5,7 +5,10 @@ import React from 'react';
 
 import { t } from '../styles';
 
-const Spinner = ({ className }: { className?: string }) => (
+const Spinner = ({ className }: {
+  // eslint-disable-next-line react/require-default-props
+  className?: string,
+}) => (
   <div className={`${styles.spinner} ${className || ''}`.trim()} />
 );
 

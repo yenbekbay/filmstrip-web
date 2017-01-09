@@ -16,4 +16,8 @@ const PlayIcon = ({ scale = 1 }: { scale?: number }) => (
   </svg>
 );
 
+PlayIcon.defaultProps = {
+  scale: 1,
+};
+
 export default PlayIcon;

@@ -26,6 +26,10 @@ const PlayTrailerButton = (props: {
   </button>
 );
 
+PlayTrailerButton.defaultProps = {
+  scale: 1,
+};
+
 const styles = {
   trailerPlayButton: style({
     ...t.absolute,

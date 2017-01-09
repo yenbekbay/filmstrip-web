@@ -4,6 +4,7 @@ import React from 'react';
 
 const SeedIcon = ({ scale = 1, className }: {
   scale?: number,
+  // eslint-disable-next-line react/require-default-props
   className?: string,
 }) => (
   <svg
@@ -47,5 +48,9 @@ const SeedIcon = ({ scale = 1, className }: {
     </g>
   </svg>
 );
+
+SeedIcon.defaultProps = {
+  scale: 1,
+};
 
 export default SeedIcon;
