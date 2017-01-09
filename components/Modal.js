@@ -34,9 +34,9 @@ const Modal_ = (props: Object & {
             ? e.targetTouches[0]
             : e.target;
 
-          if (!modalEl.contains(target)) {
+          if (modalEl && !modalEl.contains(target)) {
             e.preventDefault();
-            el.removeEventListener('touchend', handler);
+            el && el.removeEventListener('touchend', handler);
             handleRequestClose();
           }
         };
