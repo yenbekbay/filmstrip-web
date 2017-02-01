@@ -83,15 +83,6 @@
     "redux-persist": "^4.1.0"
   },
   "devDependencies": {
-    "@types/css": "^0.0.30",
-    "@types/graphql": "^0.8.6",
-    "@types/isomorphic-fetch": "^0.0.31",
-    "@types/jest": "^18.1.1",
-    "@types/lodash": "^4.14.52",
-    "@types/react": "^15.0.6",
-    "@types/react-modal": "^1.6.1",
-    "@types/react-redux": "^4.4.36",
-    "@types/redux": "^3.6.31",
     "babel-cli": "^6.22.2",
     "babel-jest": "^18.0.0",
     "commitizen": "^2.9.5",
