@@ -90,7 +90,7 @@
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.13.1",
     "eslint-config-anvilabs": "^4.0.0",
-    "flow-bin": "^0.37.4",
+    "flow-bin": "^0.38.0",
     "graphql": "^0.9.1",
     "husky": "^0.13.1",
     "isomorphic-fetch": "^2.2.1",
