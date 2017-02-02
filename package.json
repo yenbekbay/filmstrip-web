@@ -15,9 +15,11 @@
   },
   "scripts": {
     "deploy": "sh ./scripts/deploy.sh",
-    "dev": "next",
-    "build": "next build",
     "start": "next start",
+    "build": "next build",
+    "dev": "next",
+    "prepush": "npm test",
+    "commitmsg": "validate-commit-msg",
     "sync-graphql-schema": "babel-node scripts/fetch-graphql-schema.js",
     "generate-tachyons": "babel-node scripts/generate-tachyons.js",
     "test": "npm-run-all --parallel typecheck lint",
@@ -26,9 +28,7 @@
     "jest:coverage": "jest --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "typecheck": "flow check .",
-    "commitmsg": "validate-commit-msg",
-    "prepush": "npm test"
+    "typecheck": "flow check ."
   },
   "jest": {
     "collectCoverageFrom": [
@@ -49,9 +49,6 @@
     "testRegex": "/__tests__/.*-test\\.js$"
   },
   "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    },
     "validate-commit-msg": {
       "maxSubjectLength": 72,
       "types": "conventional-commit-types"
@@ -85,9 +82,7 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-jest": "^18.0.0",
-    "commitizen": "^2.9.5",
     "css": "^2.2.1",
-    "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.13.1",
     "eslint-config-anvilabs": "^4.0.0",
     "flow-bin": "^0.38.0",
