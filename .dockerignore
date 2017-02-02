@@ -1,4 +1,4 @@
 *
-!src/
-!static/
+!app/
+!build/
 !package.json

@@ -16,7 +16,7 @@
   "scripts": {
     "deploy": "sh scripts/deploy.sh",
     "start": "nodemon src/server.js",
-    "build": "npm run clean && babel --out-dir build --ignore **/__tests__,**/__mocks__ src && next build app",
+    "build": "npm run clean && babel --out-dir build --ignore **/__tests__,**/__mocks__ src && next build app && sh scripts/fix-require-paths.sh",
     "clean": "rimraf build && mkdir build",
     "prepush": "npm test",
     "commitmsg": "validate-commit-msg",
