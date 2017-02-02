@@ -5,8 +5,10 @@ RUN apk add --update git && rm -rf /tmp/* /var/cache/apk/*
 
 # Set environment variables
 ENV NPM_CONFIG_LOGLEVEL warn
-ENV NODE_ENV production
 ENV appDir /opt/app
+
+# Install pm2
+RUN npm install pm2 -g
 
 # Set the work directory
 RUN mkdir -p ${appDir}
@@ -25,4 +27,4 @@ RUN npm run build
 # Expose the port
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["pm2-docker", "start", "pm2.json"]

@@ -1,0 +1,10 @@
+{
+  "apps": [{
+    "name": "filmstrip-web",
+    "script": "build/server.js",
+    "max_restarts": 20,
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }]
+}

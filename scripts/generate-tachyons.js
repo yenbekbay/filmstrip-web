@@ -99,9 +99,8 @@ const writeFile = (file: string) => new Promise((
   reject: (err: Error) => void,
 ) => {
   fs.writeFile(
-    path.join(__dirname, '../styles/tachyons.js'),
+    path.join(__dirname, '../src/styles/tachyons.js'),
     file,
-    // eslint-disable-next-line promise/prefer-await-to-callbacks
     (err: ?Error) => {
       if (err) {
         reject(err);

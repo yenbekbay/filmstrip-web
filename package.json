@@ -14,10 +14,10 @@
     "node": "6.x.x"
   },
   "scripts": {
-    "deploy": "sh ./scripts/deploy.sh",
-    "start": "next start",
-    "build": "next build",
-    "dev": "next",
+    "deploy": "sh scripts/deploy.sh",
+    "start": "nodemon src/server.js",
+    "build": "npm run clean && babel --out-dir build --ignore **/__tests__,**/__mocks__ src && next build app",
+    "clean": "rimraf build && mkdir build",
     "prepush": "npm test",
     "commitmsg": "validate-commit-msg",
     "sync-graphql-schema": "babel-node scripts/fetch-graphql-schema.js",
@@ -32,19 +32,15 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "**/*.js",
-      "!.next/**",
-      "!flow-typed/**"
+      "app/*.js",
+      "!app/.next/**"
     ],
     "coverageReporters": [
       "lcov"
     ],
     "testEnvironment": "jsdom",
     "testPathDirs": [
-      "<rootDir>/components",
-      "<rootDir>/data",
-      "<rootDir>/hocs",
-      "<rootDir>/pages"
+      "<rootDir>/app"
     ],
     "testRegex": "/__tests__/.*-test\\.js$"
   },
@@ -56,13 +52,15 @@
   },
   "dependencies": {
     "apollo-client": "^0.8.1",
+    "babel-register": "^6.22.0",
     "counterpart": "^0.17.6",
     "dont-go": "^1.0.7",
-    "glob": "^7.1.1",
+    "express": "^4.14.1",
+    "glamor": "^2.20.22",
     "graphql-tag": "^1.2.4",
     "hoist-non-react-statics": "^1.2.0",
     "lodash": "^4.17.4",
-    "next": "^1.2.3",
+    "next": "^2.0.0-beta.21",
     "react": "^15.4.2",
     "react-apollo": "^0.9.0",
     "react-cookie": "^1.0.4",
@@ -81,6 +79,11 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-jest": "^18.0.0",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
     "css": "^2.2.1",
     "eslint": "^3.13.1",
     "eslint-config-anvilabs": "^4.0.0",
@@ -90,7 +93,9 @@
     "husky": "^0.13.1",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^18.1.0",
+    "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.1",
+    "rimraf": "^2.5.4",
     "validate-commit-msg": "^2.11.1"
   }
 }

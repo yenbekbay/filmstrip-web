@@ -12,7 +12,8 @@ node_modules/
 coverage/
 
 # Compiled files
-.next/
+app/.next/
+build/
 
 # Design files
 _design/

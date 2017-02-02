@@ -1,3 +1,4 @@
-/.next/*
-/flow-typed/*
-/styles/*
+app/.next/
+app/styles/tachyons.js
+build/
+flow-typed/

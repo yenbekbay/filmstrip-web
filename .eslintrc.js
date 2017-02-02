@@ -17,5 +17,7 @@ module.exports = {
       env: 'apollo',
       schemaJson: require('./graphql-schema.json'),
     }],
+
+    'promise/prefer-await-to-callbacks': 0,
   }
 };

@@ -1,9 +1,4 @@
 *
-!components/
-!data/
-!hocs/
-!pages/
+!src/
 !static/
-!styles/
-!env.js
 !package.json
