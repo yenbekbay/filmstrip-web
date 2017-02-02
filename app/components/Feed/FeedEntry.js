@@ -1,6 +1,6 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import React from 'react';
 
 import {
@@ -11,15 +11,21 @@ import {
   MovieSynopsis,
   PlayTrailerButton,
 } from '../MovieDetails';
-import { breakpoints, t } from '../../styles';
+import {breakpoints, t} from '../../styles';
 import withUrl from '../../hocs/withUrl';
-import type { MovieDetailsFragment } from '../types';
+import type {MovieDetailsFragment} from '../types';
 
-const FeedEntry = ({ movie, url, getPath }: {
-  movie: MovieDetailsFragment,
-  url: { push: (path: string) => void },
-  getPath: (pathname: string, query?: Object) => string,
-}) => {
+const FeedEntry = (
+  {
+    movie,
+    url,
+    getPath,
+  }: {
+    movie: MovieDetailsFragment,
+    url: {push(path: string): void},
+    getPath(pathname: string, query?: Object): string,
+  },
+) => {
   const {
     slug,
     info: {
@@ -37,14 +43,13 @@ const FeedEntry = ({ movie, url, getPath }: {
     },
   } = movie;
 
-  const movieDetailsPath = getPath('/movie', { id: slug });
+  const movieDetailsPath = getPath('/movie', {id: slug});
 
   return (
     <div className={styles.container}>
       <div className={styles.posterContainer}>
-        {youtubeIds.length > 0 && (
-          <PlayTrailerButton youtubeId={youtubeIds[0]} />
-        )}
+        {youtubeIds.length > 0 &&
+          <PlayTrailerButton youtubeId={youtubeIds[0]} />}
         <MoviePosterImage posterUrl={posterUrl} title={title} />
       </div>
       <a
@@ -72,7 +77,7 @@ const FeedEntry = ({ movie, url, getPath }: {
             </div>
             <div className={styles.infoRightColumn}>
               <MovieRatings
-                {...{ imdbRating, rtCriticsRating, kpRating }}
+                {...{imdbRating, rtCriticsRating, kpRating}}
                 direction="column"
               />
             </div>

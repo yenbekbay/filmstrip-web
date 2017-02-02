@@ -1,39 +1,47 @@
 /* @flow */
 
-import { css } from 'glamor';
-import { Translator } from 'counterpart';
+import {css} from 'glamor';
+import {Translator} from 'counterpart';
 import Link from 'next/link';
 import React from 'react';
 import Translate from 'react-translate-component';
 
-import { isBrowser, isProduction } from '../env';
-import { t } from '../styles';
+import {isBrowser, isProduction} from '../env';
+import {t} from '../styles';
 import FlagIcon from './FlagIcon';
 import withTranslator from '../hocs/withTranslator';
 import withUrl from '../hocs/withUrl';
 
-const PageHeader = ({ showSearchModal, translator, lang, url, getPath }: {
-  showSearchModal: () => void,
-  translator: Translator,
-  lang: string,
-  url: {
-    query: Object,
-    pathname: string,
-    host: ?string,
-    push: (path: string) => void,
+const PageHeader = (
+  {
+    showSearchModal,
+    translator,
+    lang,
+    url,
+    getPath,
+  }: {
+    showSearchModal(): void,
+    translator: Translator,
+    lang: string,
+    url: {
+      query: Object,
+      pathname: string,
+      host: ?string,
+      push(path: string): void,
+    },
+    getPath(pathname: string, query?: Object): string,
   },
-  getPath: (pathname: string, query?: Object) => string,
-}) => {
+) => {
   const host = isBrowser ? window.location.hostname : url.host;
   const newLang = lang === 'ru' ? 'en' : 'ru';
 
   const rootPath = getPath('/');
-  const newLangPath = (
-    host && host !== '0.0.0.0' && host !== 'localhost'
-  ) ? getPath(
-    `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`,
-    { ...url.query, lang: null },
-  ) : getPath(url.pathname, { ...url.query, lang: newLang });
+  const newLangPath = host && host !== '0.0.0.0' && host !== 'localhost'
+    ? getPath(
+        `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`,
+        {...url.query, lang: null},
+      )
+    : getPath(url.pathname, {...url.query, lang: newLang});
 
   return (
     <header className={styles.header}>
@@ -43,10 +51,7 @@ const PageHeader = ({ showSearchModal, translator, lang, url, getPath }: {
             <h1 className={styles.headerTitle}>filmstrip</h1>
           </a>
         </Link>
-        <button
-          className={styles.searchButton}
-          onClick={showSearchModal}
-        >
+        <button className={styles.searchButton} onClick={showSearchModal}>
           <Translate content="ui.searchPlaceholder" />
         </button>
         <a

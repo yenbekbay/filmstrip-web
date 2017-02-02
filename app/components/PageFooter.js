@@ -1,10 +1,10 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import React from 'react';
 import Translate from 'react-translate-component';
 
-import { t } from '../styles';
+import {t} from '../styles';
 
 const PageFooter = () => (
   <footer className={styles.footer}>

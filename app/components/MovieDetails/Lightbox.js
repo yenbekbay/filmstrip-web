@@ -1,11 +1,11 @@
 /* @flow */
 
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 
 type Props = {
   imageUrls: Array<string>,
   startIndex: number,
-  onCloseRequest: () => void,
+  onCloseRequest(): void,
 };
 type State = {
   activeImageIdx: number,
@@ -27,8 +27,8 @@ class Lightbox extends PureComponent {
   }
 
   handleMovePrevRequest = () => {
-    const { imageUrls } = this.props;
-    const { activeImageIdx } = this.state;
+    const {imageUrls} = this.props;
+    const {activeImageIdx} = this.state;
 
     this.setState({
       activeImageIdx: (activeImageIdx + 1) % imageUrls.length,
@@ -36,18 +36,19 @@ class Lightbox extends PureComponent {
   };
 
   handleMoveNextRequest = () => {
-    const { imageUrls } = this.props;
-    const { activeImageIdx } = this.state;
+    const {imageUrls} = this.props;
+    const {activeImageIdx} = this.state;
 
     this.setState({
-      activeImageIdx:
-        (activeImageIdx + (imageUrls.length - 1)) % imageUrls.length,
+      activeImageIdx: (
+        (activeImageIdx + (imageUrls.length - 1)) % imageUrls.length
+      ),
     });
   };
 
   render() {
-    const { imageUrls, onCloseRequest } = this.props;
-    const { activeImageIdx } = this.state;
+    const {imageUrls, onCloseRequest} = this.props;
+    const {activeImageIdx} = this.state;
 
     const nextSrc = imageUrls.length === 1
       ? undefined

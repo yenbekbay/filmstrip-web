@@ -1,12 +1,12 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import _ from 'lodash/fp';
 import ProgressiveImage from 'react-progressive-image';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { highresImageUrl, lowresImageUrl } from '../_utils';
-import { breakpoints, t } from '../../styles';
+import {highresImageUrl, lowresImageUrl} from '../_utils';
+import {breakpoints, t} from '../../styles';
 import Lightbox from './Lightbox';
 
 type Props = {
@@ -52,7 +52,7 @@ class MovieGallery extends Component {
   };
 
   _renderGallery = () => {
-    const { imageUrls } = this.props;
+    const {imageUrls} = this.props;
 
     return (
       <div className={styles.gallery}>
@@ -80,19 +80,18 @@ class MovieGallery extends Component {
   };
 
   render() {
-    const { imageUrls } = this.props;
-    const { lightboxIsOpen, lightboxImageIndex } = this.state;
+    const {imageUrls} = this.props;
+    const {lightboxIsOpen, lightboxImageIndex} = this.state;
 
     return (
       <div className={styles.container}>
         {this._renderGallery()}
-        {lightboxIsOpen && (
+        {lightboxIsOpen &&
           <Lightbox
             imageUrls={imageUrls}
             startIndex={lightboxImageIndex}
             onCloseRequest={this._closeLightbox}
-          />
-        )}
+          />}
       </div>
     );
   }

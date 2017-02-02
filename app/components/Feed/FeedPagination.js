@@ -1,43 +1,49 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import Link from 'next/link';
 import React from 'react';
 import Translate from 'react-translate-component';
 
-import { t } from '../../styles';
-import type { PageInfo, FeedType } from './../types';
+import {t} from '../../styles';
+import type {PageInfo, FeedType} from './../types';
 
-const FeedPagination = ({ page, activeFeedType, pageInfo }: {
-  page: ?string,
-  activeFeedType: FeedType,
-  pageInfo: PageInfo,
-}) => (
+const FeedPagination = (
+  {
+    page,
+    activeFeedType,
+    pageInfo,
+  }: {
+    page: ?string,
+    activeFeedType: FeedType,
+    pageInfo: PageInfo,
+  },
+) => (
   <div className={styles.container}>
-    {pageInfo.hasPreviousPage && (
+    {pageInfo.hasPreviousPage &&
       <Link
-        href={(page && page > '2')
-          ? `/?type=${activeFeedType}&page=${parseInt(page, 10) - 1}`
-          : `/?type=${activeFeedType}`
+        href={
+          page && page > '2'
+            ? `/?type=${activeFeedType}&page=${parseInt(page, 10) - 1}`
+            : `/?type=${activeFeedType}`
         }
       >
         <a className={styles.link}>
           <Translate content="ui.previousPageLabel" />
         </a>
-      </Link>
-    )}
-    {pageInfo.hasNextPage && (
+      </Link>}
+    {pageInfo.hasNextPage &&
       <Link
-        href={page
-          ? `/?type=${activeFeedType}&page=${parseInt(page, 10) + 1}`
-          : `/?type=${activeFeedType}&page=2`
+        href={
+          page
+            ? `/?type=${activeFeedType}&page=${parseInt(page, 10) + 1}`
+            : `/?type=${activeFeedType}&page=2`
         }
       >
         <a className={styles.link}>
           <Translate content="ui.nextPageLabel" />
         </a>
-      </Link>
-    )}
+      </Link>}
   </div>
 );
 

@@ -1,11 +1,11 @@
 /* @flow */
 
-import { applyMiddleware, compose, combineReducers, createStore } from 'redux';
-import { persistStore, autoRehydrate } from 'redux-persist';
+import {applyMiddleware, compose, combineReducers, createStore} from 'redux';
+import {persistStore, autoRehydrate} from 'redux-persist';
 import _ from 'lodash/fp';
 
 import uiReducer from './reducers/ui';
-import { isServer, isBrowser } from '../env';
+import {isServer, isBrowser} from '../env';
 
 const getStore = (
   client: any,

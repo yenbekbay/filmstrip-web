@@ -1,13 +1,13 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import _ from 'lodash/fp';
 import cookie from 'react-cookie';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Translate from 'react-translate-component';
 
-import { isServer } from '../env';
-import { t } from '../styles';
+import {isServer} from '../env';
+import {t} from '../styles';
 import CloseIcon from './CloseIcon';
 
 type State = {
@@ -29,9 +29,9 @@ class WebtorrentNotice extends Component {
   }
 
   onClose = () => {
-    cookie.save('seenWebtorrentNotice', 1, { path: '/' });
-    this.setState({ seen: true });
-  }
+    cookie.save('seenWebtorrentNotice', 1, {path: '/'});
+    this.setState({seen: true});
+  };
 
   render() {
     if (this.state.seen) return null;
@@ -46,10 +46,7 @@ class WebtorrentNotice extends Component {
         >
           ❗ <Translate content="ui.webTorrentNotice" />
         </a>
-        <button
-          className={styles.closeButton}
-          onClick={this.onClose}
-        >
+        <button className={styles.closeButton} onClick={this.onClose}>
           <CloseIcon size={25} />
         </button>
       </div>

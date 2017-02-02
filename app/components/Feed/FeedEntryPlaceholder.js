@@ -1,13 +1,13 @@
 /* @flow */
 
-import { css, keyframes } from 'glamor';
+import {css, keyframes} from 'glamor';
 import React from 'react';
 
-import { breakpoints, t } from '../../styles';
+import {breakpoints, t} from '../../styles';
 
 const loaderAnimation = keyframes({
-  '0%': { backgroundPosition: '-700px 0' },
-  '100%': { backgroundPosition: '800px 0' },
+  '0%': {backgroundPosition: '-700px 0'},
+  '100%': {backgroundPosition: '800px 0'},
 });
 
 const styles = {
@@ -59,8 +59,8 @@ const blocks = [
       left: '11rem',
     },
   },
-  { top: 0, right: '0rem', width: '2rem', height: '100%' },
-  { top: '2rem', right: '5rem', width: '3rem', height: '1.5rem' },
+  {top: 0, right: '0rem', width: '2rem', height: '100%'},
+  {top: '2rem', right: '5rem', width: '3rem', height: '1.5rem'},
   {
     top: '3.5rem',
     left: '2rem',
@@ -88,7 +88,7 @@ const blocks = [
       left: '13rem',
     },
   },
-  { top: '7rem', right: '5rem', width: '3rem', height: '3.5rem' },
+  {top: '7rem', right: '5rem', width: '3rem', height: '3.5rem'},
   {
     top: '10.5rem',
     left: 0,
@@ -116,7 +116,7 @@ const blocks = [
       left: '13rem',
     },
   },
-  { top: '13.5rem', left: '40rem', right: 0, height: '1.5rem' },
+  {top: '13.5rem', left: '40rem', right: 0, height: '1.5rem'},
 ];
 
 const renderBlock = (block: Object, idx: number) => {
@@ -126,7 +126,7 @@ const renderBlock = (block: Object, idx: number) => {
 };
 
 const FeedEntryPlaceholder = () => (
-  <div className={styles.container} >
+  <div className={styles.container}>
     {blocks.map(renderBlock)}
   </div>
 );

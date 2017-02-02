@@ -1,12 +1,12 @@
 /* @flow */
 
-import { Component, createElement } from 'react';
-import { Translator } from 'counterpart';
+import {Component, createElement} from 'react';
+import {Translator} from 'counterpart';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import Translate from 'react-translate-component';
 
-import { getDisplayName } from './_utils';
-import type { WrappableComponent } from './_utils';
+import {getDisplayName} from './_utils';
+import type {WrappableComponent} from './_utils';
 
 type Context = {
   translator: Translator,
@@ -22,7 +22,7 @@ const withTranslator = (WrappedComponent: WrappableComponent) => {
     translator: Translator;
 
     static displayName = `withTranslator(${getDisplayName(WrappedComponent)})`;
-    static contextTypes = { translator: Translate.translatorType };
+    static contextTypes = {translator: Translate.translatorType};
 
     constructor(props: any, context: Context) {
       super(props, context);
@@ -42,7 +42,7 @@ const withTranslator = (WrappedComponent: WrappableComponent) => {
     }
 
     _handleLocaleChange = (locale: string) => {
-      this.setState({ locale });
+      this.setState({locale});
     };
 
     render() {

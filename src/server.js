@@ -2,10 +2,10 @@
 
 import express from 'express';
 import next from 'next';
-import type { $Request, $Response } from 'express';
+import type {$Request, $Response} from 'express';
 
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dir: 'app', dev });
+const app = next({dir: 'app', dev});
 const handle = app.getRequestHandler();
 
 (async () => {

@@ -1,19 +1,20 @@
 /* @flow */
 
-import { css, keyframes } from 'glamor';
+import {css, keyframes} from 'glamor';
 import React from 'react';
 
-import { t } from '../styles';
+import {t} from '../styles';
 
-const Spinner = ({ className }: {
-  // eslint-disable-next-line react/require-default-props
-  className?: string,
-}) => (
-  <div className={`${styles.spinner} ${className || ''}`.trim()} />
-);
+const Spinner = (
+  {
+    className,
+  }: {
+    className?: string,
+  },
+) => <div className={`${styles.spinner} ${className || ''}`.trim()} />;
 
 const spinnerAnimation = keyframes({
-  to: { transform: 'rotate(360deg)' },
+  to: {transform: 'rotate(360deg)'},
 });
 
 const styles = {

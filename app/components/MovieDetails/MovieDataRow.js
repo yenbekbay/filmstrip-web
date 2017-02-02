@@ -1,15 +1,20 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import React from 'react';
 import Translate from 'react-translate-component';
 
-import { t } from '../../styles';
+import {t} from '../../styles';
 
-const MovieDataRow = ({ labelId, text }: {
-  labelId: string,
-  text: string,
-}) => (
+const MovieDataRow = (
+  {
+    labelId,
+    text,
+  }: {
+    labelId: string,
+    text: string,
+  },
+) => (
   <p className={styles.rowContainer}>
     <Translate content={labelId} className={styles.rowLabel} />
     <span className={styles.rowText}>{text}</span>

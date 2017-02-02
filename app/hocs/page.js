@@ -1,28 +1,29 @@
 /* @flow */
 
-import { ApolloProvider } from 'react-apollo';
-import { css, insertRule } from 'glamor';
-import { Translator } from 'counterpart';
+import {ApolloProvider} from 'react-apollo';
+import {css, insertRule} from 'glamor';
+import {Translator} from 'counterpart';
 import _ from 'lodash/fp';
 import dontGo from 'dont-go';
 import Head from 'next/head';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import Translate from 'react-translate-component';
 import 'glamor/reset';
 
-import { colors } from '../styles';
-import { getClient, getStore, getTranslator } from '../data';
-import { getDisplayName } from './_utils';
-import { isBrowser, isProduction, gaTrackingID } from '../env';
-import { updateSearchQuery } from '../data/actions/ui';
+import {colors} from '../styles';
+import {getClient, getStore, getTranslator} from '../data';
+import {getDisplayName} from './_utils';
+import {isBrowser, isProduction, gaTrackingID} from '../env';
+import {updateSearchQuery} from '../data/actions/ui';
 import Modal from '../components/Modal';
 import PageFooter from '../components/PageFooter';
 import PageHeader from '../components/PageHeader';
 import Search from '../components/Search';
-import type { WrappableComponent } from './_utils';
+import type {WrappableComponent} from './_utils';
 
-insertRule(`
+insertRule(
+  `
   body {
     background-color: ${colors.bg};
     color: #fff;
@@ -36,7 +37,8 @@ insertRule(`
     color: inherit;
     text-decoration: none;
   }
-`);
+`,
+);
 
 type GetInitialPropsContext = {
   pathname: string,
@@ -53,8 +55,8 @@ type Props = {
     query: {
       q?: string,
     },
-    back: () => void,
-    push: (path: string) => void,
+    back(): void,
+    push(path: string): void,
   },
 };
 type State = {
@@ -77,7 +79,7 @@ const trackPageView = () => {
 };
 
 const getHostLang = (headers: Object) => {
-  const { host } = headers;
+  const {host} = headers;
 
   if (host && (host.startsWith('ru') || host.startsWith('en'))) {
     return host.startsWith('ru') ? 'ru' : 'en';
@@ -118,7 +120,7 @@ const page = (WrappedComponent: WrappableComponent) => {
     }
 
     /* eslint-disable react/sort-comp */
-    state: State = { searching: false };
+    state: State = {searching: false};
 
     getChildContext = () => ({
       translator: this.translator,
@@ -169,12 +171,12 @@ const page = (WrappedComponent: WrappableComponent) => {
     }
 
     dismissModal = () => {
-      this.setState({ searching: false });
+      this.setState({searching: false});
       this.reduxStore.dispatch(updateSearchQuery(''));
     };
 
     showSearchModal = () => {
-      this.setState({ searching: true });
+      this.setState({searching: true});
     };
 
     render() {
@@ -186,12 +188,33 @@ const page = (WrappedComponent: WrappableComponent) => {
               <meta name="viewport" content="initial-scale=1.0" />
               <meta httpEquiv="Cache-Control" content="private" />
 
-              <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
-              <link rel="icon" type="image/png" href="/static/favicon-32x32.png" sizes="32x32" />
-              <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16" />
+              <link
+                rel="apple-touch-icon"
+                sizes="180x180"
+                href="/static/apple-touch-icon.png"
+              />
+              <link
+                rel="icon"
+                type="image/png"
+                href="/static/favicon-32x32.png"
+                sizes="32x32"
+              />
+              <link
+                rel="icon"
+                type="image/png"
+                href="/static/favicon-16x16.png"
+                sizes="16x16"
+              />
               <link rel="manifest" href="/static/manifest.json" />
-              <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#2b303b" />
-              <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css" />
+              <link
+                rel="mask-icon"
+                href="/static/safari-pinned-tab.svg"
+                color="#2b303b"
+              />
+              <link
+                rel="stylesheet"
+                href="https://unpkg.com/react-select/dist/react-select.css"
+              />
 
               <meta name="apple-mobile-web-app-title" content="filmstrip" />
               <meta name="application-name" content="filmstrip" />
@@ -200,14 +223,14 @@ const page = (WrappedComponent: WrappableComponent) => {
               <meta property="og:site_name" content="filmstrip" />
               <meta property="og:type" content="website" />
 
-              {isBrowser && isProduction && (
+              {isBrowser &&
+                isProduction &&
                 <script
                   // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{ __html: gaSnippet }}
-                />
-              )}
+                  dangerouslySetInnerHTML={{__html: gaSnippet}}
+                />}
             </Head>
-            {this.state.searching && (
+            {this.state.searching &&
               <Modal
                 contentLabel="Search Modal"
                 isOpen
@@ -219,8 +242,7 @@ const page = (WrappedComponent: WrappableComponent) => {
                 }}
               >
                 <Search url={this.props.url} />
-              </Modal>
-            )}
+              </Modal>}
             <PageHeader showSearchModal={this.showSearchModal} />
             <WrappedComponent />
             <PageFooter />

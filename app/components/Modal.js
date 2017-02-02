@@ -1,15 +1,19 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import Modal from 'react-modal';
 import React from 'react';
 
-import { t } from '../styles';
+import {t} from '../styles';
 import CloseIcon from './CloseIcon';
 
-const Modal_ = (props: Object & {
-  onRequestClose: () => void,
-}) => {
+const Modal_ = (
+  props: {
+    className?: string,
+    children?: React$Element<any>,
+    onRequestClose(): void,
+  },
+) => {
   const handleRequestClose = () => {
     props.onRequestClose();
     window.openModals -= 1;
@@ -48,13 +52,10 @@ const Modal_ = (props: Object & {
       onRequestClose={handleRequestClose}
     >
       <div className={styles.modalContentContainer}>
-        <button
-          className={styles.closeButton}
-          onClick={handleRequestClose}
-        >
+        <button className={styles.closeButton} onClick={handleRequestClose}>
           <CloseIcon size={40} />
         </button>
-        <div className={`${styles.modalContentInner} ${props.className}`}>
+        <div className={`${styles.modalContentInner} ${props.className || ''}.trim()`}>
           {props.children}
         </div>
       </div>

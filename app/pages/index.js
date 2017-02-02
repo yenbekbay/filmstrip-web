@@ -1,14 +1,14 @@
 /* @flow */
 
-import { connect } from 'react-redux';
-import { css } from 'glamor';
-import { graphql, compose } from 'react-apollo';
-import { Translator } from 'counterpart';
+import {connect} from 'react-redux';
+import {css} from 'glamor';
+import {graphql, compose} from 'react-apollo';
+import {Translator} from 'counterpart';
 import _ from 'lodash/fp';
 import cookie from 'react-cookie';
 import gql from 'graphql-tag';
 import Head from 'next/head';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import {
   FeedEntry,
@@ -17,8 +17,8 @@ import {
   FeedPagination,
   FeedTypeSelector,
 } from '../components/Feed';
-import { t } from '../styles';
-import { updateFeedGenres } from '../data/actions/ui';
+import {t} from '../styles';
+import {updateFeedGenres} from '../data/actions/ui';
 import MovieDetails from '../components/MovieDetails';
 import MovieModal from '../components/MovieModal';
 import page from '../hocs/page';
@@ -31,7 +31,7 @@ import type {
   PageInfo,
   FeedType,
 } from '../components/types';
-import type { Dispatch, ReduxState } from '../data/types';
+import type {Dispatch, ReduxState} from '../data/types';
 
 type Props = {
   feedLoading?: boolean,
@@ -39,7 +39,7 @@ type Props = {
   genresLoading?: boolean,
   genres?: Array<string>,
   selectedGenres: ?Array<string>,
-  updateSelectedGenres: (genres: Array<string>) => void,
+  updateSelectedGenres(genres: Array<string>): void,
   pageInfo?: PageInfo,
   url: {
     query: {
@@ -48,10 +48,10 @@ type Props = {
       id?: string,
     },
     pathname: string,
-    back: () => void,
-    push: (path: string) => void,
+    back(): void,
+    push(path: string): void,
   },
-  getPath: (pathname: string, query?: Object) => string,
+  getPath(pathname: string, query?: Object): string,
   translator: Translator,
   lang: string,
 };
@@ -77,28 +77,30 @@ class IndexPage extends Component {
   };
 
   componentWillMount() {
-    const { url, getPath } = this.props;
+    const {url, getPath} = this.props;
     const feedType = url.query.type;
     const lastFeedType = cookie.load('lastFeedType');
 
     if (!feedType && lastFeedType && lastFeedType !== defaultFeedType) {
-      url.push(getPath('/', { type: lastFeedType }));
+      url.push(getPath('/', {type: lastFeedType}));
     }
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (_.isEqual(nextProps, this.props)) return;
 
-    const { movies, selectedGenres, url, getPath } = nextProps;
+    const {movies, selectedGenres, url, getPath} = nextProps;
     const feedType = url.query.type;
     const isOnHomePage = url.pathname === '/';
     const lastFeedType = cookie.load('lastFeedType');
 
     if (
-      !feedType && isOnHomePage &&
-      lastFeedType && lastFeedType !== defaultFeedType
+      !feedType &&
+        isOnHomePage &&
+        lastFeedType &&
+        lastFeedType !== defaultFeedType
     ) {
-      this.props.url.push(getPath('/', { type: lastFeedType }));
+      this.props.url.push(getPath('/', {type: lastFeedType}));
     }
 
     if (movies || selectedGenres) {
@@ -119,7 +121,8 @@ class IndexPage extends Component {
   };
 
   _handleSelectedGenresChange = _.throttle(
-    1000, this.props.updateSelectedGenres,
+    1000,
+    this.props.updateSelectedGenres,
   );
 
   render() {
@@ -130,11 +133,11 @@ class IndexPage extends Component {
       genres,
       selectedGenres,
       pageInfo,
-      url: { back, query },
+      url: {back, query},
       translator,
     } = this.props;
     const activeFeedType = query.type || defaultFeedType;
-    const modalMovie = query.id && _.find({ slug: query.id }, movies);
+    const modalMovie = query.id && _.find({slug: query.id}, movies);
 
     return (
       <div>
@@ -142,8 +145,7 @@ class IndexPage extends Component {
           <title>
             {modalMovie
               ? modalMovie.info.title
-              : `filmstrip feed${query.page ? ` - page ${query.page}` : ''}`
-            }
+              : `filmstrip feed${query.page ? ` - page ${query.page}` : ''}`}
           </title>
         </Head>
         {modalMovie && <MovieModal movie={modalMovie} back={back} />}
@@ -158,29 +160,24 @@ class IndexPage extends Component {
               onSelectedGenresChange={this._handleSelectedGenresChange}
             />
           </div>
-          {!feedLoading && (
-            (movies && movies.length > 0) ? (movies || []).map(
-              (movie: MovieDetailsFragment) => (
-                <FeedEntry key={movie.slug} movie={movie} />
-              ),
-            ) : (
-              <p className={styles.emptyStateText}>
-                {translator.translate('ui.noMoviesFoundMessage')}
-              </p>
-            )
-          )}
-          {feedLoading && (
-            _.range(0, 3).map((idx: number) => (
-              <FeedEntryPlaceholder key={idx} />
-            ))
-          )}
-          {pageInfo && (
+          {!feedLoading &&
+            (movies && movies.length > 0
+              ? (movies || []).map((movie: MovieDetailsFragment) => (
+                  <FeedEntry key={movie.slug} movie={movie} />
+                ))
+              : <p className={styles.emptyStateText}>
+                  {translator.translate('ui.noMoviesFoundMessage')}
+                </p>)}
+          {feedLoading &&
+            _
+              .range(0, 3)
+              .map((idx: number) => <FeedEntryPlaceholder key={idx} />)}
+          {pageInfo &&
             <FeedPagination
               page={query.page}
               activeFeedType={activeFeedType}
               pageInfo={pageInfo}
-            />
-          )}
+            />}
         </div>
         <TrailerModal />
       </div>
@@ -243,27 +240,29 @@ const MOVIE_FEED_QUERY = gql`
 const ITEMS_PER_PAGE = 10;
 
 const withFeed = graphql(MOVIE_FEED_QUERY, {
-  options: ({ url: { query }, selectedGenres, lang }: Props) => ({
+  options: ({url: {query}, selectedGenres, lang}: Props) => ({
     variables: {
       type: (query.type || defaultFeedType).toUpperCase(),
       lang: lang.toUpperCase(),
       genres: selectedGenres || [],
-      offset: query.page
-        ? ((parseInt(query.page, 10) - 1) * ITEMS_PER_PAGE)
-        : 0,
+      offset: query.page ? (parseInt(query.page, 10) - 1) * ITEMS_PER_PAGE : 0,
       limit: ITEMS_PER_PAGE,
     },
   }),
-  skip: ({ url: { pathname } }: Props) => pathname === '/movie',
-  props: ({ data: { loading, feed } }: {
-    data: {
-      loading: boolean,
-      feed: {
-        nodes: Array<MovieDetailsFragment>,
-        pageInfo: PageInfo,
+  skip: ({url: {pathname}}: Props) => pathname === '/movie',
+  props: (
+    {
+      data: {loading, feed},
+    }: {
+      data: {
+        loading: boolean,
+        feed: {
+          nodes: Array<MovieDetailsFragment>,
+          pageInfo: PageInfo,
+        },
       },
     },
-  }) => ({
+  ) => ({
     feedLoading: loading,
     movies: _.get('nodes', feed),
     pageInfo: _.get('pageInfo', feed),
@@ -275,17 +274,21 @@ const GENRES_QUERY = gql`
 `;
 
 const withGenres = graphql(GENRES_QUERY, {
-  options: ({ lang }: Props) => ({
+  options: ({lang}: Props) => ({
     variables: {
       lang: lang.toUpperCase(),
     },
   }),
-  props: ({ data: { loading, genres } }: {
-    data: {
-      loading: boolean,
-      genres: Array<string>,
+  props: (
+    {
+      data: {loading, genres},
+    }: {
+      data: {
+        loading: boolean,
+        genres: Array<string>,
+      },
     },
-  }) => ({
+  ) => ({
     genresLoading: loading,
     genres,
   }),

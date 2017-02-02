@@ -1,8 +1,8 @@
 /* @flow */
 
-import { Translator } from 'counterpart';
+import {Translator} from 'counterpart';
 
-import { isServer } from '../env';
+import {isServer} from '../env';
 import translations from '../data/translations';
 
 const getTranslator = (lang: string) => {

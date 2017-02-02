@@ -1,11 +1,11 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import _ from 'lodash/fp';
 import gql from 'graphql-tag';
 import React from 'react';
 
-import { breakpoints, colors, t } from '../../styles';
+import {breakpoints, colors, t} from '../../styles';
 import MovieBackdropWrapper from './MovieBackdropWrapper';
 import MovieCredits from './MovieCredits';
 import MovieDataRow from './MovieDataRow';
@@ -17,10 +17,10 @@ import PlayTrailerButton from './PlayTrailerButton';
 import Torrents from './Torrents';
 import WebtorrentNotice from '../WebtorrentNotice';
 import withTranslator from '../../hocs/withTranslator';
-import type { MovieDetailsFragment } from '../types';
+import type {MovieDetailsFragment} from '../types';
 
-const hoursUnit = { en: 'h', ru: 'ч' };
-const minutesUnit = { en: 'min', ru: 'мин' };
+const hoursUnit = {en: 'h', ru: 'ч'};
+const minutesUnit = {en: 'min', ru: 'мин'};
 const formatRuntime = (runtime: number, lang: string) => {
   const hours = Math.floor(runtime / 60);
   const minutes = runtime % 60;
@@ -32,12 +32,32 @@ const formatRuntime = (runtime: number, lang: string) => {
 
 const monthNames = {
   en: [
-    'January', 'February', 'March', 'April', 'May', 'June', 'July',
-    'August', 'September', 'October', 'November', 'December',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ],
   ru: [
-    'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля',
-    'августа', 'сентября', 'октября', 'ноября', 'декабря',
+    'января',
+    'февраля',
+    'марта',
+    'апреля',
+    'мая',
+    'июня',
+    'июля',
+    'августа',
+    'сентября',
+    'октября',
+    'ноября',
+    'декабря',
   ],
 };
 const formatDate = (date: string, lang: string) => {
@@ -49,10 +69,15 @@ const formatDate = (date: string, lang: string) => {
   return `${day} ${monthNames[lang][monthIndex]} ${year}`;
 };
 
-const MovieDetails = ({ movie, lang }: {
-  movie: MovieDetailsFragment,
-  lang: string,
-}) => {
+const MovieDetails = (
+  {
+    movie,
+    lang,
+  }: {
+    movie: MovieDetailsFragment,
+    lang: string,
+  },
+) => {
   const {
     info: {
       backdropUrl,
@@ -78,13 +103,13 @@ const MovieDetails = ({ movie, lang }: {
   } = movie;
 
   const extras = _.toPairs({
-    'ui.originalTitleLabel':
-      (originalTitle && originalTitle !== title) && originalTitle,
+    'ui.originalTitleLabel': (
+      originalTitle && originalTitle !== title && originalTitle
+    ),
     'ui.originalLanguageLabel': originalLanguage,
     'ui.mpaaRatingLabel': mpaaRating,
     'ui.runtimeLabel': runtime && formatRuntime(runtime, lang),
-    'ui.countriesLabel':
-      productionCountries && productionCountries.join(', '),
+    'ui.countriesLabel': productionCountries && productionCountries.join(', '),
     'ui.releaseDateLabel': releaseDate && formatDate(releaseDate, lang),
   });
 
@@ -94,9 +119,8 @@ const MovieDetails = ({ movie, lang }: {
         <MovieBackdropWrapper backdropUrl={backdropUrl}>
           <div className={styles.headerContainer}>
             <div className={styles.trailerButtonWrapper}>
-              {youtubeIds.length > 0 && (
-                <PlayTrailerButton youtubeId={youtubeIds[0]} scale={1.5} />
-              )}
+              {youtubeIds.length > 0 &&
+                <PlayTrailerButton youtubeId={youtubeIds[0]} scale={1.5} />}
             </div>
             <div>
               <h1 className={styles.title}>{title}</h1>
@@ -114,27 +138,25 @@ const MovieDetails = ({ movie, lang }: {
           <div className={styles.infoInner}>
             <div className={styles.ratingsWrapper}>
               <MovieRatings
-                {...{ imdbRating, rtCriticsRating, kpRating }}
+                {...{imdbRating, rtCriticsRating, kpRating}}
                 direction="row"
               />
             </div>
             <MovieSynopsis synopsis={synopsis} />
             <MovieCredits credits={credits} />
             <div>
-              {extras.map(([labelId, text]: [string, mixed]) => (
-                text && (
-                  <MovieDataRow
-                    key={labelId}
-                    labelId={labelId}
-                    text={String(text)}
-                  />
-                )
-              ))}
+              {extras.map(
+                ([labelId, text]: [string, mixed]) =>
+                  text &&
+                    <MovieDataRow
+                      key={labelId}
+                      labelId={labelId}
+                      text={String(text)}
+                    />,
+              )}
             </div>
           </div>
-          {stills.length > 0 && (
-            <MovieGallery imageUrls={stills} />
-          )}
+          {stills.length > 0 && <MovieGallery imageUrls={stills} />}
           <div className={styles.separator} />
           <Torrents torrents={torrents} />
         </div>
@@ -213,7 +235,8 @@ const styles = {
 };
 
 MovieDetails.fragments = {
-  details: gql`
+  details: (
+    gql`
     fragment MovieDetails on Movie {
       slug
       info {
@@ -250,7 +273,8 @@ MovieDetails.fragments = {
         size
       }
     }
-  `,
+  `
+  ),
 };
 
 export default withTranslator(MovieDetails);

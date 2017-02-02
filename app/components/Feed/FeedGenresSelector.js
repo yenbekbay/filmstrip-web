@@ -1,19 +1,19 @@
 /* @flow */
 
-import { css } from 'glamor';
-import { Translator } from 'counterpart';
+import {css} from 'glamor';
+import {Translator} from 'counterpart';
 import _ from 'lodash/fp';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Select from 'react-select';
 
-import { breakpoints, colors, t } from '../../styles';
+import {breakpoints, colors, t} from '../../styles';
 import withTranslator from '../../hocs/withTranslator';
 
 type Props = {
   genres: ?Array<string>,
   selectedGenres: ?Array<string>,
   loading: ?boolean,
-  onSelectedGenresChange: (genres: Array<string>) => void,
+  onSelectedGenresChange(genres: Array<string>): void,
   translator: Translator,
 };
 type State = {
@@ -34,7 +34,7 @@ class FeedGenresSelector extends Component {
 
   componentWillReceiveProps(nextProps: Props) {
     if (!_.isEqual(nextProps.genres, this.props.genres)) {
-      this.setState({ selectedGenres: [] });
+      this.setState({selectedGenres: []});
       this.props.onSelectedGenresChange([]);
     }
   }
@@ -48,12 +48,12 @@ class FeedGenresSelector extends Component {
   _handleSelectedGenresChange = (genres: Array<Object>) => {
     const selectedGenres = _.map('value', genres);
 
-    this.setState({ selectedGenres });
+    this.setState({selectedGenres});
     this.props.onSelectedGenresChange(selectedGenres);
   };
 
   render() {
-    const { genres, loading, translator } = this.props;
+    const {genres, loading, translator} = this.props;
 
     const genreOptions = (genres || []).map((genre: string) => ({
       value: genre,

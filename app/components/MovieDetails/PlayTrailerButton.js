@@ -1,19 +1,21 @@
 /* @flow */
 
-import { connect } from 'react-redux';
-import { css } from 'glamor';
+import {connect} from 'react-redux';
+import {css} from 'glamor';
 import React from 'react';
 
-import { openTrailerModal } from '../../data/actions/ui';
-import { t } from '../../styles';
+import {openTrailerModal} from '../../data/actions/ui';
+import {t} from '../../styles';
 import PlayIcon from './PlayIcon';
-import type { Dispatch } from '../../data/types';
+import type {Dispatch} from '../../data/types';
 
-const PlayTrailerButton = (props: {
-  youtubeId: string,
-  scale?: number,
-  openTrailerModal: (youtubeId: string) => void,
-}) => (
+const PlayTrailerButton = (
+  props: {
+    youtubeId: string,
+    scale?: number,
+    openTrailerModal(youtubeId: string): void,
+  },
+) => (
   <button
     className={styles.trailerPlayButton}
     style={{

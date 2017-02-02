@@ -2,11 +2,15 @@
 
 import React from 'react';
 
-const PeerIcon = ({ scale = 1, className }: {
-  scale?: number,
-  // eslint-disable-next-line react/require-default-props
-  className?: string,
-}) => (
+const PeerIcon = (
+  {
+    scale = 1,
+    className,
+  }: {
+    scale?: number,
+    className?: string,
+  },
+) => (
   <svg
     width={`${47.5 * scale}px`}
     height={`${47.5 * scale}px`}

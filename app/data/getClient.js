@@ -1,12 +1,12 @@
 /* @flow */
 
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import ApolloClient, {createNetworkInterface} from 'apollo-client';
 
-import { isServer, graphqlEndpoint } from '../env';
+import {isServer, graphqlEndpoint} from '../env';
 
 const getClient = (headers: any) => {
   if (isServer || !window.apolloClient) {
-    const networkInterface = createNetworkInterface({ uri: graphqlEndpoint });
+    const networkInterface = createNetworkInterface({uri: graphqlEndpoint});
 
     const client = new ApolloClient({
       networkInterface,
@@ -26,5 +26,5 @@ const resetStore = () => {
   window.apolloClient.resetStore();
 };
 
-export { resetStore };
+export {resetStore};
 export default getClient;

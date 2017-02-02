@@ -3,18 +3,23 @@
 import React from 'react';
 
 import MovieDataRow from './MovieDataRow';
-import type { MovieCreditsMember } from '../types';
+import type {MovieCreditsMember} from '../types';
 
-const MovieCredits = ({ credits, truncated }: {
-  credits: {
-    cast: Array<MovieCreditsMember>,
-    crew: {
-      directors: Array<MovieCreditsMember>,
+const MovieCredits = (
+  {
+    credits,
+    truncated,
+  }: {
+    credits: {
+      cast: Array<MovieCreditsMember>,
+      crew: {
+        directors: Array<MovieCreditsMember>,
+      },
     },
+    truncated?: boolean,
   },
-  truncated?: boolean,
-}) => {
-  const { cast, crew: { directors } } = credits;
+) => {
+  const {cast, crew: {directors}} = credits;
 
   return (
     <div>
@@ -22,9 +27,7 @@ const MovieCredits = ({ credits, truncated }: {
         labelId="ui.directedByLabel"
         text={
           directors.length > 0
-            ? directors
-                .map(({ name }: MovieCreditsMember) => name)
-                .join(', ')
+            ? directors.map(({name}: MovieCreditsMember) => name).join(', ')
             : '–'
         }
       />
@@ -34,7 +37,7 @@ const MovieCredits = ({ credits, truncated }: {
           cast.length > 0
             ? cast
                 .slice(0, truncated ? 3 : undefined)
-                .map(({ name }: MovieCreditsMember) => name)
+                .map(({name}: MovieCreditsMember) => name)
                 .join(', ')
             : '–'
         }

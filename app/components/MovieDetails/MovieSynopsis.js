@@ -1,17 +1,22 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import _ from 'lodash/fp';
 import React from 'react';
 
-import { t } from '../../styles';
+import {t} from '../../styles';
 
-const MovieSynopsis = ({ synopsis, truncated }: {
-  synopsis?: ?string,
-  truncated?: boolean,
-}) => (
+const MovieSynopsis = (
+  {
+    synopsis,
+    truncated,
+  }: {
+    synopsis?: ?string,
+    truncated?: boolean,
+  },
+) => (
   <p className={styles.synopsis}>
-    {(truncated ? _.truncate({ length: 180 }, synopsis) : synopsis) || '–'}
+    {(truncated ? _.truncate({length: 180}, synopsis) : synopsis) || '–'}
   </p>
 );
 

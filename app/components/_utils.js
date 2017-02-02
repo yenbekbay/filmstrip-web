@@ -25,4 +25,4 @@ const lowresImageUrl = (imageUrl: ?string) => {
   return null;
 };
 
-export { highresImageUrl, lowresImageUrl };
+export {highresImageUrl, lowresImageUrl};

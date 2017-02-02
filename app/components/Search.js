@@ -1,33 +1,33 @@
 /* @flow */
 
-import { connect } from 'react-redux';
-import { css } from 'glamor';
-import { graphql, compose } from 'react-apollo';
-import { Translator } from 'counterpart';
+import {connect} from 'react-redux';
+import {css} from 'glamor';
+import {graphql, compose} from 'react-apollo';
+import {Translator} from 'counterpart';
 import _ from 'lodash/fp';
 import gql from 'graphql-tag';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { breakpoints, t } from '../styles';
-import { updateSearchQuery } from '../data/actions/ui';
+import {breakpoints, t} from '../styles';
+import {updateSearchQuery} from '../data/actions/ui';
 import Loader from './Loader';
-import MovieDetails, { MovieCredits, MoviePosterImage } from './MovieDetails';
+import MovieDetails, {MovieCredits, MoviePosterImage} from './MovieDetails';
 import MovieModal from './MovieModal';
 import withTranslator from '../hocs/withTranslator';
-import type { MovieDetailsFragment } from './types';
-import type { Dispatch, ReduxState } from '../data/types';
+import type {MovieDetailsFragment} from './types';
+import type {Dispatch, ReduxState} from '../data/types';
 
 type Props = {
   loading?: boolean,
   results?: Array<MovieDetailsFragment>,
   searchQuery: string,
-  updateSearchQuery: (searchQuery: string) => void,
+  updateSearchQuery(searchQuery: string): void,
   url: {
     query: {
       id?: string,
     },
-    back: () => void,
-    push: (path: string) => void,
+    back(): void,
+    push(path: string): void,
   },
   translator: Translator,
   lang: string,
@@ -66,7 +66,7 @@ class Search extends Component {
   handleSearchQueryChange = (e: Object) => {
     const searchQuery = e.target.value;
 
-    this.setState({ searchQuery });
+    this.setState({searchQuery});
     this.updateSearchQuery(searchQuery);
   };
 
@@ -80,10 +80,10 @@ class Search extends Component {
       loading,
       results,
       searchQuery,
-      url: { back, query },
+      url: {back, query},
       translator,
     } = this.props;
-    const modalMovie = query.id && _.find({ slug: query.id }, results);
+    const modalMovie = query.id && _.find({slug: query.id}, results);
 
     return (
       <div className={styles.container}>
@@ -102,41 +102,38 @@ class Search extends Component {
           </div>
         </div>
         <div className={styles.searchResultsContainer}>
-          {(
-            results && results.length > 0 &&
+          {results &&
+            results.length > 0 &&
             _.includes(this.props.searchQuery, this.state.searchQuery)
-          ) ? (
-            results.map((movie: MovieDetailsFragment) => (
-              <a
-                key={movie.info.title}
-                className={styles.searchResultContainer}
-                href={`/movie?id=${movie.slug}`}
-                onClick={(e: Object) => this.showMovieDetails(e, movie.slug)}
-              >
-                <div className={styles.posterWrapper}>
-                  <MoviePosterImage
-                    posterUrl={movie.info.posterUrl}
-                    title={movie.info.title}
-                  />
-                </div>
-                <div className={styles.movieInfo}>
-                  <h2 className={styles.movieTitle}>
-                    {`${movie.info.title} `}
-                    <span className={styles.movieYear}>
-                      {`(${movie.info.year})`}
-                    </span>
-                  </h2>
-                  <MovieCredits credits={movie.info.credits} truncated />
-                </div>
-              </a>
-            ))
-          ) : (
-            (!loading && searchQuery.length >= 3) && (
-              <p className={styles.emptyStateText}>
-                {translator.translate('ui.noMoviesFoundMessage')}
-              </p>
-            )
-          )}
+            ? results.map((movie: MovieDetailsFragment) => (
+                <a
+                  key={movie.info.title}
+                  className={styles.searchResultContainer}
+                  href={`/movie?id=${movie.slug}`}
+                  onClick={(e: Object) => this.showMovieDetails(e, movie.slug)}
+                >
+                  <div className={styles.posterWrapper}>
+                    <MoviePosterImage
+                      posterUrl={movie.info.posterUrl}
+                      title={movie.info.title}
+                    />
+                  </div>
+                  <div className={styles.movieInfo}>
+                    <h2 className={styles.movieTitle}>
+                      {`${movie.info.title} `}
+                      <span className={styles.movieYear}>
+                        {`(${movie.info.year})`}
+                      </span>
+                    </h2>
+                    <MovieCredits credits={movie.info.credits} truncated />
+                  </div>
+                </a>
+              ))
+            : !loading &&
+                searchQuery.length >= 3 &&
+                <p className={styles.emptyStateText}>
+                  {translator.translate('ui.noMoviesFoundMessage')}
+                </p>}
         </div>
       </div>
     );
@@ -225,18 +222,22 @@ const SEARCH_QUERY = gql`
 `;
 
 const withResults = graphql(SEARCH_QUERY, {
-  options: ({ searchQuery, lang }: Props) => ({
+  options: ({searchQuery, lang}: Props) => ({
     variables: {
       query: searchQuery,
       lang: lang.toUpperCase(),
     },
   }),
-  props: ({ data: { loading, search } }: {
-    data: {
-      loading: boolean,
-      search: Array<MovieDetailsFragment>,
+  props: (
+    {
+      data: {loading, search},
+    }: {
+      data: {
+        loading: boolean,
+        search: Array<MovieDetailsFragment>,
+      },
     },
-  }) => ({
+  ) => ({
     loading,
     results: search,
   }),
@@ -246,9 +247,8 @@ const mapStateToProps = (state: ReduxState) => ({
   searchQuery: state.ui.searchQuery,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  updateSearchQuery: (
-    searchQuery: string,
-  ) => dispatch(updateSearchQuery(searchQuery)),
+  updateSearchQuery: (searchQuery: string) =>
+    dispatch(updateSearchQuery(searchQuery)),
 });
 
 export default compose(

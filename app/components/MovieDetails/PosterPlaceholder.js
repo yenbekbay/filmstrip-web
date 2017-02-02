@@ -1,9 +1,9 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import React from 'react';
 
-import { t } from '../../styles';
+import {t} from '../../styles';
 
 const PosterPlaceholder = () => (
   <div

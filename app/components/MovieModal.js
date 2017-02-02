@@ -4,12 +4,17 @@ import React from 'react';
 
 import Modal from './Modal';
 import MovieDetails from './MovieDetails';
-import type { MovieDetailsFragment } from './types';
+import type {MovieDetailsFragment} from './types';
 
-const MovieModal = ({ movie, back }: {
-  movie: MovieDetailsFragment,
-  back: () => void,
-}) => (
+const MovieModal = (
+  {
+    movie,
+    back,
+  }: {
+    movie: MovieDetailsFragment,
+    back(): void,
+  },
+) => (
   <Modal
     contentLabel="Movie Modal"
     isOpen

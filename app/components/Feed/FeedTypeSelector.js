@@ -1,21 +1,28 @@
 /* @flow */
 
-import { css } from 'glamor';
-import { Translator } from 'counterpart';
+import {css} from 'glamor';
+import {Translator} from 'counterpart';
 import cookie from 'react-cookie';
 import React from 'react';
 
-import { breakpoints, colors, t } from '../../styles';
+import {breakpoints, colors, t} from '../../styles';
 import withTranslator from '../../hocs/withTranslator';
 import withUrl from '../../hocs/withUrl';
-import type { FeedType } from '../types';
+import type {FeedType} from '../types';
 
-const FeedTypeSelector = ({ activeFeedType, translator, url, getPath }: {
-  activeFeedType: FeedType,
-  translator: Translator,
-  url: { push: (path: string) => void },
-  getPath: (pathname: string, query?: Object) => string,
-}) => {
+const FeedTypeSelector = (
+  {
+    activeFeedType,
+    translator,
+    url,
+    getPath,
+  }: {
+    activeFeedType: FeedType,
+    translator: Translator,
+    url: {push(path: string): void},
+    getPath(pathname: string, query?: Object): string,
+  },
+) => {
   const feedTypeMappings = {
     trending: translator.translate('ui.trendingFeedType'),
     new: translator.translate('ui.newFeedType'),
@@ -25,7 +32,7 @@ const FeedTypeSelector = ({ activeFeedType, translator, url, getPath }: {
   return (
     <div className={styles.container}>
       {['trending', 'new', 'latest'].map((feedType: FeedType) => {
-        const feedTypePath = getPath('/', { type: feedType });
+        const feedTypePath = getPath('/', {type: feedType});
 
         return (
           <a
@@ -34,14 +41,15 @@ const FeedTypeSelector = ({ activeFeedType, translator, url, getPath }: {
               e.preventDefault();
               if (activeFeedType !== feedType) {
                 url.push(feedTypePath);
-                cookie.save('lastFeedType', feedType, { path: '/' });
+                cookie.save('lastFeedType', feedType, {path: '/'});
               }
             }}
             href={feedTypePath}
             className={styles.link}
-            style={(activeFeedType === feedType)
-              ? { ...t.bg_white_90, color: colors.bg }
-              : {}
+            style={
+              activeFeedType === feedType
+                ? {...t.bg_white_90, color: colors.bg}
+                : {}
             }
           >
             {feedTypeMappings[feedType]}

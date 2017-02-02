@@ -1,73 +1,73 @@
 /* @flow */
 
-import { css } from 'glamor';
+import {css} from 'glamor';
 import _ from 'lodash/fp';
 import React from 'react';
 import Translate from 'react-translate-component';
 
-import { t } from '../../styles';
+import {t} from '../../styles';
 import PeerIcon from './PeerIcon';
 import SeedIcon from './SeedIcon';
 import TorrentDataRow from './TorrentDataRow';
-import type { Torrent } from './../types';
+import type {Torrent} from './../types';
 
-const Torrents = ({ torrents }: { torrents: Array<Torrent> }) => (
+const Torrents = ({torrents}: {torrents: Array<Torrent>}) => (
   <div className={styles.torrentsContainer}>
     {torrents.length > 0 ? torrents.map((torrent: Torrent) => {
-      const extras = _.toPairs({
-        'ui.torrentAudioTranslationTypeLabel':
-          torrent.audioTranslationType &&
-          torrent.audioTranslationType.toLowerCase(),
-        'ui.torrentAudioTracksLabel':
-          (torrent.audioTracks && torrent.audioTracks.length > 0) &&
-          torrent.audioTracks.join(', '),
-        'ui.torrentBundledSubtitlesLabel':
-          (torrent.bundledSubtitles && torrent.bundledSubtitles.length > 0) &&
-          torrent.bundledSubtitles.join(', '),
-      });
+          const extras = _.toPairs({
+            'ui.torrentAudioTranslationTypeLabel': (
+              torrent.audioTranslationType &&
+                torrent.audioTranslationType.toLowerCase()
+            ),
+            'ui.torrentAudioTracksLabel': (
+              torrent.audioTracks &&
+                torrent.audioTracks.length > 0 &&
+                torrent.audioTracks.join(', ')
+            ),
+            'ui.torrentBundledSubtitlesLabel': (
+              torrent.bundledSubtitles &&
+                torrent.bundledSubtitles.length > 0 &&
+                torrent.bundledSubtitles.join(', ')
+            ),
+          });
 
-      return (
-        <a
-          key={torrent.magnetLink}
-          className={styles.torrentCard}
-          href={torrent.magnetLink.replace('magnet:', 'stream-magnet:')}
-        >
-          <div className={styles.torrentCardInner}>
-            <h4 className={styles.torrentQuality}>{torrent.quality}</h4>
-            <h5 className={styles.torrentSize}>
-              {`${(torrent.size / (1024 * 1024 * 1024)).toFixed(2)} `}
-              <Translate content="ui.torrentGbUnit" />
-            </h5>
-            <div className={styles.torrentExtrasContainer}>
-              {extras.map(([labelId, text]: [string, mixed]) => (
-                text && (
-                  <TorrentDataRow
-                    key={labelId}
-                    labelId={labelId}
-                    text={String(text)}
-                  />
-                )
-              ))}
-            </div>
-            <div className={styles.torrentPeersContainer}>
-              <SeedIcon
-                className={styles.torrentPeersIcon}
-                scale={0.5}
-              />
-              <span className={styles.torrentSeedsText}>
-                {torrent.seeds}
-              </span>
-              <PeerIcon className={styles.torrentPeersIcon} scale={0.5} />
-              <span className={styles.torrentPeersText}>
-                {torrent.peers}
-              </span>
-            </div>
-          </div>
-        </a>
-      );
-    }) : (
-      <Translate content="ui.torrentsPlaceholder" />
-    )}
+          return (
+            <a
+              key={torrent.magnetLink}
+              className={styles.torrentCard}
+              href={torrent.magnetLink.replace('magnet:', 'stream-magnet:')}
+            >
+              <div className={styles.torrentCardInner}>
+                <h4 className={styles.torrentQuality}>{torrent.quality}</h4>
+                <h5 className={styles.torrentSize}>
+                  {`${(torrent.size / (1024 * 1024 * 1024)).toFixed(2)} `}
+                  <Translate content="ui.torrentGbUnit" />
+                </h5>
+                <div className={styles.torrentExtrasContainer}>
+                  {extras.map(
+                    ([labelId, text]: [string, mixed]) =>
+                      text &&
+                        <TorrentDataRow
+                          key={labelId}
+                          labelId={labelId}
+                          text={String(text)}
+                        />,
+                  )}
+                </div>
+                <div className={styles.torrentPeersContainer}>
+                  <SeedIcon className={styles.torrentPeersIcon} scale={0.5} />
+                  <span className={styles.torrentSeedsText}>
+                    {torrent.seeds}
+                  </span>
+                  <PeerIcon className={styles.torrentPeersIcon} scale={0.5} />
+                  <span className={styles.torrentPeersText}>
+                    {torrent.peers}
+                  </span>
+                </div>
+              </div>
+            </a>
+          );
+        }) : <Translate content="ui.torrentsPlaceholder" />}
   </div>
 );
 

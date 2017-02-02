@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { Action } from '../types';
+import type {Action} from '../types';
 
 export type UiState = {
   youtubeId: ?string,
@@ -16,10 +16,7 @@ const initialState: UiState = {
   lang: 'en',
 };
 
-export default (
-  state: UiState = initialState,
-  action: Action,
-): UiState => {
+export default (state: UiState = initialState, action: Action): UiState => {
   switch (action.type) {
     case 'OPEN_TRAILER_MODAL':
       return {

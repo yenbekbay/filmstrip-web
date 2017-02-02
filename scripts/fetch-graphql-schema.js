@@ -3,7 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { graphql, parse, buildASTSchema, introspectionQuery } from 'graphql';
+import {graphql, parse, buildASTSchema, introspectionQuery} from 'graphql';
 import 'isomorphic-fetch';
 
 const GRAPHQL_PORT = 8080;

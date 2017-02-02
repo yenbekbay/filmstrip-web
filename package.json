@@ -28,7 +28,8 @@
     "jest:coverage": "jest --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "typecheck": "flow check ."
+    "typecheck": "flow check .",
+    "prettier": "prettier --print-width 80 --tab-width 2 --single-quote --trailing-comma --no-bracket-spacing --write '{app,scripts,src}/**/*.js'"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -95,6 +96,7 @@
     "jest": "^18.1.0",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.1",
+    "prettier": "^0.14.1",
     "rimraf": "^2.5.4",
     "validate-commit-msg": "^2.11.1"
   }

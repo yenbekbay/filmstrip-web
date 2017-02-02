@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const CloseIcon = ({ size }: { size: number }) => (
+const CloseIcon = ({size}: {size: number}) => (
   <svg width={size} height={size} viewBox="0 0 40 40">
     <path
       style={{
