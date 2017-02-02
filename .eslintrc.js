@@ -9,6 +9,8 @@ module.exports = {
     'graphql',
   ],
   rules: {
+    'no-magic-numbers': 0,
+
     'import/no-extraneous-dependencies': 0,
 
     'graphql/template-strings': [0, {

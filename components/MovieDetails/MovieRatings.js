@@ -33,7 +33,7 @@ const MovieRatings = ({ imdbRating, rtCriticsRating, kpRating, direction }: {
           <i
             className={styles.ratingIcon}
             style={{
-              backgroundPosition: `0 -${rtCriticsRating >= 50 ? 25 : 50}px`, // eslint-disable-line max-len
+              backgroundPosition: `0 -${rtCriticsRating >= 50 ? 25 : 50}px`,
             }}
           />
           <span className={styles.ratingText}>{rtCriticsRating}%</span>

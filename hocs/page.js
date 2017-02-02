@@ -61,7 +61,6 @@ type State = {
   searching: boolean,
 };
 
-/* eslint-disable max-len */
 const gaSnippet = `
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -70,7 +69,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', '${gaTrackingID}', 'auto');
 `;
-/* eslint-enable max-len */
 const trackPageView = () => {
   if (isBrowser && isProduction && window.ga) {
     window.ga('send', 'pageview');
@@ -180,7 +178,6 @@ const page = (WrappedComponent: WrappableComponent) => {
     };
 
     render() {
-      /* eslint-disable max-len */
       return (
         <ApolloProvider client={this.apolloClient} store={this.reduxStore}>
           <main className={styles.wrapper}>
@@ -230,7 +227,6 @@ const page = (WrappedComponent: WrappableComponent) => {
           </main>
         </ApolloProvider>
       );
-      /* eslint-enable max-len */
     }
   }
 
@@ -239,7 +235,6 @@ const page = (WrappedComponent: WrappableComponent) => {
 
 const styles = {
   wrapper: style({
-    // eslint-disable-next-line max-len
     fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif',
   }),
 };

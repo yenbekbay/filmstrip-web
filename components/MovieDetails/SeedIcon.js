@@ -29,7 +29,7 @@ const SeedIcon = ({ scale = 1, className }: {
                 fillRule: 'nonzero',
                 stroke: 'none',
               }}
-              d="m 0,0 c 0,-2.209 -1.791,-4 -4,-4 l -28,0 c -2.209,0 -4,1.791 -4,4 l 0,28 c 0,2.209 1.791,4 4,4 l 28,0 c 2.209,0 4,-1.791 4,-4 L 0,0 Z" // eslint-disable-line max-len
+              d="m 0,0 c 0,-2.209 -1.791,-4 -4,-4 l -28,0 c -2.209,0 -4,1.791 -4,4 l 0,28 c 0,2.209 1.791,4 4,4 l 28,0 c 2.209,0 4,-1.791 4,-4 L 0,0 Z"
             />
           </g>
           <g transform="translate(23,8)">

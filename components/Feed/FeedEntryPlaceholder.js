@@ -19,7 +19,7 @@ const styles = {
     height: '17rem',
     content: '',
     background: '#353A44',
-    backgroundImage: 'linear-gradient(to right, #353A44 0%, #2F343F 20%, #353A44 40%, #353A44 100%)', // eslint-disable-line max-len
+    backgroundImage: 'linear-gradient(to right, #353A44 0%, #2F343F 20%, #353A44 40%, #353A44 100%)',
     animation: `${loaderAnimation} 1s infinite linear`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: '1400px 600px',

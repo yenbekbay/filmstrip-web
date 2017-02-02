@@ -1,6 +1,5 @@
 /* @flow */
 
-/* eslint-disable max-len */
 export default {
   en: {
     ui: {
@@ -67,4 +66,3 @@ export default {
     },
   },
 };
-/* eslint-enable max-len */
