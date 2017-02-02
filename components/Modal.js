@@ -15,9 +15,9 @@ const Modal_ = (props: Object & {
     window.openModals -= 1;
 
     if (window.openModals > 0) {
-      document.body.classList.add('modal-open');
+      (document.body: any).classList.add('modal-open');
     } else {
-      document.body.classList.remove('modal-open');
+      (document.body: any).classList.remove('modal-open');
     }
   };
 
@@ -43,7 +43,7 @@ const Modal_ = (props: Object & {
 
         el && el.addEventListener('touchend', handler);
         window.openModals = window.openModals ? window.openModals + 1 : 1;
-        document.body.classList.add('modal-open');
+        (document.body: any).classList.add('modal-open');
       }}
       onRequestClose={handleRequestClose}
     >
