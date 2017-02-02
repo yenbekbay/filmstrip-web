@@ -13,7 +13,7 @@ module.exports = {
 
     'import/no-extraneous-dependencies': 0,
 
-    'graphql/template-strings': [0, {
+    'graphql/template-strings': [2, {
       env: 'apollo',
       schemaJson: require('./graphql-schema.json'),
     }],

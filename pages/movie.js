@@ -58,6 +58,7 @@ const styles = {
   }),
 };
 
+/* eslint-disable graphql/template-strings */
 const MOVIE_QUERY = gql`
   query Movie($slug: String!, $lang: Language!) {
     movie(slug: $slug) {
@@ -66,6 +67,7 @@ const MOVIE_QUERY = gql`
   }
   ${MovieDetails.fragments.details}
 `;
+/* eslint-enable graphql/template-strings */
 
 const withData = graphql(MOVIE_QUERY, {
   options: ({ url: { query }, lang }: {
