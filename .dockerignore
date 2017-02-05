@@ -2,3 +2,4 @@
 !app/
 !build/
 !package.json
+!pm2.json
