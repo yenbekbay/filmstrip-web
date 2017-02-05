@@ -2,3 +2,4 @@ app/.next/
 app/styles/tachyons.js
 build/
 flow-typed/
+!.eslintrc.js

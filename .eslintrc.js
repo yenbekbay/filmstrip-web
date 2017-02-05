@@ -3,13 +3,13 @@ module.exports = {
     'anvilabs',
     'anvilabs/jest',
     'anvilabs/lodash',
-    'anvilabs/react'
+    'anvilabs/react',
   ],
   plugins: [
     'graphql',
   ],
   rules: {
-    'indent': 0,
+    indent: 0,
     'no-confusing-arrow': 0,
     'no-magic-numbers': 0,
     'no-mixed-operators': 0,
@@ -28,6 +28,6 @@ module.exports = {
     'react/jsx-closing-bracket-location': 0,
     'react/jsx-indent-props': 0,
     'react/jsx-indent': 0,
-    'react/require-default-props': 0
-  }
+    'react/require-default-props': 0,
+  },
 };
