@@ -119,6 +119,7 @@ const styles = {
     ...t.ba,
     ...t.b__white_20,
     ...t.br2,
+    ...t.pointer,
     flex: 1,
   }),
   langSwitchButton: css({
