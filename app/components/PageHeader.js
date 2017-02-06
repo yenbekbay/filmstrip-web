@@ -2,6 +2,7 @@
 
 import {css} from 'glamor';
 import {Translator} from 'counterpart';
+import _ from 'lodash/fp';
 import Link from 'next/link';
 import React from 'react';
 import Router from 'next/router';
@@ -38,7 +39,7 @@ const PageHeader = (
   const newLang = lang === 'ru' ? 'en' : 'ru';
 
   const rootPath = getPath({pathname: '/'});
-  const newLangPath = host && host !== '0.0.0.0' && host !== 'localhost'
+  const newLangPath = host && !(_.includes('0.0.0.0', host) || _.includes('localhost', host))
     ? getPath({
         pathname: `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`,
         query: {lang: null},
@@ -67,7 +68,7 @@ const PageHeader = (
             }
           }}
         >
-          <FlagIcon lang={newLang} height={20} />
+          <FlagIcon lang={lang} height={20} />
         </a>
       </div>
     </header>
