@@ -6,7 +6,8 @@ if [[ -n "$machine_name" ]]; then
   docker-machine env $machine_name >/dev/null
 
   if [ $? -eq 0 ]; then
-    eval $(docker-machine env $machine_name) \
+    npm run build \
+      && eval $(docker-machine env $machine_name) \
       && docker-machine ssh $machine_name mkdir -p /root/filmstrip/data \
       && docker-machine scp Caddyfile ${machine_name}:/root/filmstrip/data \
       && docker-compose build \
