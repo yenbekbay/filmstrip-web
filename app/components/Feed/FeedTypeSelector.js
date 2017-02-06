@@ -4,6 +4,7 @@ import {css} from 'glamor';
 import {Translator} from 'counterpart';
 import cookie from 'react-cookie';
 import React from 'react';
+import Router from 'next/router';
 
 import {breakpoints, colors, t} from '../../styles';
 import withTranslator from '../../hocs/withTranslator';
@@ -14,13 +15,14 @@ const FeedTypeSelector = (
   {
     activeFeedType,
     translator,
-    url,
     getPath,
   }: {
     activeFeedType: FeedType,
     translator: Translator,
-    url: {push(path: string): void},
-    getPath(pathname: string, query?: Object): string,
+    getPath(input: {
+      pathname?: string,
+      query?: Object,
+    }): string,
   },
 ) => {
   const feedTypeMappings = {
@@ -32,7 +34,10 @@ const FeedTypeSelector = (
   return (
     <div className={styles.container}>
       {['trending', 'new', 'latest'].map((feedType: FeedType) => {
-        const feedTypePath = getPath('/', {type: feedType});
+        const feedTypePath = getPath({
+          pathname: '/',
+          query: {type: feedType},
+        });
 
         return (
           <a
@@ -40,7 +45,7 @@ const FeedTypeSelector = (
             onClick={(e: Object) => {
               e.preventDefault();
               if (activeFeedType !== feedType) {
-                url.push(feedTypePath);
+                Router.push(feedTypePath);
                 cookie.save('lastFeedType', feedType, {path: '/'});
               }
             }}

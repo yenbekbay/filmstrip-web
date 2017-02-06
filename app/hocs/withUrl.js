@@ -10,16 +10,14 @@ import type {FeedType} from '../components/types';
 
 type Context = {
   url: {
+    host: ?string,
+    pathname: string,
     query: {
       type?: FeedType,
       page?: string,
       id?: string,
       lang?: string,
     },
-    pathname: string,
-    host: ?string,
-    back(): void,
-    push(path: string): void,
   },
 };
 
@@ -39,11 +37,22 @@ const withUrl = (WrappedComponent: WrappableComponent) => {
     static displayName = `withUrl(${getDisplayName(WrappedComponent)})`;
     static contextTypes = {url: PropTypes.object};
 
-    _getPath = (pathname: string, query?: Object = {}) => {
-      const lang = this.context.url.query.lang;
-      const serializedQuery = serializeQuery(
-        _.defaults(lang ? {lang} : {}, query),
-      );
+    _getPath = ({
+      pathname: newPathname,
+      query: newQuery = {},
+    }: {
+      pathname?: string,
+      query?: Object,
+    }) => {
+      const {pathname: currentPathname, query: currentQuery} = this.context.url;
+
+      const pathname = newPathname || currentPathname;
+      const query = currentPathname === pathname
+        ? _.defaults(currentQuery, newQuery)
+        : newQuery;
+      const lang = currentQuery.lang;
+      const queryWithLang = lang ? _.defaults({lang}, query) : query;
+      const serializedQuery = serializeQuery(queryWithLang);
 
       return `${pathname}${serializedQuery ? `?${serializedQuery}` : ''}`;
     };

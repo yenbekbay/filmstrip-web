@@ -4,6 +4,7 @@ import {css} from 'glamor';
 import {Translator} from 'counterpart';
 import Link from 'next/link';
 import React from 'react';
+import Router from 'next/router';
 import Translate from 'react-translate-component';
 
 import {isBrowser, isProduction} from '../env';
@@ -24,24 +25,25 @@ const PageHeader = (
     translator: Translator,
     lang: string,
     url: {
-      query: Object,
-      pathname: string,
       host: ?string,
-      push(path: string): void,
+      pathname: string,
     },
-    getPath(pathname: string, query?: Object): string,
+    getPath(input: {
+      pathname?: string,
+      query?: Object,
+    }): string,
   },
 ) => {
   const host = isBrowser ? window.location.hostname : url.host;
   const newLang = lang === 'ru' ? 'en' : 'ru';
 
-  const rootPath = getPath('/');
+  const rootPath = getPath({pathname: '/'});
   const newLangPath = host && host !== '0.0.0.0' && host !== 'localhost'
-    ? getPath(
-        `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`,
-        {...url.query, lang: null},
-      )
-    : getPath(url.pathname, {...url.query, lang: newLang});
+    ? getPath({
+        pathname: `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`,
+        query: {lang: null},
+      })
+    : getPath({query: {lang: newLang}});
 
   return (
     <header className={styles.header}>
@@ -60,7 +62,7 @@ const PageHeader = (
           onClick={(e: Object) => {
             if (!isProduction) {
               e.preventDefault();
-              url.push(newLangPath);
+              Router.push(newLangPath);
               translator.setLocale(newLang);
             }
           }}

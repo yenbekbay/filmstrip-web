@@ -1,32 +1,43 @@
 /* @flow */
 
 import React from 'react';
+import Router from 'next/router';
 
 import Modal from './Modal';
 import MovieDetails from './MovieDetails';
+import withUrl from '../hocs/withUrl';
 import type {MovieDetailsFragment} from './types';
 
 const MovieModal = (
   {
     movie,
-    back,
+    getPath,
   }: {
     movie: MovieDetailsFragment,
-    back(): void,
+    getPath(input: {
+      pathname?: string,
+      query?: Object,
+    }): string,
   },
-) => (
-  <Modal
-    contentLabel="Movie Modal"
-    isOpen
-    onRequestClose={back}
-    style={{
-      overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      },
-    }}
-  >
-    <MovieDetails movie={movie} />
-  </Modal>
-);
+) => {
+  const handleRequestClose = () => Router.push(
+    getPath({query: {movieId: null}}),
+  );
 
-export default MovieModal;
+  return (
+    <Modal
+      contentLabel="Movie Modal"
+      isOpen
+      onRequestClose={handleRequestClose}
+      style={{
+        overlay: {
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        },
+      }}
+    >
+      <MovieDetails movie={movie} />
+    </Modal>
+  );
+};
+
+export default withUrl(MovieModal);

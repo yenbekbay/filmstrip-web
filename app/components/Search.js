@@ -7,28 +7,32 @@ import {Translator} from 'counterpart';
 import _ from 'lodash/fp';
 import gql from 'graphql-tag';
 import React, {Component} from 'react';
+import Router from 'next/router';
 
 import {breakpoints, t} from '../styles';
 import {updateSearchQuery} from '../data/actions/ui';
 import Loader from './Loader';
 import MovieDetails, {MovieCredits, MoviePosterImage} from './MovieDetails';
-import MovieModal from './MovieModal';
 import withTranslator from '../hocs/withTranslator';
+import withUrl from '../hocs/withUrl';
 import type {MovieDetailsFragment} from './types';
 import type {Dispatch, ReduxState} from '../data/types';
 
 type Props = {
+  onDismiss: () => void,
   loading?: boolean,
   results?: Array<MovieDetailsFragment>,
   searchQuery: string,
   updateSearchQuery(searchQuery: string): void,
   url: {
     query: {
-      id?: string,
+      movieId?: string,
     },
-    back(): void,
-    push(path: string): void,
   },
+  getPath(input: {
+    pathname?: string,
+    query?: Object,
+  }): string,
   translator: Translator,
   lang: string,
 };
@@ -71,8 +75,18 @@ class Search extends Component {
   };
 
   showMovieDetails = (e: Object, slug: string) => {
+    const {onDismiss, url, getPath} = this.props;
+
+    const moviePagePath = `/movie?id=${slug}`;
+
     e.preventDefault();
-    this.props.url.push(`/movie?id=${slug}`);
+    if (url.pathname === '/') {
+      Router.push(getPath({query: {movieId: slug}}), moviePagePath);
+    } else if (url.pathname === '/movie' && url.query.id === slug) {
+      onDismiss();
+    } else {
+      Router.push(moviePagePath);
+    }
   };
 
   render() {
@@ -80,14 +94,11 @@ class Search extends Component {
       loading,
       results,
       searchQuery,
-      url: {back, query},
       translator,
     } = this.props;
-    const modalMovie = query.id && _.find({slug: query.id}, results);
 
     return (
       <div className={styles.container}>
-        {modalMovie && <MovieModal movie={modalMovie} back={back} />}
         <div className={styles.searchInputContainer}>
           <input
             autoFocus
@@ -252,6 +263,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export default compose(
+  withUrl,
   withTranslator,
   connect(mapStateToProps, mapDispatchToProps),
   withResults,

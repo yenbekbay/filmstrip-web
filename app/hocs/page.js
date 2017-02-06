@@ -55,8 +55,6 @@ type Props = {
     query: {
       q?: string,
     },
-    back(): void,
-    push(path: string): void,
   },
 };
 type State = {
@@ -125,8 +123,9 @@ const page = (WrappedComponent: WrappableComponent) => {
     getChildContext = () => ({
       translator: this.translator,
       url: {
-        ...this.props.url,
         host: this.props.headers.host,
+        pathname: this.props.url.pathname,
+        query: this.props.url.query,
       },
     });
 
@@ -241,7 +240,7 @@ const page = (WrappedComponent: WrappableComponent) => {
                   },
                 }}
               >
-                <Search url={this.props.url} />
+                <Search onDismiss={this.dismissModal} />
               </Modal>}
             <PageHeader showSearchModal={this.showSearchModal} />
             <WrappedComponent />

@@ -2,6 +2,7 @@
 
 import {css} from 'glamor';
 import React from 'react';
+import Router from 'next/router';
 
 import {
   MovieBackdropWrapper,
@@ -18,12 +19,13 @@ import type {MovieDetailsFragment} from '../types';
 const FeedEntry = (
   {
     movie,
-    url,
     getPath,
   }: {
     movie: MovieDetailsFragment,
-    url: {push(path: string): void},
-    getPath(pathname: string, query?: Object): string,
+    getPath(input: {
+      pathname?: string,
+      query?: Object,
+    }): string,
   },
 ) => {
   const {
@@ -43,7 +45,10 @@ const FeedEntry = (
     },
   } = movie;
 
-  const movieDetailsPath = getPath('/movie', {id: slug});
+  const movieDetailsPath = getPath({
+    pathname: '/movie',
+    query: {id: slug},
+  });
 
   return (
     <div className={styles.container}>
@@ -57,7 +62,10 @@ const FeedEntry = (
         href={movieDetailsPath}
         onClick={(e: Object) => {
           e.preventDefault();
-          url.push(movieDetailsPath);
+          Router.push(getPath({
+            pathname: '/',
+            query: {movieId: slug},
+          }), movieDetailsPath);
         }}
       >
         <MovieBackdropWrapper backdropUrl={backdropUrl}>

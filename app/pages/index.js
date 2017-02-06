@@ -9,6 +9,7 @@ import cookie from 'react-cookie';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import React, {Component} from 'react';
+import Router from 'next/router';
 
 import {
   FeedEntry,
@@ -42,16 +43,17 @@ type Props = {
   updateSelectedGenres(genres: Array<string>): void,
   pageInfo?: PageInfo,
   url: {
+    pathname: string,
     query: {
       type?: FeedType,
       page?: string,
-      id?: string,
+      movieId?: string,
     },
-    pathname: string,
-    back(): void,
-    push(path: string): void,
   },
-  getPath(pathname: string, query?: Object): string,
+  getPath(input: {
+    pathname?: string,
+    query?: Object,
+  }): string,
   translator: Translator,
   lang: string,
 };
@@ -82,7 +84,7 @@ class IndexPage extends Component {
     const lastFeedType = cookie.load('lastFeedType');
 
     if (!feedType && lastFeedType && lastFeedType !== defaultFeedType) {
-      url.push(getPath('/', {type: lastFeedType}));
+      Router.push(getPath({pathname: '/', query: {type: lastFeedType}}));
     }
   }
 
@@ -100,7 +102,7 @@ class IndexPage extends Component {
         lastFeedType &&
         lastFeedType !== defaultFeedType
     ) {
-      this.props.url.push(getPath('/', {type: lastFeedType}));
+      Router.push(getPath({pathname: '/', query: {type: lastFeedType}}));
     }
 
     if (movies || selectedGenres) {
@@ -115,9 +117,9 @@ class IndexPage extends Component {
   }
 
   _dismissModal = () => {
-    if (!this.props.url.query.id) return;
+    if (!this.props.url.query.movieId) return;
 
-    this.props.url.back();
+    Router.back();
   };
 
   _handleSelectedGenresChange = _.throttle(
@@ -133,11 +135,11 @@ class IndexPage extends Component {
       genres,
       selectedGenres,
       pageInfo,
-      url: {back, query},
+      url: {query},
       translator,
     } = this.props;
     const activeFeedType = query.type || defaultFeedType;
-    const modalMovie = query.id && _.find({slug: query.id}, movies);
+    const modalMovie = query.movieId && _.find({slug: query.movieId}, movies);
 
     return (
       <div>
@@ -148,7 +150,7 @@ class IndexPage extends Component {
               : `filmstrip feed${query.page ? ` - page ${query.page}` : ''}`}
           </title>
         </Head>
-        {modalMovie && <MovieModal movie={modalMovie} back={back} />}
+        {modalMovie && <MovieModal movie={modalMovie} />}
         <div className={styles.container}>
           <WebtorrentNotice />
           <div className={styles.feedOptionsContainer}>
