@@ -37,13 +37,15 @@ const withUrl = (WrappedComponent: WrappableComponent) => {
     static displayName = `withUrl(${getDisplayName(WrappedComponent)})`;
     static contextTypes = {url: PropTypes.object};
 
-    _getPath = ({
-      pathname: newPathname,
-      query: newQuery = {},
-    }: {
-      pathname?: string,
-      query?: Object,
-    }) => {
+    _getPath = (
+      {
+        pathname: newPathname,
+        query: newQuery = {},
+      }: {
+        pathname?: string,
+        query?: Object,
+      },
+    ) => {
       const {pathname: currentPathname, query: currentQuery} = this.context.url;
 
       const pathname = newPathname || currentPathname;

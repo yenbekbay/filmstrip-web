@@ -29,10 +29,12 @@ type Props = {
       movieId?: string,
     },
   },
-  getPath(input: {
-    pathname?: string,
-    query?: Object,
-  }): string,
+  getPath(
+    input: {
+      pathname?: string,
+      query?: Object,
+    },
+  ): string,
   translator: Translator,
   lang: string,
 };

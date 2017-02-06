@@ -14,15 +14,16 @@ const MovieModal = (
     getPath,
   }: {
     movie: MovieDetailsFragment,
-    getPath(input: {
-      pathname?: string,
-      query?: Object,
-    }): string,
+    getPath(
+      input: {
+        pathname?: string,
+        query?: Object,
+      },
+    ): string,
   },
 ) => {
-  const handleRequestClose = () => Router.push(
-    getPath({query: {movieId: null}}),
-  );
+  const handleRequestClose = () =>
+    Router.push(getPath({query: {movieId: null}}));
 
   return (
     <Modal

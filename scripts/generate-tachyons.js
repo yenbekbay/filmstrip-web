@@ -35,24 +35,24 @@ const transformProperty = _.memoize(
   ),
 );
 
-const stylesFromRules = (rules: Array<Object>): Array<Object> =>
-  _.flow(_.filter(['type', 'rule']), _.flatMap((
-      {declarations, selectors}: Object,
-    ) =>
-      _.flow(
-        _.filter(_.startsWith('.')),
-        _.reject(_.startsWith('.debug')),
-        _.map((selector: string) => ({
-          [transformSelector(selector)]: _.flow(
-            _.reject(_.flow(_.get('property'), shouldRejectProperty)),
-            _.map(({property, value}: Object) => [
-              transformProperty(property),
-              value,
-            ]),
-            _.fromPairs,
-          )(declarations),
-        })),
-      )(selectors)), _.mergeAll)(rules);
+const stylesFromRules = (rules: Array<Object>): Array<Object> => _.flow(
+  _.filter(['type', 'rule']),
+  _.flatMap(({declarations, selectors}: Object) => _.flow(
+    _.filter(_.startsWith('.')),
+    _.reject(_.startsWith('.debug')),
+    _.map((selector: string) => ({
+      [transformSelector(selector)]: _.flow(
+        _.reject(_.flow(_.get('property'), shouldRejectProperty)),
+        _.map(({property, value}: Object) => [
+          transformProperty(property),
+          value,
+        ]),
+        _.fromPairs,
+      )(declarations),
+    })),
+  )(selectors)),
+  _.mergeAll,
+)(rules);
 
 const pseudos = ['hover', 'active', 'link', 'focus', 'visited'];
 const extractPseudoSelectors = (pseudo: string) => (styles: Object) => _.reduce(

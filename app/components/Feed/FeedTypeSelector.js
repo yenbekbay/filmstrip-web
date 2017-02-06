@@ -19,10 +19,12 @@ const FeedTypeSelector = (
   }: {
     activeFeedType: FeedType,
     translator: Translator,
-    getPath(input: {
-      pathname?: string,
-      query?: Object,
-    }): string,
+    getPath(
+      input: {
+        pathname?: string,
+        query?: Object,
+      },
+    ): string,
   },
 ) => {
   const feedTypeMappings = {

@@ -22,10 +22,12 @@ const FeedEntry = (
     getPath,
   }: {
     movie: MovieDetailsFragment,
-    getPath(input: {
-      pathname?: string,
-      query?: Object,
-    }): string,
+    getPath(
+      input: {
+        pathname?: string,
+        query?: Object,
+      },
+    ): string,
   },
 ) => {
   const {
@@ -62,10 +64,13 @@ const FeedEntry = (
         href={movieDetailsPath}
         onClick={(e: Object) => {
           e.preventDefault();
-          Router.push(getPath({
-            pathname: '/',
-            query: {movieId: slug},
-          }), movieDetailsPath);
+          Router.push(
+            getPath({
+              pathname: '/',
+              query: {movieId: slug},
+            }),
+            movieDetailsPath,
+          );
         }}
       >
         <MovieBackdropWrapper backdropUrl={backdropUrl}>

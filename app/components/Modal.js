@@ -55,7 +55,11 @@ const Modal_ = (
         <button className={styles.closeButton} onClick={handleRequestClose}>
           <CloseIcon size={40} />
         </button>
-        <div className={`${styles.modalContentInner} ${props.className || ''}.trim()`}>
+        <div
+          className={
+            `${styles.modalContentInner} ${props.className || ''}.trim()`
+          }
+        >
           {props.children}
         </div>
       </div>

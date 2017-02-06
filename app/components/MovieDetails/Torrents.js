@@ -13,7 +13,8 @@ import type {Torrent} from './../types';
 
 const Torrents = ({torrents}: {torrents: Array<Torrent>}) => (
   <div className={styles.torrentsContainer}>
-    {torrents.length > 0 ? torrents.map((torrent: Torrent) => {
+    {torrents.length > 0
+      ? torrents.map((torrent: Torrent) => {
           const extras = _.toPairs({
             'ui.torrentAudioTranslationTypeLabel': (
               torrent.audioTranslationType &&
@@ -67,7 +68,8 @@ const Torrents = ({torrents}: {torrents: Array<Torrent>}) => (
               </div>
             </a>
           );
-        }) : <Translate content="ui.torrentsPlaceholder" />}
+        })
+      : <Translate content="ui.torrentsPlaceholder" />}
   </div>
 );
 

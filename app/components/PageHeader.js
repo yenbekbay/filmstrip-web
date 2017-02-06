@@ -29,19 +29,24 @@ const PageHeader = (
       host: ?string,
       pathname: string,
     },
-    getPath(input: {
-      pathname?: string,
-      query?: Object,
-    }): string,
+    getPath(
+      input: {
+        pathname?: string,
+        query?: Object,
+      },
+    ): string,
   },
 ) => {
   const host = isBrowser ? window.location.hostname : url.host;
   const newLang = lang === 'ru' ? 'en' : 'ru';
 
   const rootPath = getPath({pathname: '/'});
-  const newLangPath = host && !(_.includes('0.0.0.0', host) || _.includes('localhost', host))
+  const newLangPath = host &&
+    !(_.includes('0.0.0.0', host) || _.includes('localhost', host))
     ? getPath({
-        pathname: `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`,
+        pathname: (
+          `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`
+        ),
         query: {lang: null},
       })
     : getPath({query: {lang: newLang}});
