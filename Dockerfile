@@ -21,9 +21,6 @@ RUN npm i --production
 # Add application files
 ADD . ./
 
-# Build with next.js
-RUN npm run build
-
 # Expose the port
 EXPOSE 3000
 
