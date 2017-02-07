@@ -7,4 +7,4 @@ export type WrappableComponent =
 const getDisplayName = (WrappedComponent: WrappableComponent) =>
   WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
-export {getDisplayName}; // eslint-disable-line import/prefer-default-export
+export {getDisplayName};
