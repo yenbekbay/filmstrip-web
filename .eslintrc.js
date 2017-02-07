@@ -3,9 +3,7 @@ module.exports = {
   plugins: ['graphql'],
   rules: {
     'no-magic-numbers': 0,
-
     'import/no-extraneous-dependencies': 0,
-
     'graphql/template-strings': [
       2,
       {
@@ -13,7 +11,6 @@ module.exports = {
         schemaJson: require('./graphql-schema.json'),
       },
     ],
-
     'react/require-default-props': 0,
   },
 };
