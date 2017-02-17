@@ -103,9 +103,9 @@ const MovieDetails = (
   } = movie;
 
   const extras = _.toPairs({
-    'ui.originalTitleLabel': (
-      originalTitle && originalTitle !== title && originalTitle
-    ),
+    'ui.originalTitleLabel': originalTitle &&
+      originalTitle !== title &&
+      originalTitle,
     'ui.originalLanguageLabel': originalLanguage,
     'ui.mpaaRatingLabel': mpaaRating,
     'ui.runtimeLabel': runtime && formatRuntime(runtime, lang),
@@ -148,11 +148,11 @@ const MovieDetails = (
               {extras.map(
                 ([labelId, text]: [string, mixed]) =>
                   text &&
-                    <MovieDataRow
-                      key={labelId}
-                      labelId={labelId}
-                      text={String(text)}
-                    />,
+                  <MovieDataRow
+                    key={labelId}
+                    labelId={labelId}
+                    text={String(text)}
+                  />,
               )}
             </div>
           </div>
@@ -235,8 +235,7 @@ const styles = {
 };
 
 MovieDetails.fragments = {
-  details: (
-    gql`
+  details: gql`
     fragment MovieDetails on Movie {
       slug
       info {
@@ -273,8 +272,7 @@ MovieDetails.fragments = {
         size
       }
     }
-  `
-  ),
+  `,
 };
 
 export default withTranslator(MovieDetails);

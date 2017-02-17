@@ -44,9 +44,10 @@ const PageHeader = (
   const newLangPath = host &&
     !(_.includes('0.0.0.0', host) || _.includes('localhost', host))
     ? getPath({
-        pathname: (
-          `https://${newLang}.${host.replace(`${lang}.`, '')}${url.pathname}`
-        ),
+        pathname: `https://${newLang}.${host.replace(
+          `${lang}.`,
+          '',
+        )}${url.pathname}`,
         query: {lang: null},
       })
     : getPath({query: {lang: newLang}});

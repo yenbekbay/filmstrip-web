@@ -40,9 +40,8 @@ class Lightbox extends PureComponent {
     const {activeImageIdx} = this.state;
 
     this.setState({
-      activeImageIdx: (
-        (activeImageIdx + (imageUrls.length - 1)) % imageUrls.length
-      ),
+      activeImageIdx: (activeImageIdx + (imageUrls.length - 1)) %
+        imageUrls.length,
     });
   };
 

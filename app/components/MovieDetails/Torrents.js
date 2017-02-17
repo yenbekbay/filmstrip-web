@@ -16,20 +16,14 @@ const Torrents = ({torrents}: {torrents: Array<Torrent>}) => (
     {torrents.length > 0
       ? torrents.map((torrent: Torrent) => {
           const extras = _.toPairs({
-            'ui.torrentAudioTranslationTypeLabel': (
-              torrent.audioTranslationType &&
-                torrent.audioTranslationType.toLowerCase()
-            ),
-            'ui.torrentAudioTracksLabel': (
-              torrent.audioTracks &&
-                torrent.audioTracks.length > 0 &&
-                torrent.audioTracks.join(', ')
-            ),
-            'ui.torrentBundledSubtitlesLabel': (
-              torrent.bundledSubtitles &&
-                torrent.bundledSubtitles.length > 0 &&
-                torrent.bundledSubtitles.join(', ')
-            ),
+            'ui.torrentAudioTranslationTypeLabel': torrent.audioTranslationType &&
+              torrent.audioTranslationType.toLowerCase(),
+            'ui.torrentAudioTracksLabel': torrent.audioTracks &&
+              torrent.audioTracks.length > 0 &&
+              torrent.audioTracks.join(', '),
+            'ui.torrentBundledSubtitlesLabel': torrent.bundledSubtitles &&
+              torrent.bundledSubtitles.length > 0 &&
+              torrent.bundledSubtitles.join(', '),
           });
 
           return (
@@ -48,11 +42,11 @@ const Torrents = ({torrents}: {torrents: Array<Torrent>}) => (
                   {extras.map(
                     ([labelId, text]: [string, mixed]) =>
                       text &&
-                        <TorrentDataRow
-                          key={labelId}
-                          labelId={labelId}
-                          text={String(text)}
-                        />,
+                      <TorrentDataRow
+                        key={labelId}
+                        labelId={labelId}
+                        text={String(text)}
+                      />,
                   )}
                 </div>
                 <div className={styles.torrentPeersContainer}>

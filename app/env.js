@@ -13,10 +13,8 @@ module.exports = {
   isServer,
   isBrowser,
   isProduction,
-  graphqlEndpoint: (
-    isBrowser && isProduction
-      ? `${window.location.protocol}//${window.location.hostname}/graphql`
-      : `http://localhost:${GRAPHQL_PORT}/graphql`
-  ),
+  graphqlEndpoint: isBrowser && isProduction
+    ? `${window.location.protocol}//${window.location.hostname}/graphql`
+    : `http://localhost:${GRAPHQL_PORT}/graphql`,
   gaTrackingID: 'UA-88023222-1',
 };

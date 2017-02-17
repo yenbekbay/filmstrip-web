@@ -26,9 +26,7 @@ const MovieBackdropWrapper = (
           style={
             progressiveBackdropUrl
               ? {
-                  backgroundImage: (
-                    `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${progressiveBackdropUrl})`
-                  ),
+                  backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${progressiveBackdropUrl})`,
                 }
               : {
                   backgroundColor: '#272B35',

@@ -100,9 +100,9 @@ class IndexPage extends Component {
 
     if (
       !feedType &&
-        isOnHomePage &&
-        lastFeedType &&
-        lastFeedType !== defaultFeedType
+      isOnHomePage &&
+      lastFeedType &&
+      lastFeedType !== defaultFeedType
     ) {
       Router.push(getPath({pathname: '/', query: {type: lastFeedType}}));
     }
@@ -173,9 +173,8 @@ class IndexPage extends Component {
                   {translator.translate('ui.noMoviesFoundMessage')}
                 </p>)}
           {feedLoading &&
-            _.range(0, 3).map((idx: number) => (
-              <FeedEntryPlaceholder key={idx} />
-            ))}
+            _.range(0, 3)
+              .map((idx: number) => <FeedEntryPlaceholder key={idx} />)}
           {pageInfo &&
             <FeedPagination
               page={query.page}
