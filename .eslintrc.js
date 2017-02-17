@@ -1,5 +1,11 @@
 module.exports = {
-  extends: ['anvilabs', 'anvilabs/jest', 'anvilabs/lodash', 'anvilabs/react'],
+  extends: [
+    'anvilabs',
+    'anvilabs/jest',
+    'anvilabs/lodash',
+    'anvilabs/react',
+    'anvilabs/flowtype',
+  ],
   plugins: ['graphql'],
   rules: {
     'no-magic-numbers': 0,
