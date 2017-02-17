@@ -14,22 +14,22 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "deploy": "sh scripts/deploy.sh",
-    "start": "nodemon src/server.js",
-    "build": "npm run clean && babel --out-dir build --ignore **/__tests__,**/__mocks__ src && next build app && sh scripts/fix-require-paths.sh",
-    "clean": "rimraf build && mkdir build",
-    "prepush": "npm test",
-    "commitmsg": "validate-commit-msg",
-    "precommit": "lint-staged",
-    "sync-graphql-schema": "babel-node scripts/fetch-graphql-schema.js",
-    "generate-tachyons": "babel-node scripts/generate-tachyons.js",
-    "test": "npm-run-all --parallel typecheck lint",
+    "typecheck": "flow check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "jest:coverage": "jest --coverage",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
-    "typecheck": "flow check ."
+    "test": "npm-run-all --parallel typecheck lint",
+    "sync-graphql-schema": "babel-node scripts/fetch-graphql-schema.js",
+    "generate-tachyons": "babel-node scripts/generate-tachyons.js",
+    "start": "nodemon src/server.js",
+    "precommit": "lint-staged",
+    "commitmsg": "validate-commit-msg",
+    "prepush": "npm test",
+    "clean": "rimraf build && mkdir build",
+    "build": "npm run clean && babel --out-dir build --ignore **/__tests__,**/__mocks__ src && next build app && sh scripts/fix-require-paths.sh",
+    "deploy": "sh scripts/deploy.sh"
   },
   "jest": {
     "collectCoverageFrom": [
