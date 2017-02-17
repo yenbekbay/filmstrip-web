@@ -28,7 +28,7 @@
     "commitmsg": "validate-commit-msg",
     "prepush": "npm test",
     "clean": "rimraf build && mkdir build",
-    "build": "npm run clean && babel --out-dir build --ignore **/__tests__,**/__mocks__ src && next build app && sh scripts/fix-require-paths.sh",
+    "build": "npm run clean && babel --out-dir build --ignore **/__tests__,**/__mocks__ src && next build app",
     "deploy": "sh scripts/deploy.sh"
   },
   "jest": {
